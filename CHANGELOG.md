@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 
 
+
+## 0.0.3
+### Updated
+- Refactored SwitchCubit:
+  - Now uses a typed SwitchState model instead of a raw bool.
+  - Introduced debug logging in onChanged and clearSwitch for easier tracing.
+  - Improved structure following SOLID principles.
+
+- Added
+  - clearSwitch() method to SwitchCubit for resetting the switch state to default (true).
+
+
 ## 0.0.2
 ### Added
 - Support for uploading and deleting files via Firestore or REST API.

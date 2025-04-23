@@ -5,6 +5,10 @@ abstract class SwitchState extends Equatable {
 }
 
 class SwitchInitial extends SwitchState {
+  final bool isOn;
+
+  const SwitchInitial({required this.isOn});
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [isOn];
 }
