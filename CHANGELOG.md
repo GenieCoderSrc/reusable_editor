@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 
 
+## 0.0.4
+- Added Register Input Field Get It Di,
+
+
 ## 0.0.3
 ### Updated
 - Refactored SwitchCubit:
