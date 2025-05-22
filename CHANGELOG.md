@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 
 
+## 0.0.5
+- Added fileRegisterGetItDiRestApiDataSource,
+
+
 ## 0.0.4
 - Added Register Input Field Get It Di,
 

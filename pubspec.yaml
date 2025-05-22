@@ -14,9 +14,9 @@ dependencies:
     sdk: flutter
   exception_type: ^0.0.3
   i_tdd: ^0.0.1
-  fire_storage_impl: ^0.0.1
+  fire_storage_impl: ^0.0.2
   flutter_bloc: ^9.1.0
-  get_it_di_global_variable: ^0.0.4
+  get_it_di_global_variable: ^0.0.5
   reusable_app_bar: ^0.0.1
   reusable_image_widget: ^0.0.2
 
