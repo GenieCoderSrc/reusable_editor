@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 
 
+## 0.0.6
+- Implemented Bloc Provider.
+- Implemented GetIt DI.
+- Removed fileRegisterGetItDiRestApiDataSource.
+
+
 ## 0.0.5
 - Added fileRegisterGetItDiRestApiDataSource,
 
