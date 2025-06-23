@@ -1,4 +1,6 @@
 export 'package:reusable_editor/application/manager/image_form_manager.dart';
+export 'package:reusable_editor/config/bloc_provider/register_reusable_editor_bloc_provider.dart';
+export 'package:reusable_editor/config/dependency_injection/register_input_fields_get_it_di.dart';
 export 'package:reusable_editor/domain/entities/enum_option_entity.dart';
 export 'package:reusable_editor/enums/file_data_source_type.dart';
 export 'package:reusable_editor/extensions/asset_image_to_file.dart';

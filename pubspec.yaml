@@ -1,6 +1,6 @@
 name: reusable_editor
 description: "A modular file editor package for Flutter with support for Firebase and REST API storage, including upload/delete functionality, state management cubits, and UI helpers."
-version: 0.0.6+1
+version: 0.0.6+2
 homepage: https://github.com/GenieCoderSrc/reusable_editor
 repository: https://github.com/GenieCoderSrc/reusable_editor
 issue_tracker: https://github.com/GenieCoderSrc/reusable_reusable_editor/issues
