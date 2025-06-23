@@ -16,7 +16,7 @@ A flexible and modular file management package for Flutter, supporting both Fire
 Add the following to your `pubspec.yaml`:
 ```yaml
 dependencies:
-  reusable_editor: ^0.0.5
+  reusable_editor: <latest_version>
 ```
 
 ### Import

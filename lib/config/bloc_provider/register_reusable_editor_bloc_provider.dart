@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it_di_global_variable/get_it_di.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:reusable_app_bar/view_models/search_field_cubit.dart';
+import 'package:reusable_editor/view_models/date_time_cubit/date_time_cubit.dart';
 import 'package:reusable_editor/view_models/image_field_cubit/image_field_cubit.dart';
 import 'package:reusable_editor/view_models/selection_cubit/selection_cubit.dart';
 import 'package:reusable_editor/view_models/switch_cubit/switch_cubit.dart';
@@ -12,6 +13,7 @@ import 'package:reusable_image_widget/reusable_image_widget.dart';
 // ---- Reusable Editor ------
 
 late TextFieldCubit _textFieldCubit;
+late DateTimeCubit _dateTimeCubit;
 late ImageCrudCubit _imageCrudCubit;
 late ImagePickerCubit _imagePickerCubit;
 late SearchFieldCubit _searchFieldCubit;
@@ -21,6 +23,7 @@ late SelectionCubit _selectionCubit;
 initReusableEditorBlocProvider() {
   // ---- Reusable Editor Init ------
   _textFieldCubit = sl<TextFieldCubit>();
+  _dateTimeCubit = sl<DateTimeCubit>();
   _imageCrudCubit = sl<ImageCrudCubit>();
   _imagePickerCubit = sl<ImagePickerCubit>();
   _searchFieldCubit = sl<SearchFieldCubit>();
@@ -31,6 +34,7 @@ initReusableEditorBlocProvider() {
 disposeReusableEditorBlocProvider() {
   // ---- Reusable Editor Dispose ------
   _textFieldCubit.close();
+  _dateTimeCubit.close();
   _imageCrudCubit.close();
   _imagePickerCubit.close();
   _searchFieldCubit.close();
@@ -43,6 +47,8 @@ List<SingleChildWidget> reusableEditorBlocProviders = [
   BlocProvider<TextFieldCubit>(
     create: (BuildContext context) => _textFieldCubit,
   ),
+  BlocProvider<DateTimeCubit>(create: (BuildContext context) => _dateTimeCubit),
+
   BlocProvider<ImageCrudCubit>(
     create: (BuildContext context) => _imageCrudCubit,
   ),

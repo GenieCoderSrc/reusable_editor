@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 
 
+## 0.0.6+1
+- Added DateTimeCubit Bloc Provider.
+- Registered DateTimeCubit GetIt DI.
+
+
 ## 0.0.6
 - Implemented Bloc Provider.
 - Implemented GetIt DI.
