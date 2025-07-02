@@ -1,12 +1,13 @@
 # reusable_editor
 
-A flexible and modular file management package for Flutter, supporting both Firestore and REST API-based storage systems. This package includes file upload/delete operations, state management using Cubits, and various utilities for file/image handling and selection.
+A flexible and modular file management and form handling package for Flutter, supporting both Firestore and REST API-based storage systems along with comprehensive form field management. This package includes file operations, form state management using Cubits, and a collection of reusable form field widgets.
 
 ## Features
 - Abstract interfaces for clean architecture
 - File upload and delete operations
 - Support for Firebase Firestore and custom REST API
-- Cubits for managing form states (e.g. image, switch, dropdown, text field)
+- Cubits for managing form states (e.g., image, switch, dropdown, text field)
+- Complete set of reusable form field widgets
 - Extensions for asset loading as `File` and `Uint8List`
 - Enum-based dropdown with icon and label support
 
@@ -26,17 +27,33 @@ import 'package:reusable_editor/reusable_editor.dart';
 
 ## Usage
 
-### File Upload and Delete
+### Form Field Management
 ```dart
-final repository = FileRepositoryFireStorageDataSourceImpl(
-  iFireStorageService: YourFireStorageService(),
+// Create cubit for a field
+final textFieldCubit = FieldCubit<String>(
+  initialValue: 'Default',
+  validator: RequiredValidator(),
 );
 
-final uploadUseCase = UploadFile(repository);
-final deleteUseCase = DeleteFile(repository);
+// Use with AppTextField
+AppTextField(cubit: textFieldCubit);
 
-final result = await uploadUseCase.call(fileEntity);
+// Toggle field example
+final toggleCubit = ToggleCubit(initialValue: false);
+AppSwitch(cubit: toggleCubit);
 ```
+
+### Available Form Widgets
+- `AppCheckbox` - Checkbox with label and validation
+- `AppDatePicker` - Date selection field
+- `AppDropdown` - Custom dropdown field
+- `AppFilePicker` - File selection widget
+- `AppRadioGroup` - Radio button group
+- `AppRangeSlider` - Range slider input
+- `AppSlider` - Slider input
+- `AppSwitch` - Toggle switch
+- `AppTextField` - Text input field
+- `AppTimePicker` - Time selection field
 
 ### Dropdown with Enum
 ```dart
@@ -64,6 +81,8 @@ final bytes = await 'assets/image.png'.loadAssetImage();
 ```
 
 ## State Management Cubits
+- `FieldCubit<T>` - Generic form field management with validation
+- `ToggleCubit` - Specialized cubit for boolean toggle fields
 - `DateTimeCubit` - Manages date selection
 - `ImageCrudCubit` - Handles image pick logic and validation
 - `SelectionCubit<T>` - Generic selection for enum dropdown
@@ -71,13 +90,10 @@ final bytes = await 'assets/image.png'.loadAssetImage();
 - `TextFieldCubit` - Text field validation
 
 ## Interfaces
-- `IFileRepository` - Upload/Delete abstraction
-- `IFileDiConst` - Dependency constant keys
-- `IFileDiFactory` - Abstract DI factory
+- `IValidator<T>` - Validation interface for form fields
 
 ## Contributions
 Feel free to open issues or pull requests.
 
 ## License
 MIT License
-

@@ -1,9 +1,9 @@
-part of 'selection_cubit.dart';
+part of 'enum_option_cubit.dart';
 
-class SelectionState<T extends Enum> extends Equatable {
+class EnumOptionState<T extends Enum> extends Equatable {
   final EnumOptionEntity<T>? selectedOption;
 
-  const SelectionState({this.selectedOption});
+  const EnumOptionState({this.selectedOption});
 
   bool get isValidSelection => selectedOption != null;
 

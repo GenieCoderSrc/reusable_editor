@@ -1,6 +1,6 @@
 name: reusable_editor
 description: "A modular file editor package for Flutter with support for Firebase and REST API storage, including upload/delete functionality, state management cubits, and UI helpers."
-version: 0.0.6+2
+version: 1.0.0
 homepage: https://github.com/GenieCoderSrc/reusable_editor
 repository: https://github.com/GenieCoderSrc/reusable_editor
 issue_tracker: https://github.com/GenieCoderSrc/reusable_reusable_editor/issues
@@ -15,18 +15,20 @@ dependencies:
   exception_type: ^0.0.3
   i_tdd: ^0.0.1
   fire_storage_impl: ^0.0.2
-  flutter_bloc: ^9.1.0
-  provider: ^6.1.5
   get_it_di_global_variable: ^0.0.5
   reusable_app_bar: ^0.0.1
   reusable_image_widget: ^0.0.2
+  navigation_without_context: ^0.0.3+1
 
-  i_validator: ^0.0.4
+  i_validator: ^1.0.2
   dartz: ^0.10.1
+  flutter_bloc: ^9.1.0
+  provider: ^6.1.5
   equatable: ^2.0.7
   bloc: ^9.0.0
   path_provider: ^2.1.5
-  navigation_without_context: ^0.0.3+1
+  intl: ^0.20.2
+  file_picker: ^10.2.0
 
 dev_dependencies:
   flutter_test:
