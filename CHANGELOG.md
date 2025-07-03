@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+### **Version 1.0.2** (Jul 3, 2025)
+
+### 📘 Documentation
+
+* Added **GitHub Pages**-based documentation under the `docs/` folder:
+
+    * `VALIDATOR_USAGE.md` – how to use all built-in validators
+
+---
+
 ### **Version 1.0.1** (Jul 3, 2025)
 
 ### 📘 Documentation
@@ -10,7 +20,6 @@ All notable changes to this project will be documented in this file.
 
     * `WIDGET_USAGE.md` – widget usage examples
     * `CUBIT_USAGE.md` – usage of FieldCubit, ToggleCubit, etc.
-    * `VALIDATOR_USAGE.md` – how to use all built-in validators
     * `FIELD_TYPE_USAGE.md` – usage patterns for `FieldCubit<T>` with various types
     * Setup `index.md` as the documentation landing page
     * Linked documentation from README
