@@ -1,0 +1,32 @@
+name: 📚 Publish Dart API Docs
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  dartdoc:
+    name: Generate & Deploy Docs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Setup Dart
+        uses: dart-lang/setup-dart@v1
+
+      - name: Get Dependencies
+        run: dart pub get
+
+      - name: Generate dartdoc
+        run: dart doc --output docs/api
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/api
+          publish_branch: gh-pages
+          force_orphan: true
