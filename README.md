@@ -1,4 +1,4 @@
-# reusable\_editor
+# reusable_editor
 
 A flexible and modular file management and form handling package for Flutter, supporting both Firestore and REST API-based storage systems along with comprehensive form field management. This package includes file operations, form state management using Cubits, and a collection of reusable form field widgets.
 
