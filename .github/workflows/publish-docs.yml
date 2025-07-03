@@ -47,7 +47,7 @@ jobs:
             title=$(echo "$filename" | sed -r 's/_/ /g' | sed -r 's/\b(.)/\u\1/g')
             pandoc "$file" -f markdown -t html -s \
               -o "docs/${filename}.html" \
-              --template=doc_template.html \
+              --template=./docs/doc_template.html \
               --metadata pagetitle="$title – reusable_editor Docs" \
               --metadata description="Documentation for $title in the reusable_editor Flutter package." \
               --metadata canonical="${filename}.html"
