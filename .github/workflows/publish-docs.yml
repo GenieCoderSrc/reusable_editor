@@ -1,4 +1,4 @@
-name: 📚 Publish Dart API Docs
+name: 📚 Publish Flutter DartDoc to GitHub Pages
 
 on:
   push:
@@ -6,27 +6,30 @@ on:
       - main
 
 jobs:
-  dartdoc:
-    name: Generate & Deploy Docs
+  flutter-docs:
+    name: Generate & Deploy Flutter Docs
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
 
-      - name: Setup Dart
-        uses: dart-lang/setup-dart@v1
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.1' # Use your package's Flutter SDK version
+          channel: stable
 
-      - name: Get Dependencies
-        run: dart pub get
+      - name: Get Flutter Dependencies
+        run: flutter pub get
 
       - name: Generate dartdoc
-        run: dart doc --output docs/api
+        run: flutter pub global activate dartdoc && dartdoc --output docs
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: docs/api
+          publish_dir: docs
           publish_branch: gh-pages
           force_orphan: true
