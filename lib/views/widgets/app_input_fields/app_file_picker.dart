@@ -48,5 +48,3 @@ class AppFilePicker extends StatelessWidget {
     );
   }
 }
-
-

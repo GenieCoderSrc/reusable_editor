@@ -8,12 +8,12 @@ All notable changes to this project will be documented in this file.
 
 * Added **GitHub Pages**-based documentation under the `docs/` folder:
 
-  * `WIDGET_USAGE.md` – widget usage examples
-  * `CUBIT_USAGE.md` – usage of FieldCubit, ToggleCubit, etc.
-  * `VALIDATOR_USAGE.md` – how to use all built-in validators
-  * `FIELD_TYPE_USAGE.md` – usage patterns for `FieldCubit<T>` with various types
-* Setup `index.md` as the documentation landing page
-* Linked documentation from README
+    * `WIDGET_USAGE.md` – widget usage examples
+    * `CUBIT_USAGE.md` – usage of FieldCubit, ToggleCubit, etc.
+    * `VALIDATOR_USAGE.md` – how to use all built-in validators
+    * `FIELD_TYPE_USAGE.md` – usage patterns for `FieldCubit<T>` with various types
+    * Setup `index.md` as the documentation landing page
+    * Linked documentation from README
 
 ---
 
@@ -23,16 +23,16 @@ All notable changes to this project will be documented in this file.
 
 * **New Input Widgets using** `FieldCubit<T>` **(renamed to App-prefixed)**
 
-  * `AppTextField` – for text input with validation
-  * `AppCheckbox` – checkbox input with error text
-  * `AppDropdown<T>` – generic dropdown field
-  * `AppSwitch` – switch toggle input
-  * `AppRadioGroup<T>` – radio button group input
-  * `AppSlider` – numeric slider input
-  * `AppRangeSlider` – range slider input with min/max
-  * `AppDatePicker` – date picker field
-  * `AppTimePicker` – time picker field
-  * `AppFilePicker` – file picker using `file_picker` package
+    * `AppTextField` – for text input with validation
+    * `AppCheckbox` – checkbox input with error text
+    * `AppDropdown<T>` – generic dropdown field
+    * `AppSwitch` – switch toggle input
+    * `AppRadioGroup<T>` – radio button group input
+    * `AppSlider` – numeric slider input
+    * `AppRangeSlider` – range slider input with min/max
+    * `AppDatePicker` – date picker field
+    * `AppTimePicker` – time picker field
+    * `AppFilePicker` – file picker using `file_picker` package
 
 ### ✅ Renamed
 
@@ -47,7 +47,8 @@ All notable changes to this project will be documented in this file.
 ### 🎨 Styles
 
 * Text field and error styles use centralized `AppFormTextStyles`
-* Input decoration elements follow `InputDecorationStyles` for consistent field UI (e.g., border, padding, label styles)
+* Input decoration elements follow `InputDecorationStyles` for consistent field UI (e.g., border,
+  padding, label styles)
 
 ---
 
@@ -81,13 +82,13 @@ All notable changes to this project will be documented in this file.
 
 * Refactored SwitchCubit:
 
-  * Now uses a typed SwitchState model instead of a raw bool.
-  * Introduced debug logging in onChanged and clearSwitch for easier tracing.
-  * Improved structure following SOLID principles.
+    * Now uses a typed SwitchState model instead of a raw bool.
+    * Introduced debug logging in onChanged and clearSwitch for easier tracing.
+    * Improved structure following SOLID principles.
 
 * Added
 
-  * clearSwitch() method to SwitchCubit for resetting the switch state to default (true).
+    * clearSwitch() method to SwitchCubit for resetting the switch state to default (true).
 
 ## 0.0.2
 
@@ -98,15 +99,15 @@ All notable changes to this project will be documented in this file.
 * Enum-based dropdown form field (`EnumOptionDropDownMenuFormField`).
 * Cubits for managing UI state:
 
-  * `DateTimeCubit`
-  * `ImageCrudCubit`
-  * `SelectionCubit`
-  * `SwitchCubit`
-  * `TextFieldCubit`
+    * `DateTimeCubit`
+    * `ImageCrudCubit`
+    * `SelectionCubit`
+    * `SwitchCubit`
+    * `TextFieldCubit`
 * Utility extensions:
 
-  * `String?.loadAsFile()` for converting asset paths to `File`
-  * `String.loadAssetImage()` for loading images as bytes
+    * `String?.loadAsFile()` for converting asset paths to `File`
+    * `String.loadAssetImage()` for loading images as bytes
 * Abstract interfaces for file handling and dependency constants.
 * Example usage with a mock implementation of `IFireStorageService`.
 

@@ -1,7 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reusable_editor/view_models/field_cubit/field_cubit.dart';
+import 'package:reusable_editor/reusable_editor.dart';
 
 // ✅ Dropdown
 class AppDropdown<T> extends StatelessWidget {
@@ -22,16 +21,14 @@ class AppDropdown<T> extends StatelessWidget {
       bloc: cubit,
       builder:
           (_, state) => DropdownButtonFormField<T>(
-        value: state.value,
-        decoration: InputDecoration(
-          labelText: label,
-          errorText: state.errorText,
-
-        ),
-        items: items,
-        onChanged: cubit.update,
-      ),
+            value: state.value,
+            decoration: InputDecoration(
+              labelText: label,
+              errorText: state.errorText,
+            ),
+            items: items,
+            onChanged: cubit.update,
+          ),
     );
   }
 }
-

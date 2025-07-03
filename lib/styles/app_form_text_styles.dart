@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter/material.dart';
-
 /// A utility class providing predefined `TextStyle` definitions for common text elements
 /// throughout the application. This promotes consistency in typography.
 class AppFormTextStyles {
@@ -67,4 +65,3 @@ class AppFormTextStyles {
     color: Colors.white,
   );
 }
-

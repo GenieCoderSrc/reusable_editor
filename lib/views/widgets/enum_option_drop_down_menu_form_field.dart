@@ -1,5 +1,5 @@
-import 'package:reusable_editor/domain/entities/enum_option_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:reusable_editor/domain/entities/enum_option_entity.dart';
 
 class EnumOptionDropDownMenuFormField<T extends Enum> extends StatelessWidget {
   final EnumOptionEntity<T>? selectedValue;
@@ -22,25 +22,25 @@ class EnumOptionDropDownMenuFormField<T extends Enum> extends StatelessWidget {
     return DropdownButtonFormField<EnumOptionEntity<T>>(
       value: selectedValue,
       onChanged: onChanged,
-      items: dropdownItems.map<DropdownMenuItem<EnumOptionEntity<T>>>((option) {
-        return DropdownMenuItem<EnumOptionEntity<T>>(
-          value: option,
-          child: itemBuilder != null
-              ? itemBuilder!(option)
-              : Row(
-                  children: [
-                    Icon(option.icon),
-                    const SizedBox(width: 8),
-                    Text(option.label ?? option.type?.name ?? ""),
-                  ],
-                ),
-        );
-      }).toList(),
+      items:
+          dropdownItems.map<DropdownMenuItem<EnumOptionEntity<T>>>((option) {
+            return DropdownMenuItem<EnumOptionEntity<T>>(
+              value: option,
+              child:
+                  itemBuilder != null
+                      ? itemBuilder!(option)
+                      : Row(
+                        children: [
+                          Icon(option.icon),
+                          const SizedBox(width: 8),
+                          Text(option.label ?? option.type?.name ?? ""),
+                        ],
+                      ),
+            );
+          }).toList(),
       hint: Text(hint),
       decoration: InputDecoration(
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
       ),
     );
   }

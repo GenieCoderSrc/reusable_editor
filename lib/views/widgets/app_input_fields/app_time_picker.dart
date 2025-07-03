@@ -8,7 +8,12 @@ class AppTimePicker extends StatelessWidget {
   final String labelText;
   final String? hintText;
 
-  const AppTimePicker({super.key, required this.cubit, required this.labelText, this.hintText});
+  const AppTimePicker({
+    super.key,
+    required this.cubit,
+    required this.labelText,
+    this.hintText,
+  });
 
   @override
   Widget build(BuildContext context) {

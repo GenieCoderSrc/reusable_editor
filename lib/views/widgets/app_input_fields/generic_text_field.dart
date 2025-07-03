@@ -25,6 +25,3 @@ class GenericTextField<T> extends StatelessWidget {
     );
   }
 }
-
-
-
