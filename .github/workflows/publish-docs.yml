@@ -25,18 +25,36 @@ jobs:
       - name: 📚 Activate dartdoc
         run: flutter pub global activate dartdoc
 
-      - name: 🧾 Generate Dart API docs
-        run: dartdoc --output docs/api
+      - name: 🔄 Update .md links to .html before conversion
+        run: |
+          for file in doc/*.md; do
+            sed -i'' -e 's/\.md)/.html)/g' "$file"
+          done
 
-      - name: 🔁 Convert Markdown (from `doc/`) to HTML (into `docs/`)
+      - name: 🧾 Generate Dart API docs
+        run: |
+          mkdir -p docs
+          dartdoc --output docs/api
+
+      - name: 🔁 Convert Markdown to HTML using Pandoc with SEO
         run: |
           sudo apt-get update
           sudo apt-get install -y pandoc
           mkdir -p docs
+
           for file in doc/*.md; do
             filename=$(basename "$file" .md)
-            pandoc "$file" -f markdown -t html -s -o "docs/${filename}.html"
+            title=$(echo "$filename" | sed -r 's/_/ /g' | sed -r 's/\b(.)/\u\1/g')
+            pandoc "$file" -f markdown -t html -s \
+              -o "docs/${filename}.html" \
+              --template=doc_template.html \
+              --metadata pagetitle="$title – reusable_editor Docs" \
+              --metadata description="Documentation for $title in the reusable_editor Flutter package." \
+              --metadata canonical="${filename}.html"
           done
+      
+
+
 
       - name: 🚀 Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
