@@ -2,13 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+### **Version 1.0.3** (Jul 3, 2025)
+
+### 📘 Removed
+
+    * `VALIDATOR_USAGE.md` – Guide for using built-in and custom validators.
+    * Separated in the `i_validator` package for built-in and custom validators.
+
+---
+
 ### **Version 1.0.2** (Jul 3, 2025)
 
 ### 📘 Documentation
 
-* Added **GitHub Pages**-based documentation under the `docs/` folder:
+* Added **GitHub Pages**-based documentation under the `doc/` folder:
 
-    * `VALIDATOR_USAGE.md` – how to use all built-in validators
+    * `VALIDATOR_USAGE.md` – Guide for using built-in and custom validators.
 
 ---
 
@@ -16,7 +25,7 @@ All notable changes to this project will be documented in this file.
 
 ### 📘 Documentation
 
-* Added **GitHub Pages**-based documentation under the `docs/` folder:
+* Added **GitHub Pages**-based documentation under the `doc/` folder:
 
     * `WIDGET_USAGE.md` – widget usage examples
     * `CUBIT_USAGE.md` – usage of FieldCubit, ToggleCubit, etc.

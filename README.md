@@ -108,4 +108,4 @@ Feel free to open issues or pull requests.
 
 ## License
 
-MIT License
+© MIT License. Developed with [Shohidul Islam](https://github.com/ShohidulProgrammer)

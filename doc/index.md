@@ -8,7 +8,6 @@ Welcome to the official documentation for the `reusable_editor` Flutter package.
 
 - [Widget Usage](./WIDGET_USAGE.md) – How to use widgets like `AppTextField`, `AppCheckbox`, `AppDropdown`, etc.
 - [Cubit Usage](./CUBIT_USAGE.md) – Usage examples for `FieldCubit`, `ToggleCubit`, `DateTimeCubit`, etc.
-- [Validator Usage](./VALIDATOR_USAGE.md) – Guide for using built-in and custom validators.
 - [Field Type Usage](./FIELD_TYPE_USAGE.md) – How to use `FieldCubit<T>` with `String`, `bool`, `DateTime`, `Enum`, etc.
 
 ---
@@ -32,5 +31,5 @@ For advanced usage, dive into the linked guides above.
 
 ---
 
-© MIT License. Developed with ❤️
+© MIT License. Developed with [Shohidul Islam](https://github.com/ShohidulProgrammer)
 
