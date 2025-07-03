@@ -31,5 +31,3 @@
 //     eitherResponse.handleReport(successMsg: successMsg);
 //   }
 // }
-
-//
