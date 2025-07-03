@@ -1,4 +1,4 @@
-name: 📚 Build Docs (Custom + Dartdoc)
+name: 📚 Build and Deploy Docs
 
 on:
   push:
@@ -6,29 +6,39 @@ on:
       - main
 
 jobs:
-  generate-docs:
+  build-docs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
+      - name: 🛒 Checkout repository
         uses: actions/checkout@v3
 
-      - name: Setup Flutter
+      - name: 🛠 Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.32.3'
           channel: stable
 
-      - name: Install Dependencies
+      - name: 📦 Install dependencies
         run: flutter pub get
 
-      - name: Activate dartdoc
+      - name: 📚 Activate dartdoc
         run: flutter pub global activate dartdoc
 
-      - name: Generate Dart API Docs
+      - name: 🧾 Generate Dart API docs
         run: dartdoc --output docs/api
 
-      - name: Deploy to GitHub Pages
+      - name: 🔁 Convert Markdown (from `doc/`) to HTML (into `docs/`)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc
+          mkdir -p docs
+          for file in doc/*.md; do
+            filename=$(basename "$file" .md)
+            pandoc "$file" -f markdown -t html -s -o "docs/${filename}.html"
+          done
+
+      - name: 🚀 Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           personal_token: ${{ secrets.GH_PAT }}
