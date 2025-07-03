@@ -17,14 +17,17 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.22.1' # Use your package's Flutter SDK version
+          flutter-version: '3.32.3'
           channel: stable
 
-      - name: Get Flutter Dependencies
+      - name: Get Dependencies
         run: flutter pub get
 
-      - name: Generate dartdoc
-        run: flutter pub global activate dartdoc && dartdoc --output docs
+      - name: Activate dartdoc
+        run: flutter pub global activate dartdoc
+
+      - name: Generate Documentation
+        run: dartdoc --output docs
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
