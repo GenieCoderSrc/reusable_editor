@@ -58,7 +58,7 @@ final agreeFieldCubit = FieldCubit<bool>(
 agreeFieldCubit.update(true); // ✅
 ```
 
-## ✅ FieldCubit\<List<String>> – Multi-select
+## ✅ FieldCubit<List<String>> – Multi-select
 
 ```dart
 final tagsFieldCubit = FieldCubit<List<String>>(

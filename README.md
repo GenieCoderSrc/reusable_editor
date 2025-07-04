@@ -98,7 +98,7 @@ final bytes = await 'assets/image.png'.loadAssetImage();
 * `ToggleCubit` - Specialized cubit for boolean toggle fields
 * `DateTimeCubit` - Manages date selection
 * `ImageCrudCubit` - Handles image pick logic and validation
-* `SelectionCubit<T>` - Generic selection for enum dropdown
+* `EnumOptionCubit<T>` - Dropdown Selection with Generic enum 
 * `SwitchCubit` - Toggle logic
 * `TextFieldCubit` - Text field validation
 

@@ -133,8 +133,8 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
             // Text field example
             AppTextField(
               cubit: _textFieldCubit,
-              label: 'Enter your name',
-              hintText: 'e.g., John Doe',
+              label: 'Name',
+              hintText: 'Enter your name',
             ),
             const SizedBox(height: 16),
             // Date Picker Example
