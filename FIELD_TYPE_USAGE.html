@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>FIELD TYPE USAGE – reusable_editor Docs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Documentation for FIELD TYPE USAGE
+in the reusable_editor Flutter package."/>
+    <link rel="canonical" href="https://geniecodersrc.github.io/reusable_editor/FIELD_TYPE_USAGE.html"/>
+    <style>
+        body {
+          margin: 0;
+          font-family: Arial, sans-serif;
+          display: flex;
+        }
+        nav {
+          width: 220px;
+          background-color: #f8f8f8;
+          padding: 1rem;
+          border-right: 1px solid #ddd;
+          height: 100vh;
+          position: fixed;
+        }
+        main {
+          margin-left: 240px;
+          padding: 2rem;
+        }
+        nav h2 {
+          font-size: 16px;
+          margin-bottom: 10px;
+        }
+        nav a {
+          display: block;
+          color: #333;
+          margin-bottom: 8px;
+          text-decoration: none;
+        }
+        nav a:hover {
+          text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <h2>📚 Docs</h2>
+    <a href="./index.html">Home</a>
+    <a href="./WIDGET_USAGE.html">Widget Usage</a>
+    <a href="./CUBIT_USAGE.html">Cubit Usage</a>
+    <a href="./FIELD_TYPE_USAGE.html">Field Type Usage</a>
+    <a href="./api/index.html">API Reference</a>
+</nav>
+<main>
+    <p><a href="./index.html">← Home</a></p>
+    <h1 id="field_type_usage.md">🧾 FIELD_TYPE_USAGE.md</h1>
+    <p>This document provides examples of how to use
+    <code>FieldCubit&lt;T&gt;</code> with different Dart data types in
+    the <code>reusable_editor</code> package.</p>
+    <hr />
+    <h2 id="fieldcubit-text-required-input">✅ FieldCubit<String> – Text
+    (Required Input)</h2>
+    <div class="sourceCode" id="cb1"><pre
+    class="sourceCode dart"><code class="sourceCode dart"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="at">final</span> nameFieldCubit <span class="op">=</span> FieldCubit<span class="op">&lt;</span><span class="dt">String</span><span class="op">&gt;</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  validator<span class="op">:</span> RequiredStringValidator()<span class="op">,</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>);</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>nameFieldCubit<span class="op">.</span>update(<span class="st">&#39;John Doe&#39;</span>);</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>nameFieldCubit<span class="op">.</span>validate(); <span class="co">// returns null if valid</span></span></code></pre></div>
+    <h2 id="fieldcubit-integer-e.g.-age">✅ FieldCubit<int> – Integer
+    (e.g., Age)</h2>
+    <div class="sourceCode" id="cb2"><pre
+    class="sourceCode dart"><code class="sourceCode dart"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="at">final</span> ageFieldCubit <span class="op">=</span> FieldCubit<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  validator<span class="op">:</span> MinValueValidator(min<span class="op">:</span> <span class="dv">18</span>)<span class="op">,</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>);</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>ageFieldCubit<span class="op">.</span>update(<span class="dv">25</span>);</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>ageFieldCubit<span class="op">.</span>validate(); <span class="co">// ✅ returns null</span></span></code></pre></div>
+    <h2 id="fieldcubit-floating-point-e.g.-price">✅ FieldCubit<double>
+    – Floating point (e.g., Price)</h2>
+    <div class="sourceCode" id="cb3"><pre
+    class="sourceCode dart"><code class="sourceCode dart"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="at">final</span> priceFieldCubit <span class="op">=</span> FieldCubit<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  validator<span class="op">:</span> MinValueValidator(min<span class="op">:</span> <span class="fl">0.0</span>)<span class="op">,</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>);</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>priceFieldCubit<span class="op">.</span>update(<span class="fl">99.99</span>);</span></code></pre></div>
+    <h2 id="fieldcubit-date-selection">✅ FieldCubit<DateTime> – Date
+    selection</h2>
+    <div class="sourceCode" id="cb4"><pre
+    class="sourceCode dart"><code class="sourceCode dart"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="at">final</span> dateFieldCubit <span class="op">=</span> FieldCubit<span class="op">&lt;</span>DateTime<span class="op">&gt;</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  validator<span class="op">:</span> RequiredDateValidator()<span class="op">,</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>);</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>dateFieldCubit<span class="op">.</span>update(DateTime<span class="op">.</span>now());</span></code></pre></div>
+    <h2 id="fieldcubit-toggle-checkbox-etc.">✅ FieldCubit<bool> –
+    Toggle, Checkbox, etc.</h2>
+    <div class="sourceCode" id="cb5"><pre
+    class="sourceCode dart"><code class="sourceCode dart"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="at">final</span> agreeFieldCubit <span class="op">=</span> FieldCubit<span class="op">&lt;</span><span class="dt">bool</span><span class="op">&gt;</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  validator<span class="op">:</span> RequiredTrueValidator()<span class="op">,</span> <span class="co">// Must be true</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>);</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>agreeFieldCubit<span class="op">.</span>update(<span class="cn">true</span>); <span class="co">// ✅</span></span></code></pre></div>
+    <h2 id="fieldcubitlist-multi-select">✅
+    FieldCubit&lt;List<String>&gt; – Multi-select</h2>
+    <div class="sourceCode" id="cb6"><pre
+    class="sourceCode dart"><code class="sourceCode dart"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="at">final</span> tagsFieldCubit <span class="op">=</span> FieldCubit<span class="op">&lt;</span><span class="dt">List</span><span class="op">&lt;</span><span class="dt">String</span><span class="op">&gt;&gt;</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  validator<span class="op">:</span> RequiredListValidator()<span class="op">,</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>);</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>tagsFieldCubit<span class="op">.</span>update([<span class="st">&#39;flutter&#39;</span><span class="op">,</span> <span class="st">&#39;dart&#39;</span>]);</span></code></pre></div>
+    <h2 id="fieldcubit-dropdownselect-input">✅ FieldCubit<Enum> –
+    Dropdown/select input</h2>
+    <div class="sourceCode" id="cb7"><pre
+    class="sourceCode dart"><code class="sourceCode dart"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">enum</span> Gender { male<span class="op">,</span> female<span class="op">,</span> other }</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="at">final</span> genderFieldCubit <span class="op">=</span> FieldCubit<span class="op">&lt;</span>Gender<span class="op">&gt;</span>(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  validator<span class="op">:</span> RequiredFieldValidator<span class="op">&lt;</span>Gender<span class="op">&gt;</span>()<span class="op">,</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>);</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>genderFieldCubit<span class="op">.</span>update(Gender<span class="op">.</span>male);</span></code></pre></div>
+    <h2 id="ui-integration-example-text-field">✅ UI Integration Example
+    – Text Field</h2>
+    <div class="sourceCode" id="cb8"><pre
+    class="sourceCode dart"><code class="sourceCode dart"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>BlocBuilder<span class="op">&lt;</span>FieldCubit<span class="op">&lt;</span><span class="dt">String</span><span class="op">&gt;,</span> FieldState<span class="op">&lt;</span><span class="dt">String</span><span class="op">&gt;&gt;</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  bloc<span class="op">:</span> nameFieldCubit<span class="op">,</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  builder<span class="op">:</span> (_<span class="op">,</span> state) <span class="op">=&gt;</span> TextFormField(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    initialValue<span class="op">:</span> state<span class="op">.</span>value <span class="op">??</span> <span class="st">&#39;&#39;</span><span class="op">,</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    onChanged<span class="op">:</span> nameFieldCubit<span class="op">.</span>update<span class="op">,</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    decoration<span class="op">:</span> InputDecoration(</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>      labelText<span class="op">:</span> <span class="st">&#39;Name&#39;</span><span class="op">,</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>      errorText<span class="op">:</span> state<span class="op">.</span>errorText<span class="op">,</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    )<span class="op">,</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  )<span class="op">,</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>);</span></code></pre></div>
+</main>
+</body>
+</html>
