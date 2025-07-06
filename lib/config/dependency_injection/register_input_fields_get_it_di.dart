@@ -1,13 +1,11 @@
 import 'package:get_it_di_global_variable/get_it_di.dart';
 import 'package:reusable_editor/reusable_editor.dart';
-import 'package:reusable_image_widget/reusable_image_widget.dart';
 
 void registerInputFieldsGetItDI() {
   /// View Models
   sl.registerFactory(() => DateTimeCubit());
   sl.registerFactory(() => TextFieldCubit());
   sl.registerFactory(() => ImageCrudCubit());
-  sl.registerFactory(() => ImagePickerCubit());
   sl.registerFactory(() => SearchFieldCubit());
   sl.registerFactory(() => SwitchCubit());
   sl.registerFactory(() => ToggleCubit());
