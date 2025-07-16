@@ -1,31 +1,35 @@
 part of 'image_field_cubit.dart';
 
-class ImageCrudState extends Equatable {
+class ImageFieldState extends Equatable {
   final String? id;
-  final File? pickedFile;
+  final XFile? pickedFile;
   final String? imgUrl;
   final String? imgFieldError;
 
-  bool get isValidImage => error == null;
+  const ImageFieldState({
+    this.id,
+    this.pickedFile,
+    this.imgUrl,
+    this.imgFieldError,
+  });
 
-  String? get error => pickedFile?.validateImage();
+  bool get isValidImage => imgFieldError == null;
 
-  const ImageCrudState(
-      {this.id, this.imgUrl, this.pickedFile, this.imgFieldError});
+  ImageFieldState copyWith({
+    String? id,
+    XFile? pickedFile,
+    String? imgUrl,
+    String? imgFieldError,
+  }) {
+    return ImageFieldState(
+      id: id ?? this.id,
+      pickedFile: pickedFile ?? this.pickedFile,
+      imgUrl: imgUrl ?? this.imgUrl,
+      imgFieldError: imgFieldError,
+    );
+  }
 
-  ImageCrudState copyWith(
-      {String? id,
-        File? pickedFile,
-        String? imgUrl,
-        String? imgFieldError}) =>
-      ImageCrudState(
-          id: id,
-          pickedFile: pickedFile ?? this.pickedFile,
-          imgUrl: imgUrl,
-          imgFieldError: imgFieldError);
-
-  ImageCrudState clear() => const ImageCrudState(
-      id: null, pickedFile: null, imgUrl: null, imgFieldError: null);
+  ImageFieldState clear() => const ImageFieldState();
 
   @override
   List<Object?> get props => [id, pickedFile, imgUrl, imgFieldError];

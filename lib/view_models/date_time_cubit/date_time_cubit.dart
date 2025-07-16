@@ -1,16 +1,27 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:i_validator/i_validator.dart';
 
 part 'date_time_state.dart';
 
 class DateTimeCubit extends Cubit<DateTimeState> {
-  DateTimeCubit() : super(const DateTimeState());
+  final IValidator<DateTime>? _validator;
 
-  onSelectDate(DateTime? dateTime) {
-    if (dateTime != null) {
-      emit(state.copyWith(dateTime: dateTime));
-    }
+  DateTimeCubit({IValidator<DateTime>? validator})
+    : _validator = validator,
+      super(const DateTimeState());
+
+  void onSelectDate(DateTime? dateTime) {
+    final error = _validator?.validate(dateTime);
+    emit(state.copyWith(dateTime: dateTime, fieldError: error));
   }
 
-  clearDateTime() => state.clear();
+  String? validate() {
+    final dateTime = state.dateTime;
+    final error = _validator?.validate(dateTime);
+    emit(state.copyWith(fieldError: error));
+    return error;
+  }
+
+  void clear() => emit(const DateTimeState());
 }

@@ -8,16 +8,26 @@ class FieldCubit<T> extends Cubit<FieldState<T>> {
   final FieldState<T> _initialState;
 
   FieldCubit({T? initialValue, IValidator<T>? validator})
-    : _initialState = FieldState<T>(value: initialValue, validator: validator),
-      super(FieldState<T>(value: initialValue, validator: validator));
+    : _initialState = FieldState<T>(
+        value: initialValue,
+        validator: validator,
+        errorText: validator?.validate(initialValue),
+      ),
+      super(
+        FieldState<T>(
+          value: initialValue,
+          validator: validator,
+          errorText: validator?.validate(initialValue),
+        ),
+      );
 
   void update(T? value) {
-    final error = state.validator?.validate(value as T);
+    final error = state.validator?.validate(value);
     emit(state.copyWith(value: value, errorText: error));
   }
 
   String? validate() {
-    final error = state.validator?.validate(state.value as T);
+    final error = state.validator?.validate(state.value);
     emit(state.copyWith(errorText: error));
     return error;
   }

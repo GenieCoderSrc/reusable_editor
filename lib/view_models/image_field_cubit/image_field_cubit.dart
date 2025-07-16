@@ -1,41 +1,32 @@
-import 'dart:io';
-
 import 'package:bloc/bloc.dart';
+import 'package:cross_file/cross_file.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:i_validator/i_validator.dart';
 
 part 'image_field_state.dart';
 
-class ImageCrudCubit extends Cubit<ImageCrudState> {
-  ImageCrudCubit() : super(const ImageCrudState());
+class ImageFieldCubit extends Cubit<ImageFieldState> {
+  ImageFieldCubit() : super(const ImageFieldState());
 
-  // final ImageFormManager imageFormManager;
+  void selectImage(XFile? pickedFile) {
+    final String? error = pickedFile?.path.validateImagePath();
 
-  void selectImage(File? pickedFile) {
-    debugPrint(
-        'ImageFieldCubit | selectImage | Image path: ${pickedFile?.path}');
-
-    if (state.isValidImage) {
-      emit(ImageCrudState(pickedFile: pickedFile));
+    if (error == null) {
+      emit(state.copyWith(pickedFile: pickedFile, imgFieldError: null));
     } else {
-      emit(ImageCrudState(imgFieldError: state.imgFieldError));
+      emit(state.copyWith(imgFieldError: error));
     }
 
-    // String? errorTxt = img?.validateImage();
-    //
-    // if (errorTxt == null) {
-    //   emit(ImageCrudState(img: img));
-    // } else {
-    //   emit(ImageCrudState(errorTxt: errorTxt));
-    // }
+    debugPrint(
+      'ImageCrudCubit | selectImage | path: ${pickedFile?.path} | error: $error',
+    );
   }
 
-// String? validate(File? img) {
-//   final String? error = img?.validateImage();
-//   emit(state.copyWith(errorTxt: error));
-//   return error;
-// }
+  void clear() => emit(state.clear());
+}
+
+// final ImageFormManager imageFormManager;
 
 //
 // void uploadImage({String? id}) async {
@@ -64,4 +55,3 @@ class ImageCrudCubit extends Cubit<ImageCrudState> {
 //       ? FileUploaderEntity(file: img, id: id)
 //       : null;
 // }
-}

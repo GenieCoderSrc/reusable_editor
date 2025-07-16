@@ -15,14 +15,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  exception_type: ^0.0.3
-  i_tdd: ^0.0.1
-  fire_storage_impl: ^0.0.2
-  get_it_di_global_variable: ^0.0.5
-  reusable_app_bar: ^0.0.1
-  navigation_without_context: ^0.0.3+1
 
-  i_validator: ^1.0.4
+  get_it_di_global_variable: ^0.0.5
+  i_validator: ^1.1.0
+
+  
   dartz: ^0.10.1
   flutter_bloc: ^9.1.0
   provider: ^6.1.5
@@ -31,6 +28,7 @@ dependencies:
   path_provider: ^2.1.5
   intl: ^0.20.2
   file_picker: ^10.2.0
+  cross_file: ^0.3.4+2
 
 dev_dependencies:
   flutter_test:

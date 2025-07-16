@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 
-/// A utility class providing predefined styles for `InputDecoration`.
-/// This helps maintain consistency across form fields in your application.
+import 'package:flutter/material.dart';
+
+/// A utility class providing consistent and customizable `InputDecoration` styles.
 class InputDecorationStyles {
-  /// Defines the standard padding for the content within an input field.
-  /// Used across all decoration styles for consistent spacing.
+  /// Shared content padding across all input fields.
   static const EdgeInsets fieldPadding = EdgeInsets.symmetric(
     horizontal: 16,
     vertical: 12,
   );
 
-  /// Creates a standard `InputDecoration` with an outlined border.
-  ///
-  /// [label]: The primary text label for the input field.
-  /// [hintText]: Placeholder text displayed when the input is empty.
-  /// [prefixIcon]: An optional icon displayed at the beginning of the input field.
-  /// [suffixIcon]: An optional icon displayed at the end of the input field.
-  /// [errorText]: Text displayed below the input field when there's an error.
-  static InputDecoration inputDecoration({
+  /// The default fill color for filled input decorations.
+  static const Color defaultFillColor = Color(0xFFF5F5F5);
+
+  /// Creates a base `InputDecoration` used by all variations.
+  static InputDecoration _baseDecoration({
     required String label,
     String? hintText,
+    String? errorText,
     Widget? prefixIcon,
     Widget? suffixIcon,
-    String? errorText,
+    InputBorder? border,
+    bool? filled,
+    Color? fillColor,
   }) {
     return InputDecoration(
       labelText: label,
@@ -30,63 +30,73 @@ class InputDecorationStyles {
       errorText: errorText,
       prefixIcon: prefixIcon,
       suffixIcon: suffixIcon,
-      // Applies a rounded outline border to the input field.
-      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
       contentPadding: fieldPadding,
+      border: border,
+      filled: filled ?? false,
+      fillColor: fillColor ?? defaultFillColor,
     );
   }
 
-  /// Creates a `InputDecoration` with a filled background and an outlined border.
-  ///
-  /// [label]: The primary text label for the input field.
-  /// [hintText]: Placeholder text displayed when the input is empty.
-  /// [prefixIcon]: An optional icon displayed at the beginning of the input field.
-  /// [suffixIcon]: An optional icon displayed at the end of the input field.
-  /// [errorText]: Text displayed below the input field when there's an error.
-  static InputDecoration filledDecoration({
+  /// Returns an outlined input style with optional rounded border radius.
+  static InputDecoration outlined({
     required String label,
     String? hintText,
+    String? errorText,
     Widget? prefixIcon,
     Widget? suffixIcon,
-    String? errorText,
+    double? borderRadius,
   }) {
-    return InputDecoration(
-      filled: true, // Enables the filled background.
-      fillColor: Colors.grey.shade100, // Sets the background color.
-      labelText: label,
+    return _baseDecoration(
+      label: label,
       hintText: hintText,
       errorText: errorText,
       prefixIcon: prefixIcon,
       suffixIcon: suffixIcon,
-      // Applies a slightly rounded outline border.
-      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-      contentPadding: fieldPadding,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(borderRadius ?? 12),
+      ),
     );
   }
 
-  /// Creates an `InputDecoration` with an underline border.
-  ///
-  /// [label]: The primary text label for the input field.
-  /// [hintText]: Placeholder text displayed when the input is empty.
-  /// [prefixIcon]: An optional icon displayed at the beginning of the input field.
-  /// [suffixIcon]: An optional icon displayed at the end of the input field.
-  /// [errorText]: Text displayed below the input field when there's an error.
-  static InputDecoration underlineDecoration({
+  /// Returns a filled background style with optional border radius and color.
+  static InputDecoration filled({
+    required String label,
+    String? hintText,
+    String? errorText,
+    Widget? prefixIcon,
+    Widget? suffixIcon,
+    double? borderRadius,
+    Color? fillColor,
+  }) {
+    return _baseDecoration(
+      label: label,
+      hintText: hintText,
+      errorText: errorText,
+      prefixIcon: prefixIcon,
+      suffixIcon: suffixIcon,
+      filled: true,
+      fillColor: fillColor ?? defaultFillColor,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(borderRadius ?? 10),
+      ),
+    );
+  }
+
+  /// Returns an underlined input style, useful for minimal form inputs.
+  static InputDecoration underlined({
     required String label,
     String? hintText,
     String? errorText,
     Widget? prefixIcon,
     Widget? suffixIcon,
   }) {
-    return InputDecoration(
-      labelText: label,
+    return _baseDecoration(
+      label: label,
       hintText: hintText,
       errorText: errorText,
       prefixIcon: prefixIcon,
       suffixIcon: suffixIcon,
-      // Uses a simple underline border.
       border: const UnderlineInputBorder(),
-      contentPadding: fieldPadding,
     );
   }
 }

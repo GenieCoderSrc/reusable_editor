@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:cross_file/cross_file.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:i_validator/i_validator.dart';
@@ -30,7 +33,7 @@ class FormEditorDemo extends StatefulWidget {
 class _FormEditorDemoState extends State<FormEditorDemo> {
   // Existing Cubits
   final EnumOptionCubit<FileDataSourceType> _sourceCubit = EnumOptionCubit();
-  final ImageCrudCubit _imageCrudCubit = ImageCrudCubit();
+  final ImageFieldCubit _imageCrudCubit = ImageFieldCubit();
 
   // New Cubits for the form fields
   final ToggleCubit _checkboxCubit = ToggleCubit(
@@ -99,16 +102,20 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
             ElevatedButton(
               onPressed: () async {
                 final file = await 'assets/sample.png'.loadAsFile();
-                _imageCrudCubit.selectImage(file);
+                if (file != null) {
+                  final XFile xFile = XFile(file.path);
+                  _imageCrudCubit.selectImage(xFile);
+                }
               },
               child: const Text('Pick Image from Asset'),
             ),
             const SizedBox(height: 16),
-            BlocBuilder<ImageCrudCubit, ImageCrudState>(
+            BlocBuilder<ImageFieldCubit, ImageFieldState>(
               bloc: _imageCrudCubit,
               builder: (context, state) {
-                if (state.pickedFile != null) {
-                  return Image.file(state.pickedFile!);
+                if (state.pickedFile?.path != null) {
+                  final File pickedFile = File(state.pickedFile!.path);
+                  return Image.file(pickedFile);
                 }
                 return const Text('No image selected');
               },

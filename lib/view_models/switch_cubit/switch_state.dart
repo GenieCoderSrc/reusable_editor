@@ -1,14 +1,27 @@
 part of 'switch_cubit.dart';
 
-abstract class SwitchState extends Equatable {
-  const SwitchState();
-}
 
-class SwitchInitial extends SwitchState {
+class SwitchState extends Equatable {
   final bool isOn;
+  final String? fieldError;
 
-  const SwitchInitial({required this.isOn});
+  const SwitchState({
+    required this.isOn,
+    this.fieldError,
+  });
+
+  bool get isValid => fieldError == null;
+
+  SwitchState copyWith({
+    bool? isOn,
+    String? fieldError,
+  }) {
+    return SwitchState(
+      isOn: isOn ?? this.isOn,
+      fieldError: fieldError,
+    );
+  }
 
   @override
-  List<Object> get props => [isOn];
+  List<Object?> get props => [isOn, fieldError];
 }

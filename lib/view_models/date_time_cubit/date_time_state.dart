@@ -1,15 +1,27 @@
 part of 'date_time_cubit.dart';
 
+
 class DateTimeState extends Equatable {
   final DateTime? dateTime;
-  const DateTimeState({this.dateTime});
+  final String? fieldError;
 
-  DateTimeState copyWith({DateTime? dateTime}) {
-    return DateTimeState(dateTime: dateTime ?? this.dateTime);
+  const DateTimeState({
+    this.dateTime,
+    this.fieldError,
+  });
+
+  bool get isValid => fieldError == null;
+
+  DateTimeState copyWith({
+    DateTime? dateTime,
+    String? fieldError,
+  }) {
+    return DateTimeState(
+      dateTime: dateTime ?? this.dateTime,
+      fieldError: fieldError,
+    );
   }
 
-  DateTimeState clear() => const DateTimeState(dateTime: null);
-
   @override
-  List<Object?> get props => [dateTime];
+  List<Object?> get props => [dateTime, fieldError];
 }

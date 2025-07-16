@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.0.6 – Jul 16, 2025
+
+### ✨ Enhanced
+
+* Introduced `FieldCubit<T>` and `FieldState<T>`:
+
+  * Generic, reusable Cubit for form input fields.
+  * Tracks current value and error message.
+  * Includes `.update(value)`, `.clear()`, and `.reset()` methods.
+
+### ✅ Refactored
+
+* `DateTimeCubit`, `TextFieldCubit`, and `SwitchCubit` updated to:
+
+  * Respect user-provided initial values.
+  * Improved state updates and structure.
+  * Used common structure aligning with `FieldCubit<T>`.
+
+---
+
+
 ## 1.0.5 – Jul 6, 2025
 
 ### 🧹 Refactored
