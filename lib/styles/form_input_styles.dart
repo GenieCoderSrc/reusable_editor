@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter/material.dart';
-
 /// A utility class providing consistent and customizable `InputDecoration` styles.
 class InputDecorationStyles {
   /// Shared content padding across all input fields.

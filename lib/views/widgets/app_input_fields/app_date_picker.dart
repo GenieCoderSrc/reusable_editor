@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:reusable_editor/reusable_editor.dart';
 
 // ✅ Date Picker
-/// A widget for selecting a date using a FieldCubit<DateTime>.
+/// A widget for selecting a date using a `FieldCubit<DateTime>`.
 ///
 /// Displays a label, the selected date (formatted), and allows users
 /// to tap to open a date picker.

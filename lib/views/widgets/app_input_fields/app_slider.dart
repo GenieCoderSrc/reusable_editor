@@ -5,7 +5,7 @@ import 'package:reusable_editor/view_models/field_cubit/field_cubit.dart';
 
 // ✅ Slider
 
-/// A widget for selecting a numerical value using a FieldCubit<double>.
+/// A widget for selecting a numerical value using a `FieldCubit<double>`.
 ///
 /// Displays a label, the current value (formatted by displayValue),
 /// and a slider for interaction.
