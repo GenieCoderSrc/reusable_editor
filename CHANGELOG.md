@@ -2,13 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+
 ## 1.0.7
 
 ### Jul 16, 2025
 
-### ✨ Fixed
+### 🐞 Fixed
 
-* Fixed `clear state` issue with emit
+* Fixed clear() method behavior in various Cubits to properly emit cleared state using emit().
 
 
 ## 1.0.6
