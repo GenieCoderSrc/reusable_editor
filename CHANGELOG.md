@@ -3,13 +3,23 @@
 All notable changes to this project will be documented in this file.
 
 
-## 1.0.7
+## 1.0.8
 
 ### Jul 16, 2025
 
 ### 🐞 Fixed
 
 * Fixed clear() method behavior in various Cubits to properly emit cleared state using emit().
+
+
+
+## 1.0.7
+
+### Jul 16, 2025
+
+### 🐞 Fixed
+
+* fixed Angle brackets will be interpreted as HTML for `AppDatePicker` and `AppSlider`.
 
 
 ## 1.0.6
