@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 
 
+
+## 1.0.9
+
+### July 22, 2025
+
+### ✅ Added
+- `String?.loadAsXFile()` for converting asset paths to `XFile`
+
+### ✅ Refactored
+
+* `SwitchCubit` has been completely replaced by `ToggleCubit`, which extends `FieldCubit<bool>`.
+    * Offers cleaner implementation using `.toggle()`, `.enable()`, `.disable()`.
+    * Leverages `FieldCubit` validation and reset mechanics.
+    * More reusable and aligns with all other form field cubits.
+
+### ✨ Enhanced
+
+* Updated example usage in `main.dart` to demonstrate:
+    * Modern `ToggleCubit` instead of `SwitchCubit`.
+    * Unified form field cubit usage.
+    * `validate()` pattern on all `FieldCubit<T>` instances.
+    * Usage of `EnumOptionDropDownMenuFormField`, `AppCheckbox`, `AppTextField`, `AppDatePicker`, etc.
+
+
+
 ## 1.0.8
 
 ### Jul 16, 2025
@@ -217,3 +242,6 @@ Cubits.
 ## 0.0.1
 
 * Initial release of `reusable_editor` package.
+
+
+

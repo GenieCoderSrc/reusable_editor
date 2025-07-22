@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:i_validator/i_validator.dart';
 import 'package:intl/intl.dart';
+import 'package:reusable_editor/extensions/asset_to_xfile_extension.dart';
 import 'package:reusable_editor/reusable_editor.dart';
 
 void main() {
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Reusable Editor Example',
-      home: const FormEditorDemo(), // Renamed to better reflect form examples
+      home: const FormEditorDemo(),
     );
   }
 }
@@ -31,28 +32,33 @@ class FormEditorDemo extends StatefulWidget {
 }
 
 class _FormEditorDemoState extends State<FormEditorDemo> {
-  // Existing Cubits
   final EnumOptionCubit<FileDataSourceType> _sourceCubit = EnumOptionCubit();
-  final ImageFieldCubit _imageCrudCubit = ImageFieldCubit();
+  final ImageFieldCubit _imageCubit = ImageFieldCubit();
 
-  // New Cubits for the form fields
   final ToggleCubit _checkboxCubit = ToggleCubit(
-    initialValue: true,
-    validator: RequiredFieldValidator(), // Example validator
+    initialValue: false,
+    validator: (val) => val == true ? null : 'You must accept the terms.',
   );
 
   final FieldCubit<String> _textFieldCubit = FieldCubit<String>(
-    initialValue: 'Hello World',
-    validator: MinLengthValidator(3), // Example validator
+    initialValue: '',
+    validator: MinLengthValidator(3).call,
   );
+
   final FieldCubit<DateTime> _datePickerCubit = FieldCubit<DateTime>(
-    initialValue: DateTime.now(),
+    validator: RequiredFieldValidator().call,
   );
+
   final FieldCubit<TimeOfDay> _timePickerCubit = FieldCubit<TimeOfDay>(
-    initialValue: TimeOfDay.now(),
+    validator: RequiredFieldValidator().call,
   );
+
   final FieldCubit<double> _sliderCubit = FieldCubit<double>(initialValue: 0.5);
-  final FieldCubit<bool> _switchCubit = ToggleCubit(initialValue: false);
+
+  final ToggleCubit _switchCubit = ToggleCubit(
+    initialValue: false,
+    validator: (val) => val == true ? null : 'Feature must be enabled.',
+  );
 
   @override
   void dispose() {
@@ -63,7 +69,7 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
     _sliderCubit.close();
     _switchCubit.close();
     _sourceCubit.close();
-    _imageCrudCubit.close();
+    _imageCubit.close();
     super.dispose();
   }
 
@@ -85,13 +91,10 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
     return Scaffold(
       appBar: AppBar(title: const Text('Reusable Editor Demo')),
       body: SingleChildScrollView(
-        // Use SingleChildScrollView for scrollability
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          // Align widgets to the start
           children: [
-            // Existing widgets
             EnumOptionDropDownMenuFormField<FileDataSourceType>(
               selectedValue: _sourceCubit.state.selectedOption,
               onChanged: _sourceCubit.selectOption,
@@ -99,23 +102,25 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
               dropdownItems: dropdownItems,
             ),
             const SizedBox(height: 16),
+
             ElevatedButton(
               onPressed: () async {
-                final file = await 'assets/sample.png'.loadAsFile();
-                if (file != null) {
-                  final XFile xFile = XFile(file.path);
-                  _imageCrudCubit.selectImage(xFile);
+                final XFile? pickedFile =
+                    await 'assets/sample.png'.loadAsXFile();
+                if (pickedFile != null) {
+                  _imageCubit.update(pickedFile);
                 }
               },
               child: const Text('Pick Image from Asset'),
             ),
             const SizedBox(height: 16),
-            BlocBuilder<ImageFieldCubit, ImageFieldState>(
-              bloc: _imageCrudCubit,
+
+            BlocBuilder<ImageFieldCubit, FieldState<XFile>>(
+              bloc: _imageCubit,
               builder: (context, state) {
-                if (state.pickedFile?.path != null) {
-                  final File pickedFile = File(state.pickedFile!.path);
-                  return Image.file(pickedFile);
+                final XFile? pickedFile = state.value;
+                if (pickedFile != null) {
+                  return Image.file(File(pickedFile.path));
                 }
                 return const Text('No image selected');
               },
@@ -124,27 +129,25 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
             const Divider(),
             const SizedBox(height: 16),
 
-            // New examples for form fields
             Text(
               'Form Field Examples',
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(height: 16),
 
-            // AppCheckbox Example
             AppCheckbox(
               cubit: _checkboxCubit,
               label: 'Accept Terms and Conditions',
             ),
             const SizedBox(height: 16),
-            // Text field example
+
             AppTextField(
               cubit: _textFieldCubit,
               label: 'Name',
               hintText: 'Enter your name',
             ),
             const SizedBox(height: 16),
-            // Date Picker Example
+
             AppDatePicker(
               cubit: _datePickerCubit,
               labelText: 'Select Date',
@@ -152,54 +155,51 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
               formatter: DateFormat('yyyy-MM-dd'),
             ),
             const SizedBox(height: 16),
-            // Time Picker Example
+
             AppTimePicker(
               cubit: _timePickerCubit,
               labelText: 'Select Time',
               hintText: 'Tap to pick a time',
             ),
             const SizedBox(height: 16),
-            // Slider Example
+
             AppSlider(
               cubit: _sliderCubit,
               min: 0.0,
               max: 1.0,
               divisions: 10,
               labelText: 'Select a value',
-              displayValue:
-                  (value) => value.toStringAsFixed(2), // Format for display
+              displayValue: (val) => val.toStringAsFixed(2),
             ),
             const SizedBox(height: 16),
-            // Switch Example
+
             AppSwitch(cubit: _switchCubit, label: 'Enable Feature'),
-            const SizedBox(height: 16),
+            const SizedBox(height: 24),
 
-            // Example of a button to validate all fields (optional)
             ElevatedButton(
-              onPressed: () {
-                // You can call validate() on each cubit and check the result
-                final isCheckboxValid = _checkboxCubit.validate() == null;
-                final isTextFieldValid = _textFieldCubit.validate() == null;
-                // ... and so on for other fields
-
-                if (isCheckboxValid && isTextFieldValid) {
-                  // Add other validations
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Form is valid!')),
-                  );
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Please correct errors in the form.'),
-                    ),
-                  );
-                }
-              },
+              onPressed: _validateForm,
               child: const Text('Validate All Fields'),
             ),
           ],
         ),
       ),
     );
+  }
+
+  void _validateForm() {
+    final isValid = [
+      _checkboxCubit.validate(),
+      _textFieldCubit.validate(),
+      _datePickerCubit.validate(),
+      _timePickerCubit.validate(),
+      _switchCubit.validate(),
+    ].every((error) => error == null);
+
+    final message =
+        isValid ? 'Form is valid!' : 'Please correct the highlighted errors.';
+
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(message)));
   }
 }

@@ -1,28 +1,62 @@
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
-import 'package:i_validator/i_validator.dart';
+// file: text_field_cubit.dart
+import 'package:flutter/widgets.dart';
+import 'package:reusable_editor/view_models/field_cubit/field_cubit.dart';
 
-part 'text_field_state.dart';
+// part 'text_field_state.dart';
 
-class TextFieldCubit extends Cubit<TextFieldState> {
-  final IValidator<String> validator;
+class TextFieldCubit extends FieldCubit<String> {
+  final TextEditingController controller = TextEditingController();
 
-  TextFieldCubit({IValidator<String>? validator})
-    : validator = validator ?? RequiredFieldValidator(),
-      super(const TextFieldState());
-
-  void onChanged(String? txt) {
-    debugPrint('TextFieldCubit | onChanged | txt: $txt');
-    final error = validator.validate(txt);
-    emit(state.copyWith(txt: txt, txtFieldError: error));
+  TextFieldCubit({String? initialValue, super.validator})
+    : super(initialValue: initialValue) {
+    controller.text = initialValue ?? '';
+    controller.addListener(_onTextChanged);
   }
 
-  void clear() => emit(state.clear());
+  void _onTextChanged() {
+    // Keep Cubit state updated when user types
+    final text = controller.text;
+    if (text != state.value) {
+      super.update(text);
+    }
+  }
 
-  String? validate(String? txt) {
-    final error = validator.validate(txt ?? '');
-    emit(state.copyWith(txtFieldError: error));
-    return error;
+  @override
+  void update(String? value) {
+    // Update Cubit + TextController together
+    if (value != state.value) {
+      controller.text = value ?? '';
+      controller.selection = TextSelection.collapsed(
+        offset: controller.text.length,
+      );
+    }
+    super.update(value);
+  }
+
+  void dispose() {
+    controller.removeListener(_onTextChanged);
+    controller.dispose();
   }
 }
+
+// class TextFieldCubit extends Cubit<TextFieldState> {
+//   final IValidator<String> validator;
+//
+//   TextFieldCubit({IValidator<String>? validator})
+//     : validator = validator ?? RequiredFieldValidator(),
+//       super(const TextFieldState());
+//
+//   void onChanged(String? txt) {
+//     debugPrint('TextFieldCubit | onChanged | txt: $txt');
+//     final error = validator.validate(txt);
+//     emit(state.copyWith(txt: txt, txtFieldError: error));
+//   }
+//
+//   void clear() => emit(state.clear());
+//
+//   String? validate(String? txt) {
+//     final error = validator.validate(txt ?? '');
+//     emit(state.copyWith(txtFieldError: error));
+//     return error;
+//   }
+// }

@@ -3,7 +3,7 @@ part of 'field_cubit.dart';
 class FieldState<T> extends Equatable {
   final T? value;
   final String? errorText;
-  final IValidator<T>? validator;
+  final FieldValidator<T>? validator; // ✅ updated type
 
   const FieldState({this.value, this.errorText, this.validator});
 
@@ -12,7 +12,7 @@ class FieldState<T> extends Equatable {
   FieldState<T> copyWith({
     T? value,
     String? errorText,
-    IValidator<T>? validator,
+    FieldValidator<T>? validator,
     bool clearError = false,
   }) {
     return FieldState<T>(
@@ -25,7 +25,7 @@ class FieldState<T> extends Equatable {
   FieldState<T> init() => FieldState<T>(
     value: null,
     validator: validator,
-    errorText: validator?.validate(null),
+    errorText: validator?.call(null),
   );
 
   @override
