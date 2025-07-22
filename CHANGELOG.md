@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.1.2
+
+### July 22, 2025
+
+♻️ Updated
+
+- Added `selectImage` method in the `ImageFieldCubit`.
+
+
 ## 1.1.1
 
 ### July 22, 2025
