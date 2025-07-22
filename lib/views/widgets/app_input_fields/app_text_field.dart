@@ -59,7 +59,7 @@ class AppTextField extends StatelessWidget {
                   prefixIcon: prefixIcon,
                   suffixIcon: suffixIcon,
                 ),
-            onChanged: cubit.update,
+            onChanged: cubit.onChanged,
           ),
     );
   }

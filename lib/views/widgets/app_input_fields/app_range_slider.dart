@@ -34,7 +34,7 @@ class AppRangeSlider extends StatelessWidget {
                 min: min,
                 max: max,
                 divisions: divisions,
-                onChanged: cubit.update,
+                onChanged: cubit.onChanged,
               ),
               if (state.errorText != null)
                 Text(state.errorText!, style: AppFormTextStyles.errorTextStyle),

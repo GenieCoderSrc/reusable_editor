@@ -16,7 +16,7 @@ class AppCheckbox extends StatelessWidget {
       builder:
           (_, state) => CheckboxListTile(
             value: state.value ?? false,
-            onChanged: cubit.update,
+            onChanged: cubit.onChanged,
             title: Text(label),
             subtitle:
                 state.errorText != null

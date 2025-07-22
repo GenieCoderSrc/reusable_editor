@@ -2,21 +2,29 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.1.1
 
+### July 22, 2025
+
+♻️ Refactored
+
+- Renamed  `update` to `onChanged` in the `FieldCubit<T>`.
 
 ## 1.1.0
 
 ### July 22, 2025
 
 ♻️ Refactored
-- Added `formFieldValidator` getter to `FieldCubit<T>` to provide a reusable Flutter form validator callback without duplicating validation logic.
 
+- Added `formFieldValidator` getter to `FieldCubit<T>` to provide a reusable Flutter form validator callback without
+  duplicating validation logic.
 
 ## 1.0.9
 
 ### July 22, 2025
 
 ### ✅ Added
+
 - `String?.loadAsXFile()` for converting asset paths to `XFile`
 
 ### ✅ Refactored
@@ -34,8 +42,6 @@ All notable changes to this project will be documented in this file.
     * `validate()` pattern on all `FieldCubit<T>` instances.
     * Usage of `EnumOptionDropDownMenuFormField`, `AppCheckbox`, `AppTextField`, `AppDatePicker`, etc.
 
-
-
 ## 1.0.8
 
 ### Jul 16, 2025
@@ -44,8 +50,6 @@ All notable changes to this project will be documented in this file.
 
 * Fixed clear() method behavior in various Cubits to properly emit cleared state using emit().
 
-
-
 ## 1.0.7
 
 ### Jul 16, 2025
@@ -53,7 +57,6 @@ All notable changes to this project will be documented in this file.
 ### 🐞 Fixed
 
 * fixed Angle brackets will be interpreted as HTML for `AppDatePicker` and `AppSlider`.
-
 
 ## 1.0.6
 

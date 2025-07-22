@@ -41,7 +41,7 @@ class AppFilePicker extends StatelessWidget {
               );
               if (result != null && result.files.isNotEmpty) {
                 final file = File(result.files.single.path!);
-                cubit.update(file);
+                cubit.onChanged(file);
               }
             },
           ),

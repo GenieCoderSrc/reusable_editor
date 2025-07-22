@@ -33,7 +33,7 @@ class AppTimePicker extends StatelessWidget {
                 context: context,
                 initialTime: state.value ?? TimeOfDay.now(),
               );
-              if (picked != null) cubit.update(picked);
+              if (picked != null) cubit.onChanged(picked);
             },
           ),
     );

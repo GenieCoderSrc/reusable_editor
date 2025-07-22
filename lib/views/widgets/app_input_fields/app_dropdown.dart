@@ -27,7 +27,7 @@ class AppDropdown<T> extends StatelessWidget {
               errorText: state.errorText,
             ),
             items: items,
-            onChanged: cubit.update,
+            onChanged: cubit.onChanged,
           ),
     );
   }

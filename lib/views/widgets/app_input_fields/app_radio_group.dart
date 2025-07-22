@@ -31,7 +31,7 @@ class AppRadioGroup<T> extends StatelessWidget {
                 return RadioListTile<T>(
                   value: values[index],
                   groupValue: state.value,
-                  onChanged: cubit.update,
+                  onChanged: cubit.onChanged,
                   title: Text(labels[index]),
                 );
               }),

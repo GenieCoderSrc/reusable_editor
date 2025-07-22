@@ -17,7 +17,7 @@ class AppSwitch extends StatelessWidget {
       builder:
           (_, state) => SwitchListTile(
             value: state.value ?? false,
-            onChanged: cubit.update,
+            onChanged: cubit.onChanged,
             title: Text(label),
             subtitle:
                 state.errorText != null

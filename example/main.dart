@@ -108,7 +108,7 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
                 final XFile? pickedFile =
                     await 'assets/sample.png'.loadAsXFile();
                 if (pickedFile != null) {
-                  _imageCubit.update(pickedFile);
+                  _imageCubit.onChanged(pickedFile);
                 }
               },
               child: const Text('Pick Image from Asset'),

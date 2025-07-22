@@ -17,12 +17,12 @@ class TextFieldCubit extends FieldCubit<String> {
     // Keep Cubit state updated when user types
     final text = controller.text;
     if (text != state.value) {
-      super.update(text);
+      super.onChanged(text);
     }
   }
 
   @override
-  void update(String? value) {
+  void onChanged(String? value) {
     // Update Cubit + TextController together
     if (value != state.value) {
       controller.text = value ?? '';
@@ -30,7 +30,7 @@ class TextFieldCubit extends FieldCubit<String> {
         offset: controller.text.length,
       );
     }
-    super.update(value);
+    super.onChanged(value);
   }
 
   void dispose() {

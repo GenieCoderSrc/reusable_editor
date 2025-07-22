@@ -19,7 +19,7 @@ class GenericTextField<T> extends StatelessWidget {
             labelText: label,
             errorText: state.errorText,
           ),
-          onChanged: (val) => cubit.update(val as T),
+          onChanged: (val) => cubit.onChanged(val as T),
         );
       },
     );

@@ -60,7 +60,7 @@ class AppDatePicker extends StatelessWidget {
                     lastDate: DateTime(2100),
                   );
                   if (picked != null) {
-                    cubit.update(picked);
+                    cubit.onChanged(picked);
                   }
                 },
                 // Display error text if validation fails

@@ -22,7 +22,7 @@ class FieldCubit<T> extends Cubit<FieldState<T>> {
         ),
       );
 
-  void update(T? value) {
+  void onChanged(T? value) {
     final error = state.validator?.call(value);
     emit(state.copyWith(value: value, errorText: error));
   }

@@ -10,7 +10,7 @@ class SwitchCubit extends FieldCubit<bool> {
   /// Toggle the value or set explicitly, then validate.
   void toggle({bool? value}) {
     final newValue = value ?? !(state.value ?? false);
-    update(newValue);
+    onChanged(newValue);
     debugPrint(
       'SwitchCubit | toggle | value: $newValue | error: ${state.errorText}',
     );
@@ -18,7 +18,7 @@ class SwitchCubit extends FieldCubit<bool> {
 
   /// Reset to the initial value and validate.
   void reset() {
-    update(_initialValue);
+    onChanged(_initialValue);
     debugPrint('SwitchCubit | reset | value: $_initialValue');
   }
 }

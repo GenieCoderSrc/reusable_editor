@@ -64,7 +64,7 @@ class AppSlider extends StatelessWidget {
                 max: max,
                 divisions: divisions,
                 onChanged: (newValue) {
-                  cubit.update(newValue);
+                  cubit.onChanged(newValue);
                 },
               ),
               // Display error text if validation fails
