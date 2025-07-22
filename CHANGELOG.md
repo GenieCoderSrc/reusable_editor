@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 
 
+## 1.1.0
+
+### July 22, 2025
+
+♻️ Refactored
+- Added `formFieldValidator` getter to `FieldCubit<T>` to provide a reusable Flutter form validator callback without duplicating validation logic.
+
+
 ## 1.0.9
 
 ### July 22, 2025
