@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.1.3
+
+### July 23, 2025
+
+♻️ Updated
+
+- Usages `ImageFieldState` in the `ImageFieldCubit`.
+
+
 ## 1.1.2
 
 ### July 22, 2025
