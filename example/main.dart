@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:i_validator/i_validator.dart';
 import 'package:intl/intl.dart';
-import 'package:reusable_editor/extensions/asset_to_xfile_extension.dart';
 import 'package:reusable_editor/reusable_editor.dart';
 
 void main() {
@@ -108,17 +107,17 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
                 final XFile? pickedFile =
                     await 'assets/sample.png'.loadAsXFile();
                 if (pickedFile != null) {
-                  _imageCubit.onChanged(pickedFile);
+                  _imageCubit.selectImage(pickedFile);
                 }
               },
               child: const Text('Pick Image from Asset'),
             ),
             const SizedBox(height: 16),
 
-            BlocBuilder<ImageFieldCubit, FieldState<XFile>>(
+            BlocBuilder<ImageFieldCubit, ImageFieldState>(
               bloc: _imageCubit,
               builder: (context, state) {
-                final XFile? pickedFile = state.value;
+                final XFile? pickedFile = state.pickedFile;
                 if (pickedFile != null) {
                   return Image.file(File(pickedFile.path));
                 }
