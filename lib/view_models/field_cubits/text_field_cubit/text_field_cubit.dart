@@ -1,6 +1,6 @@
 // file: text_field_cubit.dart
 import 'package:flutter/widgets.dart';
-import 'package:reusable_editor/view_models/field_cubit/field_cubit.dart';
+import 'package:reusable_editor/view_models/field_cubits/field_cubit/field_cubit.dart';
 
 // part 'text_field_state.dart';
 

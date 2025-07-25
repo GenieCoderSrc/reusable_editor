@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.1.4
+
+### July 26, 2025
+
+**➕ Created**
+
+- Usages `ImageFieldState` in the `ImageFieldCubit`.
+
+* `base_bloc.dart`: Introduced a foundational abstract class for all BLoCs. This class enforces the use of a common state that extends `BaseState`, encouraging consistency and reusability across all business logic components.
+
+* `base_state.dart`: Defined an abstract base state that all Cubit or Bloc states should extend. It encapsulates a `FormSubmissionStatus` to track form states (e.g., loading, success, failure), aligning with the Single Responsibility Principle.
+
+* `form_submission_status.dart`: Added sealed classes to represent the different statuses of form submission: initial, submitting, success, and failed. These classes ensure clear and maintainable handling of form-related logic, and provide extensibility for future states.
+
+* `loading_cubit.dart`: Implemented a dedicated `Cubit` to manage general-purpose loading states across the app. This promotes separation of concerns by delegating loading logic to its own class.
+
+* `loading_state.dart`: Introduced a strongly-typed state system for `LoadingCubit`, including `LoadingInitial`, `LoadingInProgress`, and `LoadingError`. This supports more expressive and testable UI loading feedback.
+
+These additions were created following SOLID principles and ensure a clean architecture approach for scalable and maintainable Flutter applications.
+
+
 ## 1.1.3
 
 ### July 23, 2025

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reusable_editor/view_models/field_cubit/field_cubit.dart';
+import 'package:reusable_editor/view_models/field_cubits/field_cubit/field_cubit.dart';
 
 class GenericTextField<T> extends StatelessWidget {
   final FieldCubit<T> cubit;
