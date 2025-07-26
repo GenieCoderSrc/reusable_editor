@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:cross_file/cross_file.dart';
 import 'package:equatable/equatable.dart';
@@ -19,19 +21,31 @@ class ImageFieldCubit extends Cubit<ImageFieldState> {
     }
 
     debugPrint(
-      'ImageCrudCubit | selectImage | path: ${pickedFile?.path} | error: $error',
+      'ImageFieldCubit | selectImage | path: ${pickedFile?.path} | error: $error',
     );
+  }
+
+  void startUpload() {
+    emit(state.copyWith(isUploading: true, uploadProgress: 0.0));
+  }
+
+  void updateUploadProgress(double progress) {
+    emit(state.copyWith(uploadProgress: progress.clamp(0.0, 1.0)));
+  }
+
+  void finishUpload({required String imgUrl}) {
+    emit(
+      state.copyWith(isUploading: false, uploadProgress: 1.0, imgUrl: imgUrl),
+    );
+  }
+
+  void startDelete() {
+    emit(state.copyWith(isDeleting: true));
+  }
+
+  void finishDelete() {
+    emit(state.copyWith(isDeleting: false, imgUrl: null, pickedFile: null));
   }
 
   void clear() => emit(state.clear());
 }
-//
-// class ImageFieldCubit extends FieldCubit<XFile> {
-//   ImageFieldCubit()
-//     : super(validator: (file) => file?.path.validateImagePath());
-//
-//   void selectImage(XFile? pickedFile) {
-//     debugPrint('ImageCrudCubit | selectImage | path: ${pickedFile?.path}');
-//     super.onChanged(pickedFile);
-//   }
-// }

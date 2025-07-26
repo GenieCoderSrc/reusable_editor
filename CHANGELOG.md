@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+
+## 1.1.5
+
+### July 26, 2025
+
+### ♻️ Updated
+
+* Improved `ImageFieldCubit` to support upload and delete state management.
+* Added `uploadProgress`, `isUploading`, and `isDeleting` to `ImageFieldState` for improved image operation tracking and user feedback in forms.
+
+
 ## 1.1.4
 
 ### July 26, 2025
