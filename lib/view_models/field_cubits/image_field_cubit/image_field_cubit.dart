@@ -57,5 +57,14 @@ class ImageFieldCubit extends Cubit<ImageFieldState> {
     emit(state.copyWith(isDeleting: false, imgUrl: null, pickedFile: null));
   }
 
+  void failDelete({String? error}) {
+    emit(
+      state.copyWith(
+        isDeleting: false,
+        imgFieldError: error ?? 'Failed to delete image',
+      ),
+    );
+  }
+
   void clear() => emit(state.clear());
 }

@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.1.7
+
+### July 27, 2025
+
+### ♻️ Updated
+
+* Added `failDelete` in the `ImageFieldCubit` to improved delete state management and user feedback.
+
 ## 1.1.6
 
 ### July 27, 2025
