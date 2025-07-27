@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.1.6
+
+### July 27, 2025
+
+### ♻️ Updated
+
+* Added `failUpload` in the `ImageFieldCubit` to improved upload state management and user feedback.
 
 ## 1.1.5
 
@@ -10,8 +17,8 @@ All notable changes to this project will be documented in this file.
 ### ♻️ Updated
 
 * Improved `ImageFieldCubit` to support upload and delete state management.
-* Added `uploadProgress`, `isUploading`, and `isDeleting` to `ImageFieldState` for improved image operation tracking and user feedback in forms.
-
+* Added `uploadProgress`, `isUploading`, and `isDeleting` to `ImageFieldState` for improved image operation tracking and
+  user feedback in forms.
 
 ## 1.1.4
 
@@ -21,18 +28,25 @@ All notable changes to this project will be documented in this file.
 
 - Usages `ImageFieldState` in the `ImageFieldCubit`.
 
-* `base_bloc.dart`: Introduced a foundational abstract class for all BLoCs. This class enforces the use of a common state that extends `BaseState`, encouraging consistency and reusability across all business logic components.
+* `base_bloc.dart`: Introduced a foundational abstract class for all BLoCs. This class enforces the use of a common
+  state that extends `BaseState`, encouraging consistency and reusability across all business logic components.
 
-* `base_state.dart`: Defined an abstract base state that all Cubit or Bloc states should extend. It encapsulates a `FormSubmissionStatus` to track form states (e.g., loading, success, failure), aligning with the Single Responsibility Principle.
+* `base_state.dart`: Defined an abstract base state that all Cubit or Bloc states should extend. It encapsulates a
+  `FormSubmissionStatus` to track form states (e.g., loading, success, failure), aligning with the Single Responsibility
+  Principle.
 
-* `form_submission_status.dart`: Added sealed classes to represent the different statuses of form submission: initial, submitting, success, and failed. These classes ensure clear and maintainable handling of form-related logic, and provide extensibility for future states.
+* `form_submission_status.dart`: Added sealed classes to represent the different statuses of form submission: initial,
+  submitting, success, and failed. These classes ensure clear and maintainable handling of form-related logic, and
+  provide extensibility for future states.
 
-* `loading_cubit.dart`: Implemented a dedicated `Cubit` to manage general-purpose loading states across the app. This promotes separation of concerns by delegating loading logic to its own class.
+* `loading_cubit.dart`: Implemented a dedicated `Cubit` to manage general-purpose loading states across the app. This
+  promotes separation of concerns by delegating loading logic to its own class.
 
-* `loading_state.dart`: Introduced a strongly-typed state system for `LoadingCubit`, including `LoadingInitial`, `LoadingInProgress`, and `LoadingError`. This supports more expressive and testable UI loading feedback.
+* `loading_state.dart`: Introduced a strongly-typed state system for `LoadingCubit`, including `LoadingInitial`,
+  `LoadingInProgress`, and `LoadingError`. This supports more expressive and testable UI loading feedback.
 
-These additions were created following SOLID principles and ensure a clean architecture approach for scalable and maintainable Flutter applications.
-
+These additions were created following SOLID principles and ensure a clean architecture approach for scalable and
+maintainable Flutter applications.
 
 ## 1.1.3
 
@@ -42,7 +56,6 @@ These additions were created following SOLID principles and ensure a clean archi
 
 - Usages `ImageFieldState` in the `ImageFieldCubit`.
 
-
 ## 1.1.2
 
 ### July 22, 2025
@@ -50,7 +63,6 @@ These additions were created following SOLID principles and ensure a clean archi
 ♻️ Updated
 
 - Added `selectImage` method in the `ImageFieldCubit`.
-
 
 ## 1.1.1
 

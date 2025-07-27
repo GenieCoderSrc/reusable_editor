@@ -39,6 +39,16 @@ class ImageFieldCubit extends Cubit<ImageFieldState> {
     );
   }
 
+  void failUpload({String? error}) {
+    emit(
+      state.copyWith(
+        isUploading: false,
+        uploadProgress: 0.0,
+        imgFieldError: error ?? 'Failed to upload image',
+      ),
+    );
+  }
+
   void startDelete() {
     emit(state.copyWith(isDeleting: true));
   }
