@@ -11,13 +11,16 @@ environment:
   sdk: ">=3.7.2 <4.0.0"
   flutter: ">=3.7.0"
 
-
 dependencies:
   flutter:
     sdk: flutter
 
-  get_it_di_global_variable: ^0.0.5
-  i_validator: ^1.1.1
+  get_it_di_global_variable:
+    path: ../get_it_di_global_variable
+#  i_validator: ^1.1.1
+  i_validator:
+    path: ../i_validator
+
 
   
   dartz: ^0.10.1
