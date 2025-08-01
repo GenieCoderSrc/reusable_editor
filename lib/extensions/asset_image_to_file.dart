@@ -33,7 +33,8 @@ extension AssetImageToFile on String? {
       return null;
     } catch (e) {
       debugPrint(
-          'AssetImageToFile | loadAsFile | Error loading asset as file: $e');
+        'AssetImageToFile | loadAsFile | Error loading asset as file: $e',
+      );
       return null;
     }
   }

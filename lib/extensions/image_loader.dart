@@ -10,7 +10,8 @@ extension ImageLoader on String {
       return data.buffer.asUint8List();
     } catch (e, stacktrace) {
       debugPrint(
-          'ImageLoader | loadAssetImage | error: $e stacktrace: $stacktrace');
+        'ImageLoader | loadAssetImage | error: $e stacktrace: $stacktrace',
+      );
       return Uint8List(0);
     }
   }

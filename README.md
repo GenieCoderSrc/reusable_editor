@@ -61,8 +61,9 @@ AppSwitch(cubit: toggleCubit);
 * `AppRangeSlider` - Range slider input
 * `AppSlider` - Slider input
 * `AppSwitch` - Toggle switch
-* `AppTextField` - Text input field
 * `AppTimePicker` - Time selection field
+* `AppTextField` - Text input field
+* `TextFieldBlocBuilder` - Manage state for Text input
 
 ### Dropdown with Enum
 

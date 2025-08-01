@@ -1,4 +1,1 @@
-enum FileDataSourceType {
-  fireStorage,
-  server,
-}
+enum FileDataSourceType { fireStorage, server }

@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.1.8
+
+### Aug 1, 2025
+
+### ✅ Added
+
+* Added `TextFieldBlocBuilder`, a BlocBuilder TextField using `TextFieldCubit`.
+
 ## 1.1.7
 
 ### July 27, 2025
