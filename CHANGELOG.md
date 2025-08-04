@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 * Added optional variables `builder` in the `AppTextField`, to pass custom input field widget.
 * Added Border & fill config variables in the `AppTextField`, for text field customization.
 
+
 ## 1.1.7
 
 ### July 27, 2025
