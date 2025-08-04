@@ -6,6 +6,7 @@ This document provides examples of how to use the available form widgets provide
 
 ---
 
+
 ## ✅ AppCheckbox – Checkbox with label and validation
 
 ```dart
@@ -66,8 +67,31 @@ AppSwitch(cubit: toggleCubit);
 ## ✅ AppTextField – Text input field
 
 ```dart
-final nameCubit = FieldCubit<String>(validator: RequiredStringValidator());
-AppTextField(cubit: nameCubit);
+final nameCubit = TextFieldCubit(validator: RequiredStringValidator());
+AppTextField(cubit: nameCubit, label: 'Name');
+```
+
+## ✅ AppTextField – Text input field 
+
+```dart
+final nameCubit = TextFieldCubit(validator: RequiredStringValidator());
+
+    AppTextField(
+      bloc: nameCubit,
+      builder: (context, state) {
+        return TextFormField(
+          label: 'Name',
+          errorMsg: state.errorText,
+          textController: nameCubit.controller,
+          onChanged: nameCubit.onChanged,
+          validator: nameCubit.formFieldValidator,
+        );
+      },
+    );
+
+
+
+
 ```
 
 ## ✅ AppTimePicker – Time selection field

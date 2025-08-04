@@ -39,7 +39,7 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
     validator: (val) => val == true ? null : 'You must accept the terms.',
   );
 
-  final FieldCubit<String> _textFieldCubit = FieldCubit<String>(
+  final TextFieldCubit _textFieldCubit = TextFieldCubit(
     initialValue: '',
     validator: MinLengthValidator(3).call,
   );
@@ -141,7 +141,7 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
             const SizedBox(height: 16),
 
             AppTextField(
-              cubit: _textFieldCubit,
+              bloc: _textFieldCubit,
               label: 'Name',
               hintText: 'Enter your name',
             ),

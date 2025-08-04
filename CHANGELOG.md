@@ -4,11 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## 1.1.8
 
-### Aug 1, 2025
+### Aug 5, 2025
 
-### ✅ Added
+### ♻️ Refactored
 
-* Added `TextFieldBlocBuilder`, a BlocBuilder TextField using `TextFieldCubit`.
+* Uses `TextFieldCubit` in the `AppTextField`, for state management.
+* Added optional variables `builder` in the `AppTextField`, to pass custom input field widget.
+* Added Border & fill config variables in the `AppTextField`, for text field customization.
 
 ## 1.1.7
 

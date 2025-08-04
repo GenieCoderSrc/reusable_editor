@@ -38,13 +38,13 @@ Full usage guides available at:
 
 ```dart
 // Create cubit for a field
-final textFieldCubit = FieldCubit<String>(
+final textFieldCubit = TextFieldCubit(
   initialValue: 'Default',
   validator: RequiredValidator(),
 );
 
 // Use with AppTextField
-AppTextField(cubit: textFieldCubit);
+AppTextField(cubit: textFieldCubit, label: 'Name');
 
 // Toggle field example
 final toggleCubit = ToggleCubit(initialValue: false);
@@ -63,7 +63,6 @@ AppSwitch(cubit: toggleCubit);
 * `AppSwitch` - Toggle switch
 * `AppTimePicker` - Time selection field
 * `AppTextField` - Text input field
-* `TextFieldBlocBuilder` - Manage state for Text input
 
 ### Dropdown with Enum
 
