@@ -188,7 +188,7 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
   void _validateForm() {
     final isValid = [
       _checkboxCubit.validate(),
-      _textFieldCubit.validate(null),
+      _textFieldCubit.validate(),
       _datePickerCubit.validate(),
       _timePickerCubit.validate(),
       _switchCubit.validate(),

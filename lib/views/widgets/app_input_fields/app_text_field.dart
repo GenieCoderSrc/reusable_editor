@@ -67,7 +67,7 @@ class AppTextField extends StatelessWidget {
               maxLines: maxLines,
               style: AppFormTextStyles.formFieldTextStyle,
               onChanged: bloc.onChanged,
-              validator: bloc.validate,
+              validator: bloc.formFieldValidator,
               decoration: _buildEffectiveDecoration(state),
             );
           },
