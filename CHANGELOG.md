@@ -2,6 +2,50 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.1.9
+
+### 2025-08-08
+
+### BREAKING CHANGES
+- **Renamed** field `txt` to `value` in `TextFieldState` for better semantic clarity.
+- `TextFieldState.value` is now `String?` (nullable).
+
+### Added
+- Optional `initialValue` support added for initializing the field with a preset value.
+- `copyWithInitial()` method added to clone with only the initial value.
+- Factory `TextFieldState.initial({String? initialValue})` now accepts a nullable value.
+
+### Removed
+- Removed dependency on previous field `txt`.
+
+### Fixed
+- Fixed behavior where `value` was previously non-nullable and defaulted to an empty string. Now supports proper `null` values so that unedited/cleared inputs can be filtered before DB save.
+- Ensures validation can be skipped during reset state if needed.
+
+### Refactored
+- Improved naming conventions and structure to align with SOLID principles.
+- Improved immutability handling by ensuring `copyWith` and `reset` handle null/initial values correctly.
+
+---
+
+### Recommended Usage Changes
+- Use `TextFieldState.initial()` with optional `initialValue`.
+- Use `value` instead of `txt`.
+- When saving to DB, filter out `null` values from `TextFieldState.value`.
+- If resetting a form, use `.reset()` to return to `initialValue` (which may be null).
+
+---
+
+### Example
+```dart
+final nameField = TextFieldState.initial(initialValue: 'John Doe');
+
+if (nameField.value != null) {
+  saveToDB(nameField.value);
+}
+```
+
+
 ## 1.1.8
 
 ### Aug 5, 2025

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reusable_editor/styles/app_form_text_styles.dart';
-import 'package:reusable_editor/view_models/field_cubits/field_cubit/field_cubit.dart';
 import 'package:reusable_editor/view_models/field_cubits/text_field_cubit/text_field_cubit.dart';
 
 // ✅ String Based Text Input Field
@@ -28,8 +27,7 @@ class AppTextField extends StatelessWidget {
   final Color? borderColor;
   final double? borderWidth;
 
-  final Widget Function(BuildContext context, FieldState<String> state)?
-  builder;
+  final Widget Function(BuildContext context, TextFieldState state)? builder;
 
   const AppTextField({
     super.key,
@@ -55,7 +53,7 @@ class AppTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TextFieldCubit, FieldState<String>>(
+    return BlocBuilder<TextFieldCubit, TextFieldState>(
       bloc: bloc,
       builder:
           builder ??
@@ -69,14 +67,14 @@ class AppTextField extends StatelessWidget {
               maxLines: maxLines,
               style: AppFormTextStyles.formFieldTextStyle,
               onChanged: bloc.onChanged,
-              validator: bloc.formFieldValidator,
+              validator: bloc.validate,
               decoration: _buildEffectiveDecoration(state),
             );
           },
     );
   }
 
-  InputDecoration _buildEffectiveDecoration(FieldState<String> state) {
+  InputDecoration _buildEffectiveDecoration(TextFieldState state) {
     final effectiveBorder = border ?? _buildDefaultBorder();
     return decoration?.copyWith(
           labelText: label,
