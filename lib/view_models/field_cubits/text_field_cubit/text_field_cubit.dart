@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'text_field_state.dart';
 
-
 class TextFieldCubit extends Cubit<TextFieldState> {
   final TextEditingController controller;
   final String? _initialValue;
