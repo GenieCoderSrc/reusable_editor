@@ -33,7 +33,9 @@ class ImageFieldCubit extends Cubit<ImageFieldState> {
     emit(state.copyWith(uploadProgress: progress.clamp(0.0, 1.0)));
   }
 
-  void finishUpload({required String imgUrl}) {
+  void finishUpload({required String imgUrl}) => setUploadedUrl(imgUrl: imgUrl);
+
+  void setUploadedUrl({required String imgUrl}) {
     emit(
       state.copyWith(isUploading: false, uploadProgress: 1.0, imgUrl: imgUrl),
     );

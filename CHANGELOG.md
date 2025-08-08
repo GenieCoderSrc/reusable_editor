@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.2.0
+
+### Aug 8, 2025
+
+### Added
+
+- Added `setUploadedUrl` method in the ImageFieldCubit to set uploaded file Url.
+- Updated file_picker version as file_picker: ^10.2.2
+
 ## 1.1.9
 
 ### Aug 8, 2025
