@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://geniecodersrc.github.io/reusable_editor/sitemap.xml
