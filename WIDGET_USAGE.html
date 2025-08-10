@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>WIDGET USAGE – reusable_editor Docs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Documentation for WIDGET USAGE in
+the reusable_editor Flutter package."/>
+    <link rel="canonical" href="https://geniecodersrc.github.io/reusable_editor/WIDGET_USAGE.html"/>
+    <style>
+        body {
+          margin: 0;
+          font-family: Arial, sans-serif;
+          display: flex;
+        }
+        nav {
+          width: 220px;
+          background-color: #f8f8f8;
+          padding: 1rem;
+          border-right: 1px solid #ddd;
+          height: 100vh;
+          position: fixed;
+        }
+        main {
+          margin-left: 240px;
+          padding: 2rem;
+        }
+        nav h2 {
+          font-size: 16px;
+          margin-bottom: 10px;
+        }
+        nav a {
+          display: block;
+          color: #333;
+          margin-bottom: 8px;
+          text-decoration: none;
+        }
+        nav a:hover {
+          text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <h2>📚 Docs</h2>
+    <a href="./index.html">Home</a>
+    <a href="./WIDGET_USAGE.html">Widget Usage</a>
+    <a href="./CUBIT_USAGE.html">Cubit Usage</a>
+    <a href="./FIELD_TYPE_USAGE.html">Field Type Usage</a>
+    <a href="./api/index.html">API Reference</a>
+</nav>
+<main>
+    <p><a href="./index.html">← Home</a></p>
+    <h1 id="widget_usage.md">📘 WIDGET_USAGE.md</h1>
+    <p>This document provides examples of how to use the available form
+    widgets provided by the <code>reusable_editor</code> package.</p>
+    <hr />
+    <h2 id="appcheckbox-checkbox-with-label-and-validation">✅
+    AppCheckbox – Checkbox with label and validation</h2>
+    <div class="sourceCode" id="cb1"><pre
+    class="sourceCode dart"><code class="sourceCode dart"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="at">final</span> agreeCubit <span class="op">=</span> FieldCubit<span class="op">&lt;</span><span class="dt">bool</span><span class="op">&gt;</span>(validator<span class="op">:</span> RequiredTrueValidator());</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>AppCheckbox(cubit<span class="op">:</span> agreeCubit<span class="op">,</span> label<span class="op">:</span> <span class="st">&#39;Agree to Terms&#39;</span>);</span></code></pre></div>
+    <h2 id="appdatepicker-date-selection-field">✅ AppDatePicker – Date
+    selection field</h2>
+    <div class="sourceCode" id="cb2"><pre
+    class="sourceCode dart"><code class="sourceCode dart"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="at">final</span> dateCubit <span class="op">=</span> FieldCubit<span class="op">&lt;</span>DateTime<span class="op">&gt;</span>(validator<span class="op">:</span> RequiredDateValidator());</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>AppDatePicker(cubit<span class="op">:</span> dateCubit);</span></code></pre></div>
+    <h2 id="appdropdown-custom-dropdown-field">✅ AppDropdown – Custom
+    dropdown field</h2>
+    <div class="sourceCode" id="cb3"><pre
+    class="sourceCode dart"><code class="sourceCode dart"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">enum</span> Status { active<span class="op">,</span> inactive }</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">final</span> statusCubit <span class="op">=</span> FieldCubit<span class="op">&lt;</span>Status<span class="op">&gt;</span>(validator<span class="op">:</span> RequiredFieldValidator<span class="op">&lt;</span>Status<span class="op">&gt;</span>());</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>AppDropdown<span class="op">&lt;</span>Status<span class="op">&gt;</span>(cubit<span class="op">:</span> statusCubit<span class="op">,</span> items<span class="op">:</span> Status<span class="op">.</span>values);</span></code></pre></div>
+    <h2 id="appfilepicker-file-selection-widget">✅ AppFilePicker – File
+    selection widget</h2>
+    <div class="sourceCode" id="cb4"><pre
+    class="sourceCode dart"><code class="sourceCode dart"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="at">final</span> fileCubit <span class="op">=</span> FieldCubit<span class="op">&lt;</span>File<span class="op">&gt;</span>(validator<span class="op">:</span> RequiredFieldValidator<span class="op">&lt;</span>File<span class="op">&gt;</span>());</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>AppFilePicker(cubit<span class="op">:</span> fileCubit);</span></code></pre></div>
+    <h2 id="appradiogroup-radio-button-group">✅ AppRadioGroup – Radio
+    button group</h2>
+    <div class="sourceCode" id="cb5"><pre
+    class="sourceCode dart"><code class="sourceCode dart"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="at">final</span> genderCubit <span class="op">=</span> FieldCubit<span class="op">&lt;</span><span class="dt">String</span><span class="op">&gt;</span>(validator<span class="op">:</span> RequiredStringValidator());</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>AppRadioGroup<span class="op">&lt;</span><span class="dt">String</span><span class="op">&gt;</span>(cubit<span class="op">:</span> genderCubit<span class="op">,</span> options<span class="op">:</span> [<span class="st">&#39;Male&#39;</span><span class="op">,</span> <span class="st">&#39;Female&#39;</span>]);</span></code></pre></div>
+    <h2 id="apprangeslider-range-slider-input">✅ AppRangeSlider – Range
+    slider input</h2>
+    <div class="sourceCode" id="cb6"><pre
+    class="sourceCode dart"><code class="sourceCode dart"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="at">final</span> rangeCubit <span class="op">=</span> FieldCubit<span class="op">&lt;</span>RangeValues<span class="op">&gt;</span>();</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>AppRangeSlider(cubit<span class="op">:</span> rangeCubit<span class="op">,</span> min<span class="op">:</span> <span class="dv">0</span><span class="op">,</span> max<span class="op">:</span> <span class="dv">100</span>);</span></code></pre></div>
+    <h2 id="appslider-slider-input">✅ AppSlider – Slider input</h2>
+    <div class="sourceCode" id="cb7"><pre
+    class="sourceCode dart"><code class="sourceCode dart"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="at">final</span> volumeCubit <span class="op">=</span> FieldCubit<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span>(initialValue<span class="op">:</span> <span class="dv">50</span>);</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>AppSlider(cubit<span class="op">:</span> volumeCubit<span class="op">,</span> min<span class="op">:</span> <span class="dv">0</span><span class="op">,</span> max<span class="op">:</span> <span class="dv">100</span>);</span></code></pre></div>
+    <h2 id="appswitch-toggle-switch">✅ AppSwitch – Toggle switch</h2>
+    <div class="sourceCode" id="cb8"><pre
+    class="sourceCode dart"><code class="sourceCode dart"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="at">final</span> toggleCubit <span class="op">=</span> ToggleCubit(initialValue<span class="op">:</span> <span class="cn">false</span>);</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>AppSwitch(cubit<span class="op">:</span> toggleCubit);</span></code></pre></div>
+    <h2 id="apptextfield-text-input-field">✅ AppTextField – Text input
+    field</h2>
+    <div class="sourceCode" id="cb9"><pre
+    class="sourceCode dart"><code class="sourceCode dart"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="at">final</span> nameCubit <span class="op">=</span> TextFieldCubit(validator<span class="op">:</span> RequiredStringValidator());</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>AppTextField(cubit<span class="op">:</span> nameCubit<span class="op">,</span> label<span class="op">:</span> <span class="st">&#39;Name&#39;</span>);</span></code></pre></div>
+    <h2 id="apptextfield-text-input-field-1">✅ AppTextField – Text
+    input field</h2>
+    <div class="sourceCode" id="cb10"><pre
+    class="sourceCode dart"><code class="sourceCode dart"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="at">final</span> nameCubit <span class="op">=</span> TextFieldCubit(validator<span class="op">:</span> RequiredStringValidator());</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    AppTextField(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>      bloc<span class="op">:</span> nameCubit<span class="op">,</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>      builder<span class="op">:</span> (context<span class="op">,</span> state) {</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        <span class="kw">return</span> TextFormField(</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>          label<span class="op">:</span> <span class="st">&#39;Name&#39;</span><span class="op">,</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>          errorMsg<span class="op">:</span> state<span class="op">.</span>errorText<span class="op">,</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>          textController<span class="op">:</span> nameCubit<span class="op">.</span>controller<span class="op">,</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>          onChanged<span class="op">:</span> nameCubit<span class="op">.</span>onChanged<span class="op">,</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>          validator<span class="op">:</span> nameCubit<span class="op">.</span>formFieldValidator<span class="op">,</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>        );</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>      }<span class="op">,</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    );</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span></code></pre></div>
+    <h2 id="apptimepicker-time-selection-field">✅ AppTimePicker – Time
+    selection field</h2>
+    <div class="sourceCode" id="cb11"><pre
+    class="sourceCode dart"><code class="sourceCode dart"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="at">final</span> timeCubit <span class="op">=</span> FieldCubit<span class="op">&lt;</span>TimeOfDay<span class="op">&gt;</span>(validator<span class="op">:</span> RequiredFieldValidator<span class="op">&lt;</span>TimeOfDay<span class="op">&gt;</span>());</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>AppTimePicker(cubit<span class="op">:</span> timeCubit);</span></code></pre></div>
+</main>
+</body>
+</html>

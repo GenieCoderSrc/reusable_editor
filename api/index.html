@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="reusable_editor API docs, for the Dart programming language.">
+  <title>reusable_editor - Dart API docs</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="static-assets/github.css?v1">
+  <link rel="stylesheet" href="static-assets/styles.css?v1">
+  <link rel="icon" href="static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="https://geniecodersrc.github.io/reusable_editor/">reusable_editor package</a></li>
+  </ol>
+  <div class="self-name">reusable_editor</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div id="dartdoc-main-content" class="main-content">
+      
+<section class="desc markdown">
+  <h1 id="reusable_editor">reusable_editor</h1>
+<p>A flexible and modular file management and form handling package for Flutter, supporting both Firestore and REST API-based storage systems along with comprehensive form field management. This package includes file operations, form state management using Cubits, and a collection of reusable form field widgets.</p>
+<h2 id="features">Features</h2>
+<ul>
+<li>Abstract interfaces for clean architecture</li>
+<li>Cubits for managing form states (e.g., image, switch, dropdown, text field)</li>
+<li>Complete set of reusable form field widgets</li>
+<li>Extensions for asset loading as <code>File</code> and <code>Uint8List</code></li>
+<li>Enum-based dropdown with icon and label support</li>
+</ul>
+<h2 id="getting-started">Getting Started</h2>
+<h3 id="installation">Installation</h3>
+<p>Add the following to your <code>pubspec.yaml</code>:</p>
+<pre class="language-yaml"><code class="language-yaml">dependencies:
+  reusable_editor: &lt;latest_version&gt;
+</code></pre>
+<h3 id="import">Import</h3>
+<pre class="language-dart"><code class="language-dart">import 'package:reusable_editor/reusable_editor.dart';
+</code></pre>
+<h2 id="-documentation">📘 Documentation</h2>
+<p>Full usage guides available at:
+👉 <a href="https://geniecodersrc.github.io/reusable_editor/">https://geniecodersrc.github.io/reusable_editor</a></p>
+<h2 id="usage">Usage</h2>
+<h3 id="form-field-management">Form Field Management</h3>
+<pre class="language-dart"><code class="language-dart">// Create cubit for a field
+final textFieldCubit = TextFieldCubit(
+  initialValue: 'Default',
+  validator: RequiredValidator(),
+);
+
+// Use with AppTextField
+AppTextField(cubit: textFieldCubit, label: 'Name');
+
+// Toggle field example
+final toggleCubit = ToggleCubit(initialValue: false);
+AppSwitch(cubit: toggleCubit);
+</code></pre>
+<h3 id="available-form-widgets">Available Form Widgets</h3>
+<ul>
+<li><code>AppCheckbox</code> - Checkbox with label and validation</li>
+<li><code>AppDatePicker</code> - Date selection field</li>
+<li><code>AppDropdown</code> - Custom dropdown field</li>
+<li><code>AppFilePicker</code> - File selection widget</li>
+<li><code>AppRadioGroup</code> - Radio button group</li>
+<li><code>AppRangeSlider</code> - Range slider input</li>
+<li><code>AppSlider</code> - Slider input</li>
+<li><code>AppSwitch</code> - Toggle switch</li>
+<li><code>AppTimePicker</code> - Time selection field</li>
+<li><code>AppTextField</code> - Text input field</li>
+</ul>
+<h3 id="dropdown-with-enum">Dropdown with Enum</h3>
+<pre class="language-dart"><code class="language-dart">enum FileSourceType { firebase, server }
+
+final dropdown = EnumOptionDropDownMenuFormField&lt;FileSourceType&gt;(
+  selectedValue: selectedOption,
+  onChanged: (value) =&gt; print(value?.type),
+  hint: 'Select file source',
+  dropdownItems: [
+    EnumOptionEntity(type: FileSourceType.firebase, icon: Icons.cloud, label: 'Firebase'),
+    EnumOptionEntity(type: FileSourceType.server, icon: Icons.storage, label: 'Server'),
+  ],
+);
+</code></pre>
+<h3 id="load-asset-as-file">Load Asset as File</h3>
+<pre class="language-dart"><code class="language-dart">final file = await 'assets/image.png'.loadAsFile();
+</code></pre>
+<h3 id="load-asset-as-bytes">Load Asset as Bytes</h3>
+<pre class="language-dart"><code class="language-dart">final bytes = await 'assets/image.png'.loadAssetImage();
+</code></pre>
+<h2 id="state-management-cubits">State Management Cubits</h2>
+<ul>
+<li><code>FieldCubit&lt;T&gt;</code> - Generic form field management with validation</li>
+<li><code>ToggleCubit</code> - Specialized cubit for boolean toggle fields</li>
+<li><code>DateTimeCubit</code> - Manages date selection</li>
+<li><code>ImageCrudCubit</code> - Handles image pick logic and validation</li>
+<li><code>EnumOptionCubit&lt;T&gt;</code> - Dropdown Selection with Generic enum</li>
+<li><code>SwitchCubit</code> - Toggle logic</li>
+<li><code>TextFieldCubit</code> - Text field validation</li>
+</ul>
+<h2 id="contributions">Contributions</h2>
+<p>Feel free to open issues or pull requests.</p>
+<h2 id="license">License</h2>
+<p>© MIT License. Developed with ❤️ by <a href="https://github.com/ShohidulProgrammer">Shohidul Islam</a></p>
+</section>
+
+
+      <section class="summary">
+          <h2>Libraries</h2>
+        <dl>
+          <dt id="image_form_manager">
+  <span class="name"><a href="application_manager_image_form_manager/">application/manager/image_form_manager</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="register_reusable_editor_bloc_provider">
+  <span class="name"><a href="config_bloc_provider_register_reusable_editor_bloc_provider/">config/bloc_provider/register_reusable_editor_bloc_provider</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="register_input_fields_get_it_di">
+  <span class="name"><a href="config_dependency_injection_register_input_fields_get_it_di/">config/dependency_injection/register_input_fields_get_it_di</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="enum_option_entity">
+  <span class="name"><a href="domain_entities_enum_option_entity/">domain/entities/enum_option_entity</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="file_data_source_type">
+  <span class="name"><a href="enums_file_data_source_type/">enums/file_data_source_type</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="asset_image_to_file">
+  <span class="name"><a href="extensions_asset_image_to_file/">extensions/asset_image_to_file</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="asset_to_xfile_extension">
+  <span class="name"><a href="extensions_asset_to_xfile_extension/">extensions/asset_to_xfile_extension</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="image_loader">
+  <span class="name"><a href="extensions_image_loader/">extensions/image_loader</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="reusable_editor">
+  <span class="name"><a href="reusable_editor/">reusable_editor</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="app_form_text_styles">
+  <span class="name"><a href="styles_app_form_text_styles/">styles/app_form_text_styles</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="form_input_styles">
+  <span class="name"><a href="styles_form_input_styles/">styles/form_input_styles</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="type_defs">
+  <span class="name"><a href="type_defs_type_defs/">type_defs/type_defs</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="base_bloc">
+  <span class="name"><a href="view_models_base_bloc_base_bloc/">view_models/base_bloc/base_bloc</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="base_state">
+  <span class="name"><a href="view_models_base_bloc_base_state/">view_models/base_bloc/base_state</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="date_time_cubit">
+  <span class="name"><a href="view_models_field_cubits_date_time_cubit_date_time_cubit/">view_models/field_cubits/date_time_cubit/date_time_cubit</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="enum_option_cubit">
+  <span class="name"><a href="view_models_field_cubits_enum_option_cubit_enum_option_cubit/">view_models/field_cubits/enum_option_cubit/enum_option_cubit</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="field_cubit">
+  <span class="name"><a href="view_models_field_cubits_field_cubit_field_cubit/">view_models/field_cubits/field_cubit/field_cubit</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="image_field_cubit">
+  <span class="name"><a href="view_models_field_cubits_image_field_cubit_image_field_cubit/">view_models/field_cubits/image_field_cubit/image_field_cubit</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="switch_cubit">
+  <span class="name"><a href="view_models_field_cubits_switch_cubit_switch_cubit/">view_models/field_cubits/switch_cubit/switch_cubit</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="text_field_cubit">
+  <span class="name"><a href="view_models_field_cubits_text_field_cubit_text_field_cubit/">view_models/field_cubits/text_field_cubit/text_field_cubit</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="toggle_cubit">
+  <span class="name"><a href="view_models_field_cubits_toggle_cubit_toggle_cubit/">view_models/field_cubits/toggle_cubit/toggle_cubit</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="form_submission_status">
+  <span class="name"><a href="view_models_form_submission_form_submission_status/">view_models/form_submission/form_submission_status</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="loading_cubit">
+  <span class="name"><a href="view_models_loading_cubit_loading_cubit/">view_models/loading_cubit/loading_cubit</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="loading_state">
+  <span class="name"><a href="view_models_loading_cubit_loading_state/">view_models/loading_cubit/loading_state</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="app_checkbox">
+  <span class="name"><a href="views_widgets_app_input_fields_app_checkbox/">views/widgets/app_input_fields/app_checkbox</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="app_date_picker">
+  <span class="name"><a href="views_widgets_app_input_fields_app_date_picker/">views/widgets/app_input_fields/app_date_picker</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="app_dropdown">
+  <span class="name"><a href="views_widgets_app_input_fields_app_dropdown/">views/widgets/app_input_fields/app_dropdown</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="app_file_picker">
+  <span class="name"><a href="views_widgets_app_input_fields_app_file_picker/">views/widgets/app_input_fields/app_file_picker</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="app_radio_group">
+  <span class="name"><a href="views_widgets_app_input_fields_app_radio_group/">views/widgets/app_input_fields/app_radio_group</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="app_range_slider">
+  <span class="name"><a href="views_widgets_app_input_fields_app_range_slider/">views/widgets/app_input_fields/app_range_slider</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="app_slider">
+  <span class="name"><a href="views_widgets_app_input_fields_app_slider/">views/widgets/app_input_fields/app_slider</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="app_switch">
+  <span class="name"><a href="views_widgets_app_input_fields_app_switch/">views/widgets/app_input_fields/app_switch</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="app_text_field">
+  <span class="name"><a href="views_widgets_app_input_fields_app_text_field/">views/widgets/app_input_fields/app_text_field</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="app_time_picker">
+  <span class="name"><a href="views_widgets_app_input_fields_app_time_picker/">views/widgets/app_input_fields/app_time_picker</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="generic_text_field">
+  <span class="name"><a href="views_widgets_app_input_fields_generic_text_field/">views/widgets/app_input_fields/generic_text_field</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="enum_option_drop_down_menu_form_field">
+  <span class="name"><a href="views_widgets_enum_option_drop_down_menu_form_field/">views/widgets/enum_option_drop_down_menu_form_field</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+        </dl>
+      </section>
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="https://geniecodersrc.github.io/reusable_editor/">reusable_editor package</a></li>
+</ol>
+
+    <h5 class="hidden-xs"><span class="package-name">reusable_editor</span> <span class="package-kind">package</span></h5>
+    <ol>
+      <li class="section-title">Libraries</li>
+      <li><a href="application_manager_image_form_manager/">application/manager/image_form_manager</a></li>
+      <li><a href="config_bloc_provider_register_reusable_editor_bloc_provider/">config/bloc_provider/register_reusable_editor_bloc_provider</a></li>
+      <li><a href="config_dependency_injection_register_input_fields_get_it_di/">config/dependency_injection/register_input_fields_get_it_di</a></li>
+      <li><a href="domain_entities_enum_option_entity/">domain/entities/enum_option_entity</a></li>
+      <li><a href="enums_file_data_source_type/">enums/file_data_source_type</a></li>
+      <li><a href="extensions_asset_image_to_file/">extensions/asset_image_to_file</a></li>
+      <li><a href="extensions_asset_to_xfile_extension/">extensions/asset_to_xfile_extension</a></li>
+      <li><a href="extensions_image_loader/">extensions/image_loader</a></li>
+      <li><a href="reusable_editor/">reusable_editor</a></li>
+      <li><a href="styles_app_form_text_styles/">styles/app_form_text_styles</a></li>
+      <li><a href="styles_form_input_styles/">styles/form_input_styles</a></li>
+      <li><a href="type_defs_type_defs/">type_defs/type_defs</a></li>
+      <li><a href="view_models_base_bloc_base_bloc/">view_models/base_bloc/base_bloc</a></li>
+      <li><a href="view_models_base_bloc_base_state/">view_models/base_bloc/base_state</a></li>
+      <li><a href="view_models_field_cubits_date_time_cubit_date_time_cubit/">view_models/field_cubits/date_time_cubit/date_time_cubit</a></li>
+      <li><a href="view_models_field_cubits_enum_option_cubit_enum_option_cubit/">view_models/field_cubits/enum_option_cubit/enum_option_cubit</a></li>
+      <li><a href="view_models_field_cubits_field_cubit_field_cubit/">view_models/field_cubits/field_cubit/field_cubit</a></li>
+      <li><a href="view_models_field_cubits_image_field_cubit_image_field_cubit/">view_models/field_cubits/image_field_cubit/image_field_cubit</a></li>
+      <li><a href="view_models_field_cubits_switch_cubit_switch_cubit/">view_models/field_cubits/switch_cubit/switch_cubit</a></li>
+      <li><a href="view_models_field_cubits_text_field_cubit_text_field_cubit/">view_models/field_cubits/text_field_cubit/text_field_cubit</a></li>
+      <li><a href="view_models_field_cubits_toggle_cubit_toggle_cubit/">view_models/field_cubits/toggle_cubit/toggle_cubit</a></li>
+      <li><a href="view_models_form_submission_form_submission_status/">view_models/form_submission/form_submission_status</a></li>
+      <li><a href="view_models_loading_cubit_loading_cubit/">view_models/loading_cubit/loading_cubit</a></li>
+      <li><a href="view_models_loading_cubit_loading_state/">view_models/loading_cubit/loading_state</a></li>
+      <li><a href="views_widgets_app_input_fields_app_checkbox/">views/widgets/app_input_fields/app_checkbox</a></li>
+      <li><a href="views_widgets_app_input_fields_app_date_picker/">views/widgets/app_input_fields/app_date_picker</a></li>
+      <li><a href="views_widgets_app_input_fields_app_dropdown/">views/widgets/app_input_fields/app_dropdown</a></li>
+      <li><a href="views_widgets_app_input_fields_app_file_picker/">views/widgets/app_input_fields/app_file_picker</a></li>
+      <li><a href="views_widgets_app_input_fields_app_radio_group/">views/widgets/app_input_fields/app_radio_group</a></li>
+      <li><a href="views_widgets_app_input_fields_app_range_slider/">views/widgets/app_input_fields/app_range_slider</a></li>
+      <li><a href="views_widgets_app_input_fields_app_slider/">views/widgets/app_input_fields/app_slider</a></li>
+      <li><a href="views_widgets_app_input_fields_app_switch/">views/widgets/app_input_fields/app_switch</a></li>
+      <li><a href="views_widgets_app_input_fields_app_text_field/">views/widgets/app_input_fields/app_text_field</a></li>
+      <li><a href="views_widgets_app_input_fields_app_time_picker/">views/widgets/app_input_fields/app_time_picker</a></li>
+      <li><a href="views_widgets_app_input_fields_generic_text_field/">views/widgets/app_input_fields/generic_text_field</a></li>
+      <li><a href="views_widgets_enum_option_drop_down_menu_form_field/">views/widgets/enum_option_drop_down_menu_form_field</a></li>
+</ol>
+
+  </div>
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div>
+</main>
+<footer>
+  <span class="no-break">
+    reusable_editor
+      1.2.1
+  </span>
+  
+</footer>
+
+
+<script src="static-assets/highlight.pack.js?v1"></script>
+<script src="static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+
