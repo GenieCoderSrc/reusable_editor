@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.2.1
+
+### Aug 10, 2025
+
+### Added
+
+- Updated file_picker version as file_picker: ^10.2.4
+
 ## 1.2.0
 
 ### Aug 8, 2025
