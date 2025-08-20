@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.2.2
+
+### Aug 22, 2025
+
+### ✨ Updated
+
+- Updated Dart sdk to 3.9.0
+- Updated `i_validator` to 1.1.2
+- Updated `get_it_di_global_variable` to 0.0.6
+- Updated `provider` to 6.1.5+1
+- Updated `file_picker` to 10.3.2
+- Removed `flutter_lints` Dependency
+
 ## 1.2.1
 
 ### Aug 10, 2025
