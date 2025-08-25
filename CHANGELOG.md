@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.2.3
+
+### Aug 26, 2025
+
+### ✨ Updated
+
+- Improved `AssetImageToFile` extension
+- Improved `AssetToXFileExtension` extension
+
 ## 1.2.2
 
 ### Aug 22, 2025

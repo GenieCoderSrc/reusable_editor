@@ -2,38 +2,36 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter/services.dart' show rootBundle, ByteData;
 import 'package:path_provider/path_provider.dart';
 
 extension AssetImageToFile on String? {
+  /// Loads an asset image as a [File] by writing it into the temp directory.
+  /// Returns `null` if the asset path is invalid or an error occurs.
   Future<File?> loadAsFile() async {
+    final String? assetPath = this;
+    if (assetPath == null || assetPath.isEmpty) return null;
+
     try {
-      final String? assetPath = this;
-      if (assetPath != null) {
-        // Get the asset file name
-        List<String> pathParts = assetPath.split('/');
-        String assetFileName = pathParts.last;
+      // Extract the file name from the asset path
+      final String assetFileName = assetPath.split('/').last;
 
-        // Load the asset image as a ByteData
-        ByteData data = await rootBundle.load(assetPath);
+      // Load asset as bytes
+      final ByteData data = await rootBundle.load(assetPath);
+      final Uint8List bytes = data.buffer.asUint8List();
 
-        // Convert ByteData to Uint8List
-        Uint8List bytes = data.buffer.asUint8List();
+      // Get the temporary directory
+      final Directory tempDir = await getTemporaryDirectory();
+      final String tempPath = '${tempDir.path}/$assetFileName';
 
-        // Get the temporary directory using path_provider
-        Directory tempDir = await getTemporaryDirectory();
-        String tempPath = tempDir.path;
+      // Write the bytes into a temp file
+      final File tempFile = File(tempPath);
+      await tempFile.writeAsBytes(bytes, flush: true);
 
-        // Write the bytes to a temporary file using the asset file name
-        File tempFile = File('$tempPath/$assetFileName');
-        await tempFile.writeAsBytes(bytes);
-
-        return tempFile;
-      }
-      return null;
-    } catch (e) {
+      return tempFile;
+    } catch (e, stackTrace) {
       debugPrint(
-        'AssetImageToFile | loadAsFile | Error loading asset as file: $e',
+        '❌ AssetImageToFile | Error converting asset to File: $e\n$stackTrace',
       );
       return null;
     }
