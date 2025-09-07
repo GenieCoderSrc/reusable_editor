@@ -5,7 +5,6 @@ import 'package:cross_file/cross_file.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:i_validator/i_validator.dart';
-import 'package:reusable_editor/extensions/validation/x_file_image_validation_extension.dart';
 
 part 'image_field_state.dart';
 
