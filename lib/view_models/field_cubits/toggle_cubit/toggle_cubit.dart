@@ -1,4 +1,4 @@
-import 'package:reusable_editor/view_models/field_cubits/field_cubit/field_cubit.dart';
+import 'package:reusable_editor/view_models/generic_cubits/field_cubit/field_cubit.dart';
 
 // ✅ Toggle Cubit (extends FieldCubit<bool>)
 class ToggleCubit extends FieldCubit<bool> {

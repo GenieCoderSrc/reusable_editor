@@ -2,10 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
-
 ## 1.2.3
 
-### Sep 06, 2025
+### Sep 7, 2025
 
 ### ✨ Updated
 
@@ -13,6 +12,11 @@ All notable changes to this project will be documented in this file.
 - Improved `AssetToXFileExtension` extension
 - Added XFile Image Validation Extension
 
+### ✨ Removed
+
+- Removed `BaseBloc` And place it in the [submission_state](../submission_state) package.
+- Removed `BaseState` And place it in the [submission_state](../submission_state) package.
+- Removed `FormSubmissionState` And place it in the [submission_state](../submission_state) package.
 
 ## 1.2.2
 
