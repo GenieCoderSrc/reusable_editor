@@ -14,19 +14,14 @@ class AppSwitch extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<FieldCubit<bool>, FieldState<bool>>(
       bloc: cubit,
-      builder:
-          (_, state) => SwitchListTile(
-            value: state.value ?? false,
-            onChanged: cubit.onChanged,
-            title: Text(label),
-            subtitle:
-                state.errorText != null
-                    ? Text(
-                      state.errorText!,
-                      style: AppFormTextStyles.errorTextStyle,
-                    )
-                    : null,
-          ),
+      builder: (_, state) => SwitchListTile(
+        value: state.value ?? false,
+        onChanged: cubit.onChanged,
+        title: Text(label),
+        subtitle: state.errorText != null
+            ? Text(state.errorText!, style: AppFormTextStyles.errorTextStyle)
+            : null,
+      ),
     );
   }
 }

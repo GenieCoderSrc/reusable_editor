@@ -19,23 +19,22 @@ class AppTimePicker extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<FieldCubit<TimeOfDay>, FieldState<TimeOfDay>>(
       bloc: cubit,
-      builder:
-          (_, state) => ListTile(
-            title: Text(labelText),
-            subtitle: Text(
-              state.value != null
-                  ? state.value!.format(context)
-                  : 'Tap to pick time',
-            ),
-            trailing: const Icon(Icons.access_time),
-            onTap: () async {
-              final picked = await showTimePicker(
-                context: context,
-                initialTime: state.value ?? TimeOfDay.now(),
-              );
-              if (picked != null) cubit.onChanged(picked);
-            },
-          ),
+      builder: (_, state) => ListTile(
+        title: Text(labelText),
+        subtitle: Text(
+          state.value != null
+              ? state.value!.format(context)
+              : 'Tap to pick time',
+        ),
+        trailing: const Icon(Icons.access_time),
+        onTap: () async {
+          final picked = await showTimePicker(
+            context: context,
+            initialTime: state.value ?? TimeOfDay.now(),
+          );
+          if (picked != null) cubit.onChanged(picked);
+        },
+      ),
     );
   }
 }

@@ -24,27 +24,25 @@ class AppFilePicker extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<FieldCubit<File>, FieldState<File>>(
       bloc: cubit,
-      builder:
-          (_, state) => ListTile(
-            title: Text(label),
-            subtitle: Text(
-              state.value?.path.split('/').last ?? 'No file selected',
-              overflow: TextOverflow.ellipsis,
-            ),
-            trailing: const Icon(Icons.attach_file),
-            onTap: () async {
-              final result = await FilePicker.platform.pickFiles(
-                allowMultiple: allowMultiple,
-                type:
-                    allowedExtensions == null ? FileType.any : FileType.custom,
-                allowedExtensions: allowedExtensions,
-              );
-              if (result != null && result.files.isNotEmpty) {
-                final file = File(result.files.single.path!);
-                cubit.onChanged(file);
-              }
-            },
-          ),
+      builder: (_, state) => ListTile(
+        title: Text(label),
+        subtitle: Text(
+          state.value?.path.split('/').last ?? 'No file selected',
+          overflow: TextOverflow.ellipsis,
+        ),
+        trailing: const Icon(Icons.attach_file),
+        onTap: () async {
+          final result = await FilePicker.platform.pickFiles(
+            allowMultiple: allowMultiple,
+            type: allowedExtensions == null ? FileType.any : FileType.custom,
+            allowedExtensions: allowedExtensions,
+          );
+          if (result != null && result.files.isNotEmpty) {
+            final file = File(result.files.single.path!);
+            cubit.onChanged(file);
+          }
+        },
+      ),
     );
   }
 }

@@ -104,8 +104,8 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
 
             ElevatedButton(
               onPressed: () async {
-                final XFile? pickedFile =
-                    await 'assets/sample.png'.loadAsXFile();
+                final XFile? pickedFile = await 'assets/sample.png'
+                    .loadAsXFile();
                 if (pickedFile != null) {
                   _imageCubit.selectImage(pickedFile);
                 }
@@ -194,8 +194,9 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
       _switchCubit.validate(),
     ].every((error) => error == null);
 
-    final message =
-        isValid ? 'Form is valid!' : 'Please correct the highlighted errors.';
+    final message = isValid
+        ? 'Form is valid!'
+        : 'Please correct the highlighted errors.';
 
     ScaffoldMessenger.of(
       context,

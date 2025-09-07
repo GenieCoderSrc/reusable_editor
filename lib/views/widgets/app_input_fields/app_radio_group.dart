@@ -22,23 +22,22 @@ class AppRadioGroup<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<FieldCubit<T>, FieldState<T>>(
       bloc: cubit,
-      builder:
-          (_, state) => Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(label, style: Theme.of(context).textTheme.titleMedium),
-              ...List.generate(values.length, (index) {
-                return RadioListTile<T>(
-                  value: values[index],
-                  groupValue: state.value,
-                  onChanged: cubit.onChanged,
-                  title: Text(labels[index]),
-                );
-              }),
-              if (state.errorText != null)
-                Text(state.errorText!, style: AppFormTextStyles.errorTextStyle),
-            ],
-          ),
+      builder: (_, state) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(label, style: Theme.of(context).textTheme.titleMedium),
+          ...List.generate(values.length, (index) {
+            return RadioListTile<T>(
+              value: values[index],
+              groupValue: state.value,
+              onChanged: cubit.onChanged,
+              title: Text(labels[index]),
+            );
+          }),
+          if (state.errorText != null)
+            Text(state.errorText!, style: AppFormTextStyles.errorTextStyle),
+        ],
+      ),
     );
   }
 }

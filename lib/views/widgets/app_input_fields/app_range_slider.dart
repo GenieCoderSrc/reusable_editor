@@ -24,22 +24,21 @@ class AppRangeSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<FieldCubit<RangeValues>, FieldState<RangeValues>>(
       bloc: cubit,
-      builder:
-          (_, state) => Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(label),
-              RangeSlider(
-                values: state.value ?? RangeValues(min, max),
-                min: min,
-                max: max,
-                divisions: divisions,
-                onChanged: cubit.onChanged,
-              ),
-              if (state.errorText != null)
-                Text(state.errorText!, style: AppFormTextStyles.errorTextStyle),
-            ],
+      builder: (_, state) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(label),
+          RangeSlider(
+            values: state.value ?? RangeValues(min, max),
+            min: min,
+            max: max,
+            divisions: divisions,
+            onChanged: cubit.onChanged,
           ),
+          if (state.errorText != null)
+            Text(state.errorText!, style: AppFormTextStyles.errorTextStyle),
+        ],
+      ),
     );
   }
 }

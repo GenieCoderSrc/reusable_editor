@@ -26,58 +26,52 @@ class AppDatePicker extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<FieldCubit<DateTime>, FieldState<DateTime>>(
       bloc: cubit,
-      builder:
-          (_, state) => Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Display the label text
-              if (labelText.isNotEmpty)
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
-                  child: Text(
-                    labelText,
-                    style:
-                        Theme.of(
-                          context,
-                        ).textTheme.bodyLarge, // Adjust style as needed
-                  ),
-                ),
-              ListTile(
-                title: Text(
-                  state.value != null
-                      ? formatter.format(
-                        state.value!,
-                      ) // Format the selected date
-                      : placeholderText, // Use placeholder when no date is selected
-                ),
-                trailing: const Icon(Icons.calendar_today),
-                onTap: () async {
-                  final now = DateTime.now();
-                  final picked = await showDatePicker(
-                    context: context,
-                    initialDate: state.value ?? now,
-                    firstDate: DateTime(1900),
-                    lastDate: DateTime(2100),
-                  );
-                  if (picked != null) {
-                    cubit.onChanged(picked);
-                  }
-                },
-                // Display error text if validation fails
-                subtitle:
-                    state.errorText != null
-                        ? Text(
-                          state.errorText!,
-                          style:
-                              AppFormTextStyles
-                                  .errorTextStyle, // Ensure this style is defined
-                        )
-                        : null,
+      builder: (_, state) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Display the label text
+          if (labelText.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: Text(
+                labelText,
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyLarge, // Adjust style as needed
               ),
-              // Add a divider or line below the list tile for better visual separation
-              const Divider(height: 1),
-            ],
+            ),
+          ListTile(
+            title: Text(
+              state.value != null
+                  ? formatter.format(state.value!) // Format the selected date
+                  : placeholderText, // Use placeholder when no date is selected
+            ),
+            trailing: const Icon(Icons.calendar_today),
+            onTap: () async {
+              final now = DateTime.now();
+              final picked = await showDatePicker(
+                context: context,
+                initialDate: state.value ?? now,
+                firstDate: DateTime(1900),
+                lastDate: DateTime(2100),
+              );
+              if (picked != null) {
+                cubit.onChanged(picked);
+              }
+            },
+            // Display error text if validation fails
+            subtitle: state.errorText != null
+                ? Text(
+                    state.errorText!,
+                    style: AppFormTextStyles
+                        .errorTextStyle, // Ensure this style is defined
+                  )
+                : null,
           ),
+          // Add a divider or line below the list tile for better visual separation
+          const Divider(height: 1),
+        ],
+      ),
     );
   }
 }

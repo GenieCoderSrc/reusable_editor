@@ -32,51 +32,47 @@ class AppSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<FieldCubit<double>, FieldState<double>>(
       bloc: cubit,
-      builder:
-          (_, state) => Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+      builder: (_, state) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Display the label and the current formatted value
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Display the label and the current formatted value
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    labelText,
-                    style:
-                        Theme.of(
-                          context,
-                        ).textTheme.bodyLarge, // Adjust style as needed
-                  ),
-                  Text(
-                    displayValue(state.value ?? min),
-                    // Display the formatted current value
-                    style:
-                        Theme.of(
-                          context,
-                        ).textTheme.bodyMedium, // Adjust style as needed
-                  ),
-                ],
+              Text(
+                labelText,
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyLarge, // Adjust style as needed
               ),
-              Slider(
-                value: state.value ?? min,
-                // Use min if value is null
-                min: min,
-                max: max,
-                divisions: divisions,
-                onChanged: (newValue) {
-                  cubit.onChanged(newValue);
-                },
+              Text(
+                displayValue(state.value ?? min),
+                // Display the formatted current value
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium, // Adjust style as needed
               ),
-              // Display error text if validation fails
-              if (state.errorText != null)
-                Text(
-                  state.errorText!,
-                  style:
-                      AppFormTextStyles
-                          .errorTextStyle, // Ensure this style is defined
-                ),
             ],
           ),
+          Slider(
+            value: state.value ?? min,
+            // Use min if value is null
+            min: min,
+            max: max,
+            divisions: divisions,
+            onChanged: (newValue) {
+              cubit.onChanged(newValue);
+            },
+          ),
+          // Display error text if validation fails
+          if (state.errorText != null)
+            Text(
+              state.errorText!,
+              style: AppFormTextStyles
+                  .errorTextStyle, // Ensure this style is defined
+            ),
+        ],
+      ),
     );
   }
 }
