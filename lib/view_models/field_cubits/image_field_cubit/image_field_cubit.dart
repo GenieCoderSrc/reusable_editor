@@ -21,7 +21,7 @@ class ImageFieldCubit extends Cubit<ImageFieldState> {
     }
 
     debugPrint(
-      'ImageFieldCubit | selectImage | path: ${pickedFile?.path} | error: $error',
+      'ImageFieldCubit | selectImage | path: ${pickedFile?.path} | error: $error state pickedFile: ${state.pickedFile?.name}',
     );
   }
 

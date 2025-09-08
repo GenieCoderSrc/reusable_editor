@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.2.5
+
+### Sep 9, 2025
+
+### ✨ Updated
+
+- Updated `i_validator` to 1.1.5
+
 ## 1.2.4
 
 ### Sep 8, 2025

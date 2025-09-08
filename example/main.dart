@@ -108,6 +108,7 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
                     .loadAsXFile();
                 if (pickedFile != null) {
                   _imageCubit.selectImage(pickedFile);
+
                 }
               },
               child: const Text('Pick Image from Asset'),
