@@ -1,6 +1,6 @@
 name: reusable_editor
 description: A modular form and file editor package for Flutter with support for Form widgets. Includes Cubit-based state management, form field validation, and UI input widgets.
-version: 1.2.7
+version: 1.2.8
 homepage: https://geniecodersrc.github.io/reusable_editor/
 repository: https://github.com/GenieCoderSrc/reusable_editor
 issue_tracker: https://github.com/GenieCoderSrc/reusable_editor/issues

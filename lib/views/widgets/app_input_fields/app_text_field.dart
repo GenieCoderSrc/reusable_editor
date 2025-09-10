@@ -13,6 +13,8 @@ class AppTextField extends StatelessWidget {
   final TextInputAction? textInputAction;
   final int? maxLines;
   final bool obscureText;
+  final double? borderRadius;
+  final bool? filled;
 
   const AppTextField({
     super.key,
@@ -24,6 +26,8 @@ class AppTextField extends StatelessWidget {
     this.textInputAction,
     this.maxLines = 1,
     this.obscureText = false,
+    this.borderRadius,
+    this.filled = false,
   });
 
   @override
@@ -44,6 +48,19 @@ class AppTextField extends StatelessWidget {
             labelText: label,
             hintText: hintText,
             errorText: state.isDirty ? state.errorText : null,
+            filled: filled,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(
+                borderRadius ?? 8,
+              ), // ✅ default 8
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(borderRadius ?? 8),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(borderRadius ?? 8),
+              borderSide: const BorderSide(color: Colors.blue),
+            ),
           ),
         );
       },

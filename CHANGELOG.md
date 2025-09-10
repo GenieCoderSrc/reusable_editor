@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.2.8
+
+### Sep 11, 2025
+
+### ✨ Added
+
+* Added variables `filled`, `borderRadius` in the `AppTextField`,
+
+
 ## 1.2.7
 
 ### Sep 11, 2025
