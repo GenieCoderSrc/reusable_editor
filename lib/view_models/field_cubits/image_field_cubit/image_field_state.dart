@@ -8,6 +8,7 @@ class ImageFieldState extends Equatable {
   final bool isUploading;
   final bool isDeleting;
   final double uploadProgress; // 0.0 to 1.0
+  final bool isDirty;
 
   const ImageFieldState({
     this.id,
@@ -15,8 +16,9 @@ class ImageFieldState extends Equatable {
     this.imgUrl,
     this.imgFieldError,
     this.isUploading = false,
-    this.isDeleting = false,
     this.uploadProgress = 0.0,
+    this.isDeleting = false,
+    this.isDirty = false,
   });
 
   bool get isValidImage => imgFieldError == null;
@@ -30,22 +32,22 @@ class ImageFieldState extends Equatable {
   File? get imageFile => pickedFile != null ? File(pickedFile!.path) : null;
 
   ImageFieldState copyWith({
-    String? id,
     XFile? pickedFile,
     String? imgUrl,
     String? imgFieldError,
     bool? isUploading,
-    bool? isDeleting,
     double? uploadProgress,
+    bool? isDeleting,
+    bool? isDirty,
   }) {
     return ImageFieldState(
-      id: id ?? this.id,
       pickedFile: pickedFile ?? this.pickedFile,
       imgUrl: imgUrl ?? this.imgUrl,
       imgFieldError: imgFieldError,
       isUploading: isUploading ?? this.isUploading,
-      isDeleting: isDeleting ?? this.isDeleting,
       uploadProgress: uploadProgress ?? this.uploadProgress,
+      isDeleting: isDeleting ?? this.isDeleting,
+      isDirty: isDirty ?? this.isDirty,
     );
   }
 
@@ -53,12 +55,12 @@ class ImageFieldState extends Equatable {
 
   @override
   List<Object?> get props => [
-    id,
     pickedFile,
     imgUrl,
     imgFieldError,
     isUploading,
-    isDeleting,
     uploadProgress,
+    isDeleting,
+    isDirty,
   ];
 }

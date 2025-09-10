@@ -14,14 +14,16 @@ class ImageFieldCubit extends Cubit<ImageFieldState> {
   void selectImage(XFile? pickedFile) {
     final String? error = pickedFile?.validateImageFile();
 
-    if (error == null) {
-      emit(state.copyWith(pickedFile: pickedFile, imgFieldError: null));
-    } else {
-      emit(state.copyWith(imgFieldError: error));
-    }
+    emit(
+      state.copyWith(
+        pickedFile: pickedFile,
+        imgFieldError: error,
+        isDirty: true, // ✅ mark as dirty
+      ),
+    );
 
     debugPrint(
-      'ImageFieldCubit | selectImage | path: ${pickedFile?.path} | error: $error state pickedFile: ${state.pickedFile?.name}',
+      'ImageFieldCubit | selectImage | path: ${pickedFile?.path} | error: $error | pickedFile: ${state.pickedFile?.name}',
     );
   }
 
@@ -33,11 +35,25 @@ class ImageFieldCubit extends Cubit<ImageFieldState> {
     emit(state.copyWith(uploadProgress: progress.clamp(0.0, 1.0)));
   }
 
-  void finishUpload({required String imgUrl}) => setUploadedUrl(imgUrl: imgUrl);
+  void finishUpload({required String imgUrl}) {
+    emit(
+      state.copyWith(
+        isUploading: false,
+        uploadProgress: 1.0,
+        imgUrl: imgUrl,
+        isDirty: true, // ✅ uploading also counts as interaction
+      ),
+    );
+  }
 
   void setUploadedUrl({required String imgUrl}) {
     emit(
-      state.copyWith(isUploading: false, uploadProgress: 1.0, imgUrl: imgUrl),
+      state.copyWith(
+        isUploading: false,
+        uploadProgress: 1.0,
+        imgUrl: imgUrl,
+        isDirty: true,
+      ),
     );
   }
 
@@ -47,6 +63,7 @@ class ImageFieldCubit extends Cubit<ImageFieldState> {
         isUploading: false,
         uploadProgress: 0.0,
         imgFieldError: error ?? 'Failed to upload image',
+        isDirty: true,
       ),
     );
   }
@@ -56,7 +73,14 @@ class ImageFieldCubit extends Cubit<ImageFieldState> {
   }
 
   void finishDelete() {
-    emit(state.copyWith(isDeleting: false, imgUrl: null, pickedFile: null));
+    emit(
+      state.copyWith(
+        isDeleting: false,
+        imgUrl: null,
+        pickedFile: null,
+        isDirty: true, // ✅ user removed image
+      ),
+    );
   }
 
   void failDelete({String? error}) {
@@ -64,9 +88,22 @@ class ImageFieldCubit extends Cubit<ImageFieldState> {
       state.copyWith(
         isDeleting: false,
         imgFieldError: error ?? 'Failed to delete image',
+        isDirty: true,
       ),
     );
   }
 
   void clear() => emit(state.clear());
+
+  /// ✅ Validation logic (like FieldCubit)
+  String? validate({bool force = false}) {
+    final shouldValidate = force || state.isDirty;
+
+    if (!shouldValidate) return null;
+
+    final error = state.pickedFile?.validateImageFile();
+    emit(state.copyWith(imgFieldError: error, isDirty: true));
+    return error;
+  }
 }
+

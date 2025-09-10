@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:reusable_editor/type_defs/type_defs.dart';
+import 'package:reusable_editor/type_def/type_def.dart';
 
 part 'field_state.dart';
 
@@ -9,27 +9,48 @@ class FieldCubit<T> extends Cubit<FieldState<T>> {
   final FieldState<T> _initialState;
 
   FieldCubit({T? initialValue, FieldValidator<T>? validator})
-    : _initialState = FieldState<T>(
-        value: initialValue,
-        validator: validator,
-        errorText: validator?.call(initialValue),
-      ),
-      super(
+      : _initialState = FieldState<T>(
+    value: initialValue,
+    validator: validator,
+    errorText: validator?.call(initialValue),
+    isDirty: false,
+  ),
+        super(
         FieldState<T>(
           value: initialValue,
           validator: validator,
           errorText: validator?.call(initialValue),
+          isDirty: false,
         ),
       );
 
   void onChanged(T? value) {
     final error = state.validator?.call(value);
-    emit(state.copyWith(value: value, errorText: error));
+    emit(
+      state.copyWith(
+        value: value,
+        errorText: error,
+        isDirty: true, // mark dirty when user updates
+      ),
+    );
   }
 
-  String? validate() => _validateAndEmit(state.value);
+  String? validate({bool force = false}) {
+    // only validate if forced (create) or if dirty (update)
+    final shouldValidate = force || state.isDirty;
+    final error = shouldValidate ? state.validator?.call(state.value) : null;
+    emit(
+      state.copyWith(
+        errorText: error,
+        // once validated, we consider it dirty if forced or already dirty
+        isDirty: state.isDirty || force,
+      ),
+    );
+    return error;
+  }
 
-  FormFieldValidator<T> get formFieldValidator => _validateAndEmit;
+  FormFieldValidator<T> get formFieldValidator =>
+          (value) => _validateAndEmit(value);
 
   void clear() => emit(state.init());
 
@@ -37,7 +58,13 @@ class FieldCubit<T> extends Cubit<FieldState<T>> {
 
   String? _validateAndEmit(T? value) {
     final error = state.validator?.call(value);
-    emit(state.copyWith(errorText: error));
+    emit(
+      state.copyWith(
+        errorText: error,
+        isDirty: true, // validating via form field means user interacted
+      ),
+    );
     return error;
   }
 }
+

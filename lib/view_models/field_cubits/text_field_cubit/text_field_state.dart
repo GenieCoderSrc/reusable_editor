@@ -1,23 +1,27 @@
 part of 'text_field_cubit.dart';
 
-typedef TextFieldValidator = String? Function(String? value);
-
 class TextFieldState extends Equatable {
   final String? value;
   final String? errorText;
   final TextFieldValidator? validator;
+  final bool isDirty;
 
-  const TextFieldState({this.value, this.errorText, this.validator});
+  const TextFieldState({
+    this.value,
+    this.errorText,
+    this.validator,
+    this.isDirty = false,
+  });
 
   factory TextFieldState.initial({
     String? initialValue,
     TextFieldValidator? validator,
   }) {
-    final error = validator?.call(initialValue);
     return TextFieldState(
       value: initialValue,
-      errorText: error,
+      errorText: null, // no error initially
       validator: validator,
+      isDirty: false,
     );
   }
 
@@ -25,43 +29,16 @@ class TextFieldState extends Equatable {
     String? value,
     String? errorText,
     TextFieldValidator? validator,
+    bool? isDirty,
   }) {
     return TextFieldState(
       value: value ?? this.value,
-      errorText: errorText,
+      errorText: errorText ?? this.errorText,
       validator: validator ?? this.validator,
+      isDirty: isDirty ?? this.isDirty,
     );
   }
 
   @override
-  List<Object?> get props => [value, errorText, validator];
+  List<Object?> get props => [value, errorText, validator, isDirty];
 }
-
-//
-// class TextFieldState extends Equatable {
-//   final String? txt;
-//   final String? txtFieldError;
-//
-//   const TextFieldState({
-//     this.txt,
-//     this.txtFieldError,
-//   });
-//
-//   bool get isValid => txtFieldError == null;
-//
-//   TextFieldState copyWith({
-//     String? txt,
-//     String? txtFieldError,
-//   }) {
-//     return TextFieldState(
-//       txt: txt ?? this.txt,
-//       txtFieldError: txtFieldError,
-//     );
-//   }
-//
-//   TextFieldState clear() => const TextFieldState();
-//
-//   @override
-//   List<Object?> get props => [txt, txtFieldError];
-// }
-//

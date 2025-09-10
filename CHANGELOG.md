@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.2.7
+
+### Sep 11, 2025
+
+### ✨ Added
+
+- `isDirty` flag to track user interaction in `FieldState<T>` and `ImageFieldState`.
+- `validate({bool force = false})` for create/update validation logic.
+
+### 🔄 Changed
+
+- Fields marked as dirty on user input or image selection.
+- Errors show only after interaction or forced validation.
+
 ## 1.2.6
 
 ### Sep 9, 2025
