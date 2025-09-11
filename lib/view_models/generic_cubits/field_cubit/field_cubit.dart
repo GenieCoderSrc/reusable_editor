@@ -9,13 +9,13 @@ class FieldCubit<T> extends Cubit<FieldState<T>> {
   final FieldState<T> _initialState;
 
   FieldCubit({T? initialValue, FieldValidator<T>? validator})
-      : _initialState = FieldState<T>(
-    value: initialValue,
-    validator: validator,
-    errorText: null,
-    isDirty: false,
-  ),
-        super(
+    : _initialState = FieldState<T>(
+        value: initialValue,
+        validator: validator,
+        errorText: null,
+        isDirty: false,
+      ),
+      super(
         FieldState<T>(
           value: initialValue,
           validator: validator,
@@ -26,13 +26,7 @@ class FieldCubit<T> extends Cubit<FieldState<T>> {
 
   void onChanged(T? value) {
     final error = state.validator?.call(value);
-    emit(
-      state.copyWith(
-        value: value,
-        errorText: error,
-        isDirty: true,
-      ),
-    );
+    emit(state.copyWith(value: value, errorText: error, isDirty: true));
   }
 
   String? validate({bool force = false}) {
@@ -49,7 +43,7 @@ class FieldCubit<T> extends Cubit<FieldState<T>> {
   }
 
   FormFieldValidator<T> get formFieldValidator =>
-          (value) => _validateAndEmit(value);
+      (value) => _validateAndEmit(value);
 
   void clear() => emit(state.init());
 
@@ -57,13 +51,7 @@ class FieldCubit<T> extends Cubit<FieldState<T>> {
 
   String? _validateAndEmit(T? value) {
     final error = state.validator?.call(value);
-    emit(
-      state.copyWith(
-        errorText: error,
-        isDirty: true,
-      ),
-    );
+    emit(state.copyWith(errorText: error, isDirty: true));
     return error;
   }
 }
-
