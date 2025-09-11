@@ -23,19 +23,21 @@ class TextFieldCubit extends Cubit<TextFieldState> {
   }
 
   void _handleTextChanged() {
+    // Keep Cubit state updated when user types
     final value = controller.text;
     if (value != state.value) {
-      final error = state.isDirty ? state.validator?.call(value) : null;
-      emit(state.copyWith(value: value, errorText: error, isDirty: true));
+      final error = state.validator?.call(value);
+      emit(state.copyWith(value: value, errorText: error));
     }
   }
 
   void onChanged(String? value) {
     final newValue = value?.trim() ?? '';
+    // Update Cubit + TextController together
     if (newValue != state.value) {
       controller.text = newValue;
       controller.selection = TextSelection.collapsed(offset: newValue.length);
-      final error = state.isDirty ? state.validator?.call(newValue) : null;
+      final error = state.validator?.call(newValue);
       emit(state.copyWith(value: newValue, errorText: error, isDirty: true));
     }
   }
@@ -47,8 +49,8 @@ class TextFieldCubit extends Cubit<TextFieldState> {
     final error = shouldValidate ? state.validator?.call(state.value) : null;
     emit(
       state.copyWith(
-        errorText: error,
-        isDirty: shouldValidate || state.isDirty,
+        errorText: shouldValidate ? error : null,
+        isDirty: shouldValidate,
       ),
     );
     return error;

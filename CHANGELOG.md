@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.2.9
+
+### Sep 11, 2025
+
+### 🛠 Fixed
+
+- Error state now updates correctly after valid input in `TextFieldCubit`.
+- Added `ImageFieldValidator` typedef for consistency with TextFieldValidator.
+- `ImageFieldCubit` accepts an optional validator, defaults to `validateImageFile`.
+- `ImageFieldState` stores the `validator`, so validation logic stays consistent.
+- `clear()` preserves the `validator`.
+
 ## 1.2.8
 
 ### Sep 11, 2025
@@ -9,7 +21,6 @@ All notable changes to this project will be documented in this file.
 ### ✨ Added
 
 * Added variables `filled`, `borderRadius` in the `AppTextField`,
-
 
 ## 1.2.7
 

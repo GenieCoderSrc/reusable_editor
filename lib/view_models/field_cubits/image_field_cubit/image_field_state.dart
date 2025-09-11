@@ -1,7 +1,6 @@
 part of 'image_field_cubit.dart';
 
 class ImageFieldState extends Equatable {
-  final String? id;
   final XFile? pickedFile;
   final String? imgUrl;
   final String? imgFieldError;
@@ -9,9 +8,9 @@ class ImageFieldState extends Equatable {
   final bool isDeleting;
   final double uploadProgress; // 0.0 to 1.0
   final bool isDirty;
+  final ImageFieldValidator? validator;
 
   const ImageFieldState({
-    this.id,
     this.pickedFile,
     this.imgUrl,
     this.imgFieldError,
@@ -19,7 +18,14 @@ class ImageFieldState extends Equatable {
     this.uploadProgress = 0.0,
     this.isDeleting = false,
     this.isDirty = false,
+    this.validator,
   });
+
+  factory ImageFieldState.initial({ImageFieldValidator? validator}) {
+    return ImageFieldState(
+      validator: validator ?? ((file) => file?.validateImageFile()),
+    );
+  }
 
   bool get isValidImage => imgFieldError == null;
 
@@ -39,6 +45,7 @@ class ImageFieldState extends Equatable {
     double? uploadProgress,
     bool? isDeleting,
     bool? isDirty,
+    ImageFieldValidator? validator,
   }) {
     return ImageFieldState(
       pickedFile: pickedFile ?? this.pickedFile,
@@ -48,10 +55,11 @@ class ImageFieldState extends Equatable {
       uploadProgress: uploadProgress ?? this.uploadProgress,
       isDeleting: isDeleting ?? this.isDeleting,
       isDirty: isDirty ?? this.isDirty,
+      validator: validator ?? this.validator,
     );
   }
 
-  ImageFieldState clear() => const ImageFieldState();
+  ImageFieldState clear() => ImageFieldState.initial(validator: validator);
 
   @override
   List<Object?> get props => [
@@ -62,5 +70,6 @@ class ImageFieldState extends Equatable {
     uploadProgress,
     isDeleting,
     isDirty,
+    validator,
   ];
 }

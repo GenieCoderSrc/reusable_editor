@@ -33,7 +33,7 @@ class TextFieldState extends Equatable {
   }) {
     return TextFieldState(
       value: value ?? this.value,
-      errorText: errorText ?? this.errorText,
+      errorText: errorText,
       validator: validator ?? this.validator,
       isDirty: isDirty ?? this.isDirty,
     );
