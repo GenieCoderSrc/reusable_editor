@@ -1,84 +1,86 @@
+import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reusable_editor/reusable_editor.dart';
 
 part 'multi_enum_option_state.dart';
 
 class MultiEnumOptionCubit<T extends Enum>
     extends Cubit<MultiEnumOptionState<T>> {
-  MultiEnumOptionCubit({required List<EnumOptionEntity<T>> options})
-    : super(MultiEnumOptionState(options: options, selectedOptions: const []));
+  MultiEnumOptionCubit() : super(const MultiEnumOptionState());
 
-  /// ---------- Read helpers ----------
-
-  bool isSelected(T type) {
-    return state.selectedOptions.any((e) => e.type == type);
+  /// Replace entire selection
+  void setSelected(List<T>? values) {
+    emit(
+      MultiEnumOptionState(
+        selectedTypes: values ?? [],
+      ),
+    );
   }
 
-  List<T> get selectedTypes =>
-      state.selectedOptions.map((e) => e.type).toList();
+  /// Toggle a value
+  void toggleOption(T type) {
+    final selected = List<T>.from(state.selectedTypes);
 
-  /// ---------- Select ----------
-
-  void selectOption(EnumOptionEntity<T> option) {
-    if (isSelected(option.type)) return;
-
-    final updated = [...state.selectedOptions, option];
-
-    emit(state.copyWith(selectedOptions: updated));
-  }
-
-  void selectOptionByType(T type) {
-    final option = state.options.firstWhere((element) => element.type == type);
-
-    selectOption(option);
-  }
-
-  /// ---------- Unselect ----------
-
-  void unSelectOption(EnumOptionEntity<T> option) {
-    final updated = state.selectedOptions
-        .where((element) => element.type != option.type)
-        .toList();
-
-    emit(state.copyWith(selectedOptions: updated));
-  }
-
-  void unSelectOptionByType(T type) {
-    final updated = state.selectedOptions
-        .where((element) => element.type != type)
-        .toList();
-
-    emit(state.copyWith(selectedOptions: updated));
-  }
-
-  /// ---------- Toggle ----------
-
-  void toggleOptionByType(T type) {
-    if (isSelected(type)) {
-      unSelectOptionByType(type);
+    if (selected.contains(type)) {
+      selected.remove(type);
     } else {
-      selectOptionByType(type);
+      selected.add(type);
+    }
+
+    emit(MultiEnumOptionState(selectedTypes: selected));
+  }
+
+  /// Add a value if not already selected
+  void selectOption(T type) {
+    final selected = List<T>.from(state.selectedTypes);
+
+    if (!selected.contains(type)) {
+      selected.add(type);
+      emit(MultiEnumOptionState(selectedTypes: selected));
     }
   }
 
-  /// ---------- Bulk ----------
+  /// Remove a selected value
+  void unSelectOption(T type) {
+    final selected = List<T>.from(state.selectedTypes);
 
-  void selectAll() {
-    emit(state.copyWith(selectedOptions: [...state.options]));
+    if (selected.contains(type)) {
+      selected.remove(type);
+      emit(MultiEnumOptionState(selectedTypes: selected));
+    }
   }
 
-  void unSelectAllOptions() {
-    emit(state.copyWith(selectedOptions: const []));
+  /// Add multiple values
+  void addOptions(List<T> types) {
+    final selected = List<T>.from(state.selectedTypes);
+
+    for (final type in types) {
+      if (!selected.contains(type)) {
+        selected.add(type);
+      }
+    }
+
+    emit(MultiEnumOptionState(selectedTypes: selected));
   }
 
-  /// ---------- Set values ----------
+  /// Remove multiple values
+  void removeOptions(List<T> types) {
+    final selected = List<T>.from(state.selectedTypes);
 
-  void setSelectedTypes(List<T> types) {
-    final selected = state.options
-        .where((option) => types.contains(option.type))
-        .toList();
+    selected.removeWhere((element) => types.contains(element));
 
-    emit(state.copyWith(selectedOptions: selected));
+    emit(MultiEnumOptionState(selectedTypes: selected));
   }
+
+  /// Clear all selections
+  void clearSelection() {
+    emit(const MultiEnumOptionState());
+  }
+
+  /// Check if a value is selected
+  bool isSelected(T type) {
+    return state.selectedTypes.contains(type);
+  }
+
+  /// Read-only selected values
+  List<T> get selectedTypes => List.unmodifiable(state.selectedTypes);
 }

@@ -34,13 +34,13 @@ class FormEditorDemo extends StatefulWidget {
 }
 
 class _FormEditorDemoState extends State<FormEditorDemo> {
-  // --- Cubit Instances ---
+  /// --- Cubit Instances ---
+
   final EnumOptionCubit<FileDataSourceType> _sourceCubit = EnumOptionCubit();
 
-  // Multi-select Cubit for User Roles
+  /// Multi-select Cubit
   late final MultiEnumOptionCubit<UserRole> _rolesCubit;
 
-  // NEW: Radio Group Cubit for Gender/Selection
   final FieldCubit<String> _genderCubit = FieldCubit<String>(
     initialValue: 'Male',
     validator: RequiredFieldValidator().call,
@@ -76,25 +76,9 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
   @override
   void initState() {
     super.initState();
-    _rolesCubit = MultiEnumOptionCubit<UserRole>(
-      options: [
-        EnumOptionEntity(
-          type: UserRole.admin,
-          label: 'Administrator',
-          icon: Icons.security,
-        ),
-        EnumOptionEntity(
-          type: UserRole.editor,
-          label: 'Content Editor',
-          icon: Icons.edit,
-        ),
-        EnumOptionEntity(
-          type: UserRole.viewer,
-          label: 'Viewer Only',
-          icon: Icons.visibility,
-        ),
-      ],
-    );
+
+    /// MultiEnumOptionCubit no longer needs options
+    _rolesCubit = MultiEnumOptionCubit<UserRole>();
   }
 
   @override
@@ -108,7 +92,7 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
     _sourceCubit.close();
     _imageCubit.close();
     _rolesCubit.close();
-    _genderCubit.close(); // Dispose new cubit
+    _genderCubit.close();
     super.dispose();
   }
 
@@ -127,6 +111,29 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
       ),
     ];
 
+    final roleOptions = [
+      EnumOptionEntity(
+        type: UserRole.admin,
+        label: 'Administrator',
+        icon: Icons.security,
+      ),
+      EnumOptionEntity(
+        type: UserRole.editor,
+        label: 'Content Editor',
+        icon: Icons.edit,
+      ),
+      EnumOptionEntity(
+        type: UserRole.viewer,
+        label: 'Viewer Only',
+        icon: Icons.visibility,
+      ),
+      EnumOptionEntity(
+        type: UserRole.guest,
+        label: 'Guest',
+        icon: Icons.person_outline,
+      ),
+    ];
+
     return Scaffold(
       appBar: AppBar(title: const Text('Reusable Editor Demo')),
       body: SingleChildScrollView(
@@ -139,12 +146,14 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 8),
+
             EnumOptionDropDownMenuFormField<FileDataSourceType>(
               selectedValue: _sourceCubit.state.selectedOption,
               onChanged: _sourceCubit.selectOption,
               hint: 'Choose data source',
               dropdownItems: dropdownItems,
             ),
+
             const SizedBox(height: 24),
 
             Text(
@@ -152,9 +161,18 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 8),
+
             Card(
-              child: EnumMultiOptionCheckboxGroup<UserRole>(cubit: _rolesCubit),
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: EnumMultiOptionCheckboxGroup<UserRole>(
+                  cubit: _rolesCubit,
+                  options: roleOptions,
+                  label: 'User Roles',
+                ),
+              ),
             ),
+
             const SizedBox(height: 24),
 
             Text(
@@ -162,27 +180,33 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 8),
+
             ElevatedButton.icon(
               onPressed: () async {
                 final XFile? pickedFile = await 'assets/sample.png'
                     .loadAsXFile();
-                if (pickedFile != null) _imageCubit.selectImage(pickedFile);
+                if (pickedFile != null) {
+                  _imageCubit.selectImage(pickedFile);
+                }
               },
               icon: const Icon(Icons.image),
               label: const Text('Simulate Image Pick'),
             ),
+
             const SizedBox(height: 16),
 
             BlocBuilder<ImageFieldCubit, ImageFieldState>(
               bloc: _imageCubit,
               builder: (context, state) {
                 final XFile? pickedFile = state.pickedFile;
+
                 if (pickedFile != null) {
                   return ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: Image.file(File(pickedFile.path), height: 100),
                   );
                 }
+
                 return const Text('No image selected');
               },
             ),
@@ -193,9 +217,9 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
               'Standard Form Fields',
               style: Theme.of(context).textTheme.headlineSmall,
             ),
+
             const SizedBox(height: 16),
 
-            // NEW: AppRadioGroup Implementation
             AppRadioGroup<String>(
               cubit: _genderCubit,
               label: 'Select Gender',
@@ -203,12 +227,14 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
               labels: const ['Male', 'Female', 'Other'],
               activeColor: Colors.deepPurple,
             ),
+
             const SizedBox(height: 16),
 
             AppCheckbox(
               cubit: _checkboxCubit,
               label: 'Accept Terms and Conditions',
             ),
+
             const SizedBox(height: 16),
 
             AppTextField(
@@ -216,6 +242,7 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
               label: 'Name',
               hintText: 'Enter your name',
             ),
+
             const SizedBox(height: 16),
 
             AppDatePicker(
@@ -224,6 +251,7 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
               placeholderText: 'Tap to pick a date',
               formatter: DateFormat('yyyy-MM-dd'),
             ),
+
             const SizedBox(height: 16),
 
             AppTimePicker(
@@ -231,6 +259,7 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
               labelText: 'Select Time',
               hintText: 'Tap to pick a time',
             ),
+
             const SizedBox(height: 16),
 
             AppSlider(
@@ -241,9 +270,11 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
               labelText: 'Intensity Level',
               displayValue: (val) => '${(val * 100).toInt()}%',
             ),
+
             const SizedBox(height: 16),
 
             AppSwitch(cubit: _switchCubit, label: 'Enable Notifications'),
+
             const SizedBox(height: 32),
 
             SizedBox(
@@ -256,6 +287,7 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
                 child: const Text('Validate & Submit'),
               ),
             ),
+
             const SizedBox(height: 40),
           ],
         ),
@@ -273,7 +305,9 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
       _switchCubit.validate(),
     ].every((error) => error == null);
 
-    final selectedRoles = _rolesCubit.selectedTypes.join(', ');
+    final selectedRoles = _rolesCubit.selectedTypes
+        .map((e) => e.name)
+        .join(', ');
 
     final message = isValid
         ? 'Valid! Gender: ${_genderCubit.state.value}, Roles: ${selectedRoles.isEmpty ? 'None' : selectedRoles}'

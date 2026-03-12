@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 
 
+## 1.3.1
+
+### Mar 13, 2026
+
+### ✨ Added
+
+- Added `EnumMultiOptionCheckboxGroup` for enum-based multi-select inputs.
+- Introduced `MultiEnumOptionCubit` to manage multi-selection state.
+- Improved form example with checkbox group, radio group, and better Cubit usage.
+- Minor fixes and consistency improvements across reusable form widgets.
+
+
 ## 1.3.0
 
 ### Mar 12, 2026

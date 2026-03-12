@@ -1,25 +1,16 @@
 part of 'multi_enum_option_cubit.dart';
 
 class MultiEnumOptionState<T extends Enum> extends Equatable {
-  final List<EnumOptionEntity<T>> options;
-
-  final List<EnumOptionEntity<T>> selectedOptions;
+  final List<T> selectedTypes;
 
   const MultiEnumOptionState({
-    required this.options,
-    required this.selectedOptions,
+    this.selectedTypes = const [],
   });
 
-  MultiEnumOptionState<T> copyWith({
-    List<EnumOptionEntity<T>>? options,
-    List<EnumOptionEntity<T>>? selectedOptions,
-  }) {
-    return MultiEnumOptionState(
-      options: options ?? this.options,
-      selectedOptions: selectedOptions ?? this.selectedOptions,
-    );
-  }
+  bool get hasSelection => selectedTypes.isNotEmpty;
+
+  bool isSelected(T type) => selectedTypes.contains(type);
 
   @override
-  List<Object?> get props => [options, selectedOptions];
+  List<Object?> get props => [selectedTypes];
 }

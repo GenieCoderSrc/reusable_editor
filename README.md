@@ -32,24 +32,6 @@ import 'package:reusable_editor/reusable_editor.dart';
 Full usage guides available at:
 👉 [https://geniecodersrc.github.io/reusable_editor/](https://geniecodersrc.github.io/reusable_editor/)
 
-## Usage
-
-### Form Field Management
-
-```dart
-// Create cubit for a field
-final textFieldCubit = TextFieldCubit(
-  initialValue: 'Default',
-  validator: RequiredValidator(),
-);
-
-// Use with AppTextField
-AppTextField(cubit: textFieldCubit, label: 'Name');
-
-// Toggle field example
-final toggleCubit = ToggleCubit(initialValue: false);
-AppSwitch(cubit: toggleCubit);
-```
 
 ### Available Form Widgets
 
@@ -66,14 +48,85 @@ AppSwitch(cubit: toggleCubit);
 * `EnumOptionDropDownMenuFormField` - Dropdown for Enum values
 * `EnumMultiOptionCheckboxGroup` - Multi-select checkbox group for Enums
 
+
+## State Management Cubits
+
+* `FieldCubit<T>` - Generic form field management with validation
+* `ToggleCubit` - Specialized cubit for boolean toggle fields
+* `DateTimeCubit` - Manages date selection
+* `ImageFieldCubit` - Handles image pick logic and validation
+* `EnumOptionCubit<T>` - Dropdown selection with generic enum
+* `MultiEnumOptionCubit<T>` - Multi-select enum field management
+* `SwitchCubit` - Toggle logic
+* `TextFieldCubit` - Text field validation
+
+
+## Usage
+
+### Form Field Management
+
+```dart
+// Text field
+final textFieldCubit = TextFieldCubit(
+  initialValue: 'Default',
+  validator: RequiredValidator(),
+);
+AppTextField(cubit: textFieldCubit, label: 'Name');
+
+// Toggle switch
+final toggleCubit = ToggleCubit(initialValue: false);
+AppSwitch(cubit: toggleCubit);
+
+// Date picker
+final dateCubit = FieldCubit<DateTime>(
+  validator: RequiredFieldValidator().call,
+);
+AppDatePicker(cubit: dateCubit, labelText: 'Select Date', formatter: DateFormat('yyyy-MM-dd'));
+
+// Time picker
+final timeCubit = FieldCubit<TimeOfDay>(
+  validator: RequiredFieldValidator().call,
+);
+AppTimePicker(cubit: timeCubit, labelText: 'Select Time');
+
+// Slider
+final sliderCubit = FieldCubit<double>(initialValue: 0.5);
+AppSlider(cubit: sliderCubit, min: 0, max: 1, divisions: 10, labelText: 'Select Value', displayValue: (val) => val.toStringAsFixed(2));
+
+// Range slider
+final rangeSliderCubit = FieldCubit<RangeValues>(
+  initialValue: const RangeValues(0, 50),
+);
+AppRangeSlider(cubit: rangeSliderCubit, min: 0, max: 100, divisions: 20, labelText: 'Range');
+
+// Checkbox
+final checkboxCubit = ToggleCubit(initialValue: false);
+AppCheckbox(cubit: checkboxCubit, label: 'Accept Terms');
+
+// Radio Group
+final radioCubit = FieldCubit<String>(initialValue: 'Male');
+AppRadioGroup<String>(
+  cubit: radioCubit,
+  label: 'Gender',
+  values: const ['Male', 'Female', 'Other'],
+  labels: const ['Male', 'Female', 'Other'],
+);
+
+// File picker
+final imageCubit = ImageFieldCubit();
+AppFilePicker(cubit: imageCubit, labelText: 'Pick Image');
+```
+
 ### Dropdown with Enum
 
 ```dart
 enum FileSourceType { firebase, server }
 
+final dropdownCubit = EnumOptionCubit<FileSourceType>();
+
 final dropdown = EnumOptionDropDownMenuFormField<FileSourceType>(
-  selectedValue: selectedOption,
-  onChanged: (value) => print(value?.type),
+  selectedValue: dropdownCubit.state.selectedOption,
+  onChanged: dropdownCubit.selectOption,
   hint: 'Select file source',
   dropdownItems: [
     EnumOptionEntity(type: FileSourceType.firebase, icon: Icons.cloud, label: 'Firebase'),
@@ -85,16 +138,13 @@ final dropdown = EnumOptionDropDownMenuFormField<FileSourceType>(
 ### Multi Select Enum (MultiEnumOptionCubit)
 
 ```dart
-enum ReactionType {
-  like,
-  love,
-  laugh,
-  wow,
-  sad,
-  angry,
-}
+enum ReactionType { like, love, laugh, wow, sad, angry }
 
-final reactionsCubit = MultiEnumOptionCubit<ReactionType>(
+final reactionsCubit = MultiEnumOptionCubit<ReactionType>();
+
+// Use the widget
+EnumMultiOptionCheckboxGroup<ReactionType>(
+  cubit: reactionsCubit,
   options: [
     EnumOptionEntity(type: ReactionType.like, label: 'Like', icon: Icons.thumb_up),
     EnumOptionEntity(type: ReactionType.love, label: 'Love', icon: Icons.favorite),
@@ -105,13 +155,11 @@ final reactionsCubit = MultiEnumOptionCubit<ReactionType>(
   ],
 );
 
-// Use the Widget
-EnumMultiOptionCheckboxGroup<ReactionType>(
-  cubit: reactionsCubit,
-);
-
 // Toggle selection
-reactionsCubit.toggleOptionByType(ReactionType.like);
+reactionsCubit.toggleOption(ReactionType.like);
+
+// Replace all selections
+reactionsCubit.setSelected([ReactionType.love, ReactionType.wow]);
 
 // Read selected values
 final selectedReactions = reactionsCubit.selectedTypes;
@@ -128,17 +176,6 @@ final file = await 'assets/image.png'.loadAsFile();
 ```dart
 final bytes = await 'assets/image.png'.loadAssetImage();
 ```
-
-## State Management Cubits
-
-* `FieldCubit<T>` - Generic form field management with validation
-* `ToggleCubit` - Specialized cubit for boolean toggle fields
-* `DateTimeCubit` - Manages date selection
-* `ImageCrudCubit` - Handles image pick logic and validation
-* `EnumOptionCubit<T>` - Dropdown selection with generic enum
-* `MultiEnumOptionCubit<T>` - Multi-select enum field management
-* `SwitchCubit` - Toggle logic
-* `TextFieldCubit` - Text field validation
 
 ## Contributions
 
