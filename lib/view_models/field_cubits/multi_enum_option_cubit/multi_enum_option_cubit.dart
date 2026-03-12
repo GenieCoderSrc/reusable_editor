@@ -9,11 +9,7 @@ class MultiEnumOptionCubit<T extends Enum>
 
   /// Replace entire selection
   void setSelected(List<T>? values) {
-    emit(
-      MultiEnumOptionState(
-        selectedTypes: values ?? [],
-      ),
-    );
+    emit(MultiEnumOptionState(selectedTypes: values ?? []));
   }
 
   /// Toggle a value
