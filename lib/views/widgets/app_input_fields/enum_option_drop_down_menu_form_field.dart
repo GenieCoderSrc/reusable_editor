@@ -20,7 +20,7 @@ class EnumOptionDropDownMenuFormField<T extends Enum> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<EnumOptionEntity<T>>(
-      value: selectedValue,
+      initialValue: selectedValue,
       onChanged: onChanged,
       items: dropdownItems.map<DropdownMenuItem<EnumOptionEntity<T>>>((option) {
         return DropdownMenuItem<EnumOptionEntity<T>>(
@@ -31,7 +31,7 @@ class EnumOptionDropDownMenuFormField<T extends Enum> extends StatelessWidget {
                   children: [
                     Icon(option.icon),
                     const SizedBox(width: 8),
-                    Text(option.label ?? option.type?.name ?? ""),
+                    Text(option.label ?? option.type.name ?? ""),
                   ],
                 ),
         );

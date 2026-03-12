@@ -1,7 +1,8 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reusable_editor/reusable_editor.dart';
 
-import 'multi_enum_option_state.dart';
+part 'multi_enum_option_state.dart';
 
 class MultiEnumOptionCubit<T extends Enum>
     extends Cubit<MultiEnumOptionState<T>> {

@@ -1,5 +1,6 @@
-import 'package:equatable/equatable.dart';
-import 'package:reusable_editor/reusable_editor.dart';
+
+
+part of 'multi_enum_option_cubit.dart';
 
 class MultiEnumOptionState<T extends Enum> extends Equatable {
   final List<EnumOptionEntity<T>> options;

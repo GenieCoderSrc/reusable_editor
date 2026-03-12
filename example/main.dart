@@ -11,14 +11,17 @@ void main() {
   runApp(const MyApp());
 }
 
+/// Define a sample Enum for the multi-select demo
+enum UserRole { admin, editor, viewer, guest }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Reusable Editor Example',
-      home: const FormEditorDemo(),
+      home: FormEditorDemo(),
     );
   }
 }
@@ -31,7 +34,11 @@ class FormEditorDemo extends StatefulWidget {
 }
 
 class _FormEditorDemoState extends State<FormEditorDemo> {
+  // --- Cubit Instances ---
   final EnumOptionCubit<FileDataSourceType> _sourceCubit = EnumOptionCubit();
+
+  // NEW: Multi-select Cubit for User Roles
+  late final MultiEnumOptionCubit<UserRole> _rolesCubit;
 
   final ImageFieldCubit _imageCubit = ImageFieldCubit();
 
@@ -61,6 +68,19 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
   );
 
   @override
+  void initState() {
+    super.initState();
+    // Initialize the Multi-select cubit with available options
+    _rolesCubit = MultiEnumOptionCubit<UserRole>(
+      options: [
+        EnumOptionEntity(type: UserRole.admin, label: 'Administrator', icon: Icons.security),
+        EnumOptionEntity(type: UserRole.editor, label: 'Content Editor', icon: Icons.edit),
+        EnumOptionEntity(type: UserRole.viewer, label: 'Viewer Only', icon: Icons.visibility),
+      ],
+    );
+  }
+
+  @override
   void dispose() {
     _checkboxCubit.close();
     _textFieldCubit.close();
@@ -70,6 +90,7 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
     _switchCubit.close();
     _sourceCubit.close();
     _imageCubit.close();
+    _rolesCubit.close(); // Clean up the new cubit
     super.dispose();
   }
 
@@ -95,23 +116,38 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Text('Single Selection (Dropdown)', style: Theme.of(context).textTheme.titleMedium),
+            const SizedBox(height: 8),
             EnumOptionDropDownMenuFormField<FileDataSourceType>(
               selectedValue: _sourceCubit.state.selectedOption,
               onChanged: _sourceCubit.selectOption,
               hint: 'Choose data source',
               dropdownItems: dropdownItems,
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 24),
 
-            ElevatedButton(
+            // NEW: Multi-selection section
+            Text('Multi-Selection (Checkboxes)', style: Theme.of(context).textTheme.titleMedium),
+            const SizedBox(height: 8),
+            Card(
+              child: EnumMultiOptionCheckboxGroup<UserRole>(
+                cubit: _rolesCubit,
+              ),
+            ),
+            const SizedBox(height: 24),
+
+            Text('Image Picker', style: Theme.of(context).textTheme.titleMedium),
+            const SizedBox(height: 8),
+            ElevatedButton.icon(
               onPressed: () async {
-                final XFile? pickedFile = await 'assets/sample.png'
-                    .loadAsXFile();
+                // Mock loading an XFile from assets
+                final XFile? pickedFile = await 'assets/sample.png'.loadAsXFile();
                 if (pickedFile != null) {
                   _imageCubit.selectImage(pickedFile);
                 }
               },
-              child: const Text('Pick Image from Asset'),
+              icon: const Icon(Icons.image),
+              label: const Text('Simulate Image Pick'),
             ),
             const SizedBox(height: 16),
 
@@ -120,17 +156,19 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
               builder: (context, state) {
                 final XFile? pickedFile = state.pickedFile;
                 if (pickedFile != null) {
-                  return Image.file(File(pickedFile.path));
+                  return ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Image.file(File(pickedFile.path), height: 100),
+                  );
                 }
                 return const Text('No image selected');
               },
             ),
-            const SizedBox(height: 32),
-            const Divider(),
-            const SizedBox(height: 16),
+
+            const Divider(height: 40),
 
             Text(
-              'Form Field Examples',
+              'Standard Form Fields',
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(height: 16),
@@ -168,18 +206,23 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
               min: 0.0,
               max: 1.0,
               divisions: 10,
-              labelText: 'Select a value',
-              displayValue: (val) => val.toStringAsFixed(2),
+              labelText: 'Intensity Level',
+              displayValue: (val) => '${(val * 100).toInt()}%',
             ),
             const SizedBox(height: 16),
 
-            AppSwitch(cubit: _switchCubit, label: 'Enable Feature'),
-            const SizedBox(height: 24),
+            AppSwitch(cubit: _switchCubit, label: 'Enable Notifications'),
+            const SizedBox(height: 32),
 
-            ElevatedButton(
-              onPressed: _validateForm,
-              child: const Text('Validate All Fields'),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: _validateForm,
+                style: ElevatedButton.styleFrom(padding: const EdgeInsets.all(16)),
+                child: const Text('Validate & Submit'),
+              ),
             ),
+            const SizedBox(height: 40),
           ],
         ),
       ),
@@ -195,12 +238,15 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
       _switchCubit.validate(),
     ].every((error) => error == null);
 
+    // Demonstration of how to pull data from the multi-select cubit
+    final selectedRoles = _rolesCubit.selectedTypes.join(', ');
+
     final message = isValid
-        ? 'Form is valid!'
+        ? 'Valid! Roles: ${selectedRoles.isEmpty ? 'None' : selectedRoles}'
         : 'Please correct the highlighted errors.';
 
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text(message)));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
   }
 }
