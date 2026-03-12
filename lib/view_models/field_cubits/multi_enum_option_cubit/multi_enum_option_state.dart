@@ -1,5 +1,3 @@
-
-
 part of 'multi_enum_option_cubit.dart';
 
 class MultiEnumOptionState<T extends Enum> extends Equatable {
@@ -23,8 +21,5 @@ class MultiEnumOptionState<T extends Enum> extends Equatable {
   }
 
   @override
-  List<Object?> get props => [
-    options,
-    selectedOptions,
-  ];
+  List<Object?> get props => [options, selectedOptions];
 }

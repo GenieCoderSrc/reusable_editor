@@ -73,9 +73,21 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
     // Initialize the Multi-select cubit with available options
     _rolesCubit = MultiEnumOptionCubit<UserRole>(
       options: [
-        EnumOptionEntity(type: UserRole.admin, label: 'Administrator', icon: Icons.security),
-        EnumOptionEntity(type: UserRole.editor, label: 'Content Editor', icon: Icons.edit),
-        EnumOptionEntity(type: UserRole.viewer, label: 'Viewer Only', icon: Icons.visibility),
+        EnumOptionEntity(
+          type: UserRole.admin,
+          label: 'Administrator',
+          icon: Icons.security,
+        ),
+        EnumOptionEntity(
+          type: UserRole.editor,
+          label: 'Content Editor',
+          icon: Icons.edit,
+        ),
+        EnumOptionEntity(
+          type: UserRole.viewer,
+          label: 'Viewer Only',
+          icon: Icons.visibility,
+        ),
       ],
     );
   }
@@ -116,7 +128,10 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Single Selection (Dropdown)', style: Theme.of(context).textTheme.titleMedium),
+            Text(
+              'Single Selection (Dropdown)',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
             const SizedBox(height: 8),
             EnumOptionDropDownMenuFormField<FileDataSourceType>(
               selectedValue: _sourceCubit.state.selectedOption,
@@ -127,21 +142,26 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
             const SizedBox(height: 24),
 
             // NEW: Multi-selection section
-            Text('Multi-Selection (Checkboxes)', style: Theme.of(context).textTheme.titleMedium),
+            Text(
+              'Multi-Selection (Checkboxes)',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
             const SizedBox(height: 8),
             Card(
-              child: EnumMultiOptionCheckboxGroup<UserRole>(
-                cubit: _rolesCubit,
-              ),
+              child: EnumMultiOptionCheckboxGroup<UserRole>(cubit: _rolesCubit),
             ),
             const SizedBox(height: 24),
 
-            Text('Image Picker', style: Theme.of(context).textTheme.titleMedium),
+            Text(
+              'Image Picker',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
             const SizedBox(height: 8),
             ElevatedButton.icon(
               onPressed: () async {
                 // Mock loading an XFile from assets
-                final XFile? pickedFile = await 'assets/sample.png'.loadAsXFile();
+                final XFile? pickedFile = await 'assets/sample.png'
+                    .loadAsXFile();
                 if (pickedFile != null) {
                   _imageCubit.selectImage(pickedFile);
                 }
@@ -218,7 +238,9 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: _validateForm,
-                style: ElevatedButton.styleFrom(padding: const EdgeInsets.all(16)),
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.all(16),
+                ),
                 child: const Text('Validate & Submit'),
               ),
             ),
@@ -245,8 +267,8 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
         ? 'Valid! Roles: ${selectedRoles.isEmpty ? 'None' : selectedRoles}'
         : 'Please correct the highlighted errors.';
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message)),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(message)));
   }
 }
