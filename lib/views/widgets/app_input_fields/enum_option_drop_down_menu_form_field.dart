@@ -31,7 +31,7 @@ class EnumOptionDropDownMenuFormField<T extends Enum> extends StatelessWidget {
                   children: [
                     Icon(option.icon),
                     const SizedBox(width: 8),
-                    Text(option.label ?? option.type.name ?? ""),
+                    Text(option.label ?? option.type.name),
                   ],
                 ),
         );

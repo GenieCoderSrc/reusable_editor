@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 - Added empty string for `labelText` in the `AppDatePicker`.
 - Added `MultiEnumOptionCubit` for managing multi-select enum fields.
 - Added `EnumMultiOptionCheckboxGroup` a Multi-select checkbox group for List of Enums.
+- Updated `AppRadioGroup` to remove deprecated member use.
 
 ## 1.2.9
 
