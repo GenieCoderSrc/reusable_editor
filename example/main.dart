@@ -78,9 +78,21 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
     super.initState();
     _rolesCubit = MultiEnumOptionCubit<UserRole>(
       options: [
-        EnumOptionEntity(type: UserRole.admin, label: 'Administrator', icon: Icons.security),
-        EnumOptionEntity(type: UserRole.editor, label: 'Content Editor', icon: Icons.edit),
-        EnumOptionEntity(type: UserRole.viewer, label: 'Viewer Only', icon: Icons.visibility),
+        EnumOptionEntity(
+          type: UserRole.admin,
+          label: 'Administrator',
+          icon: Icons.security,
+        ),
+        EnumOptionEntity(
+          type: UserRole.editor,
+          label: 'Content Editor',
+          icon: Icons.edit,
+        ),
+        EnumOptionEntity(
+          type: UserRole.viewer,
+          label: 'Viewer Only',
+          icon: Icons.visibility,
+        ),
       ],
     );
   }
@@ -103,8 +115,16 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
   @override
   Widget build(BuildContext context) {
     final dropdownItems = [
-      EnumOptionEntity(type: FileDataSourceType.fireStorage, icon: Icons.cloud, label: 'Firebase'),
-      EnumOptionEntity(type: FileDataSourceType.server, icon: Icons.storage, label: 'Server'),
+      EnumOptionEntity(
+        type: FileDataSourceType.fireStorage,
+        icon: Icons.cloud,
+        label: 'Firebase',
+      ),
+      EnumOptionEntity(
+        type: FileDataSourceType.server,
+        icon: Icons.storage,
+        label: 'Server',
+      ),
     ];
 
     return Scaffold(
@@ -114,7 +134,10 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Single Selection (Dropdown)', style: Theme.of(context).textTheme.titleMedium),
+            Text(
+              'Single Selection (Dropdown)',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
             const SizedBox(height: 8),
             EnumOptionDropDownMenuFormField<FileDataSourceType>(
               selectedValue: _sourceCubit.state.selectedOption,
@@ -124,18 +147,25 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
             ),
             const SizedBox(height: 24),
 
-            Text('Multi-Selection (Checkboxes)', style: Theme.of(context).textTheme.titleMedium),
+            Text(
+              'Multi-Selection (Checkboxes)',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
             const SizedBox(height: 8),
             Card(
               child: EnumMultiOptionCheckboxGroup<UserRole>(cubit: _rolesCubit),
             ),
             const SizedBox(height: 24),
 
-            Text('Image Picker', style: Theme.of(context).textTheme.titleMedium),
+            Text(
+              'Image Picker',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
             const SizedBox(height: 8),
             ElevatedButton.icon(
               onPressed: () async {
-                final XFile? pickedFile = await 'assets/sample.png'.loadAsXFile();
+                final XFile? pickedFile = await 'assets/sample.png'
+                    .loadAsXFile();
                 if (pickedFile != null) _imageCubit.selectImage(pickedFile);
               },
               icon: const Icon(Icons.image),
@@ -159,7 +189,10 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
 
             const Divider(height: 40),
 
-            Text('Standard Form Fields', style: Theme.of(context).textTheme.headlineSmall),
+            Text(
+              'Standard Form Fields',
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
             const SizedBox(height: 16),
 
             // NEW: AppRadioGroup Implementation
@@ -172,10 +205,17 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
             ),
             const SizedBox(height: 16),
 
-            AppCheckbox(cubit: _checkboxCubit, label: 'Accept Terms and Conditions'),
+            AppCheckbox(
+              cubit: _checkboxCubit,
+              label: 'Accept Terms and Conditions',
+            ),
             const SizedBox(height: 16),
 
-            AppTextField(bloc: _textFieldCubit, label: 'Name', hintText: 'Enter your name'),
+            AppTextField(
+              bloc: _textFieldCubit,
+              label: 'Name',
+              hintText: 'Enter your name',
+            ),
             const SizedBox(height: 16),
 
             AppDatePicker(
@@ -210,7 +250,9 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: _validateForm,
-                style: ElevatedButton.styleFrom(padding: const EdgeInsets.all(16)),
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.all(16),
+                ),
                 child: const Text('Validate & Submit'),
               ),
             ),
@@ -237,6 +279,8 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
         ? 'Valid! Gender: ${_genderCubit.state.value}, Roles: ${selectedRoles.isEmpty ? 'None' : selectedRoles}'
         : 'Please correct the highlighted errors.';
 
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(message)));
   }
 }

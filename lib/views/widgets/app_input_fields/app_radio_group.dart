@@ -69,7 +69,10 @@ class AppRadioGroup<T> extends StatelessWidget {
     this.mouseCursor,
     this.subtitleBuilder,
     this.secondaryBuilder,
-  }) : assert(values.length == labels.length, 'Values and Labels must have same length');
+  }) : assert(
+         values.length == labels.length,
+         'Values and Labels must have same length',
+       );
 
   @override
   Widget build(BuildContext context) {
@@ -127,9 +130,11 @@ class AppRadioGroup<T> extends StatelessWidget {
                   // If you decide to add activeColor or tileColor,
                   // check if the specific Flutter version requires WidgetStateProperty for those too.
                   // Usually, activeColor remains a plain Color, but fillColor is a Property.
-                  fillColor: fillColor ?? (activeColor != null
-                      ? WidgetStateProperty.all(activeColor)
-                      : null),
+                  fillColor:
+                      fillColor ??
+                      (activeColor != null
+                          ? WidgetStateProperty.all(activeColor)
+                          : null),
                   radioSide: radioSide,
                   mouseCursor: mouseCursor,
                 );
