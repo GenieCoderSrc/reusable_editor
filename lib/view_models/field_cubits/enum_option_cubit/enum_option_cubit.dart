@@ -11,7 +11,7 @@ class EnumOptionCubit<T extends Enum> extends Cubit<EnumOptionState<T>> {
   // Method to select an option
   void selectOption(EnumOptionEntity<T>? selectedOption) {
     debugPrint(
-      'SelectionCubit | selectOption | type: ${selectedOption?.type?.toString()}',
+      'SelectionCubit | selectOption | type: ${selectedOption?.type.name}',
     );
     if (selectedOption != null) {
       emit(EnumOptionState(selectedOption: selectedOption));

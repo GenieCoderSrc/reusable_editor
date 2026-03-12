@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+
+## 1.3.0
+
+### Mar 12, 2026
+
+### ✨ Added
+
+- Added Default `DateFormat` as `YYYY-MM-DD` in the `AppDatePicker`.
+- Added empty string for `labelText` in the `AppDatePicker`.
+- Added `MultiEnumOptionCubit` for managing multi-select enum fields.
+
 ## 1.2.9
 
 ### Sep 11, 2025

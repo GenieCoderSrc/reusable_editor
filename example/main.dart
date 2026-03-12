@@ -32,6 +32,7 @@ class FormEditorDemo extends StatefulWidget {
 
 class _FormEditorDemoState extends State<FormEditorDemo> {
   final EnumOptionCubit<FileDataSourceType> _sourceCubit = EnumOptionCubit();
+
   final ImageFieldCubit _imageCubit = ImageFieldCubit();
 
   final ToggleCubit _checkboxCubit = ToggleCubit(

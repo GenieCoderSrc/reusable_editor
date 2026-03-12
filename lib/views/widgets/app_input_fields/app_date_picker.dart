@@ -10,20 +10,21 @@ import 'package:reusable_editor/reusable_editor.dart';
 /// to tap to open a date picker.
 class AppDatePicker extends StatelessWidget {
   final FieldCubit<DateTime> cubit;
-  final String labelText; // Changed from hintText to labelText for clarity
   final String placeholderText; // New parameter for when no date is selected
-  final DateFormat formatter; // Renamed to displayFormatter for clarity
+  final String labelText; // Changed from hintText to labelText for clarity
+  final DateFormat? formatter; // Renamed to displayFormatter for clarity
 
   const AppDatePicker({
     super.key,
     required this.cubit,
-    required this.labelText,
+    this.labelText = '',
     this.placeholderText = 'Tap to pick date', // Default placeholder
-    required this.formatter,
+    this.formatter,
   });
 
   @override
   Widget build(BuildContext context) {
+    DateFormat _dateFormat = formatter ?? DateFormat('YYYY-MM-DD');
     return BlocBuilder<FieldCubit<DateTime>, FieldState<DateTime>>(
       bloc: cubit,
       builder: (_, state) => Column(
@@ -43,7 +44,7 @@ class AppDatePicker extends StatelessWidget {
           ListTile(
             title: Text(
               state.value != null
-                  ? formatter.format(state.value!) // Format the selected date
+                  ? _dateFormat.format(state.value!) // Format the selected date
                   : placeholderText, // Use placeholder when no date is selected
             ),
             trailing: const Icon(Icons.calendar_today),
