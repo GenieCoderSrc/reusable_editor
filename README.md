@@ -55,6 +55,7 @@ Full usage guides available at:
 * `ToggleCubit` - Specialized cubit for boolean toggle fields
 * `DateTimeCubit` - Manages date selection
 * `ImageFieldCubit` - Handles image pick logic and validation
+* `ListImageFieldCubit` - Handles multiple image selection and bulk upload tracking
 * `EnumOptionCubit<T>` - Dropdown selection with generic enum
 * `MultiEnumOptionCubit<T>` - Multi-select enum field management
 * `SwitchCubit` - Toggle logic

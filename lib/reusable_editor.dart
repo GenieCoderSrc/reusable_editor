@@ -13,6 +13,7 @@ export 'type_def/type_def.dart';
 export 'view_models/field_cubits/date_time_cubit/date_time_cubit.dart';
 export 'view_models/field_cubits/enum_option_cubit/enum_option_cubit.dart';
 export 'view_models/field_cubits/image_field_cubit/image_field_cubit.dart';
+export 'view_models/field_cubits/list_image_field_cubit/list_image_field_cubit.dart';
 export 'view_models/field_cubits/multi_enum_option_cubit/multi_enum_option_cubit.dart';
 export 'view_models/field_cubits/switch_cubit/switch_cubit.dart';
 export 'view_models/field_cubits/text_field_cubit/text_field_cubit.dart';

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 
 
+## 1.3.2
+
+### Jun 13, 2026
+
+### ✨ Added
+
+- Added `ListImageFieldCubit` and `ListImageFieldState` to support multiple image uploads and validation.
+- Implemented multi-image validation by mapping `ImageFieldValidator` across lists.
+- Added support for aggregate upload progress and bulk image deletion.
+
+
 ## 1.3.1
 
 ### Mar 13, 2026

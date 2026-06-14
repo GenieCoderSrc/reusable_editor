@@ -47,6 +47,7 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
   );
 
   final ImageFieldCubit _imageCubit = ImageFieldCubit();
+  final ListImageFieldCubit _listImageCubit = ListImageFieldCubit();
 
   final ToggleCubit _checkboxCubit = ToggleCubit(
     initialValue: false,
@@ -91,6 +92,7 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
     _switchCubit.close();
     _sourceCubit.close();
     _imageCubit.close();
+    _listImageCubit.close();
     _rolesCubit.close();
     _genderCubit.close();
     super.dispose();
@@ -181,34 +183,103 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
             ),
             const SizedBox(height: 8),
 
-            ElevatedButton.icon(
-              onPressed: () async {
-                final XFile? pickedFile = await 'assets/sample.png'
-                    .loadAsXFile();
-                if (pickedFile != null) {
-                  _imageCubit.selectImage(pickedFile);
-                }
-              },
-              icon: const Icon(Icons.image),
-              label: const Text('Simulate Image Pick'),
+            Wrap(
+              spacing: 10,
+              children: [
+                ElevatedButton.icon(
+                  onPressed: () async {
+                    final XFile? pickedFile = await 'assets/sample.png'
+                        .loadAsXFile();
+                    if (pickedFile != null) {
+                      _imageCubit.selectImage(pickedFile);
+                    }
+                  },
+                  icon: const Icon(Icons.image),
+                  label: const Text('Single Pick'),
+                ),
+                ElevatedButton.icon(
+                  onPressed: () async {
+                    // Simulating multiple file selection
+                    final results = await Future.wait([
+                      'assets/sample.png'.loadAsXFile(),
+                      'assets/sample.png'.loadAsXFile(),
+                    ]);
+                    final pickedFiles = results.whereType<XFile>().toList();
+                    
+                    _listImageCubit.selectImages(pickedFiles);
+                  },
+                  icon: const Icon(Icons.photo_library),
+                  label: const Text('Multi Pick'),
+                ),
+              ],
             ),
 
             const SizedBox(height: 16),
 
-            BlocBuilder<ImageFieldCubit, ImageFieldState>(
-              bloc: _imageCubit,
-              builder: (context, state) {
-                final XFile? pickedFile = state.pickedFile;
-
-                if (pickedFile != null) {
-                  return ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Image.file(File(pickedFile.path), height: 100),
-                  );
-                }
-
-                return const Text('No image selected');
-              },
+            Row(
+              children: [
+                Expanded(
+                  child: BlocBuilder<ImageFieldCubit, ImageFieldState>(
+                    bloc: _imageCubit,
+                    builder: (context, state) {
+                      final XFile? pickedFile = state.pickedFile;
+                      if (pickedFile != null) {
+                        return Column(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.file(
+                                File(pickedFile.path),
+                                height: 80,
+                                width: 80,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            const Text(
+                              'Single',
+                              style: TextStyle(fontSize: 10),
+                            ),
+                          ],
+                        );
+                      }
+                      return const Text('No single image');
+                    },
+                  ),
+                ),
+                const SizedBox(width: 20),
+                Expanded(
+                  child: BlocBuilder<ListImageFieldCubit, ListImageFieldState>(
+                    bloc: _listImageCubit,
+                    builder: (context, state) {
+                      final pickedFiles = state.pickedFiles;
+                      if (pickedFiles != null && pickedFiles.isNotEmpty) {
+                        return Column(
+                          children: [
+                            Wrap(
+                              spacing: 4,
+                              children: pickedFiles
+                                  .map(
+                                    (file) => ClipRRect(
+                                      borderRadius: BorderRadius.circular(4),
+                                      child: Image.file(
+                                        File(file.path),
+                                        height: 40,
+                                        width: 40,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
+                            const Text('Multi', style: TextStyle(fontSize: 10)),
+                          ],
+                        );
+                      }
+                      return const Text('No multi images');
+                    },
+                  ),
+                ),
+              ],
             ),
 
             const Divider(height: 40),
