@@ -205,7 +205,7 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
                       'assets/sample.png'.loadAsXFile(),
                     ]);
                     final pickedFiles = results.whereType<XFile>().toList();
-                    
+
                     _listImageCubit.selectImages(pickedFiles);
                   },
                   icon: const Icon(Icons.photo_library),

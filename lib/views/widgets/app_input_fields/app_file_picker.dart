@@ -32,7 +32,7 @@ class AppFilePicker extends StatelessWidget {
         ),
         trailing: const Icon(Icons.attach_file),
         onTap: () async {
-          final result = await FilePicker.platform.pickFiles(
+          final result = await FilePicker.pickFiles(
             allowMultiple: allowMultiple,
             type: allowedExtensions == null ? FileType.any : FileType.custom,
             allowedExtensions: allowedExtensions,
