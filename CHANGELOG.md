@@ -22,6 +22,7 @@ All notable changes to this project will be documented in this file.
 - Added `ListImageFieldCubit` and `ListImageFieldState` to support multiple image uploads and validation.
 - Implemented multi-image validation by mapping `ImageFieldValidator` across lists.
 - Added support for aggregate upload progress and bulk image deletion.
+- Updated `DropdownButtonFormField` deprecated `value` property to `initialValue`.
 
 ## 1.3.1
 
