@@ -20,7 +20,7 @@ class AppDropdown<T> extends StatelessWidget {
     return BlocBuilder<FieldCubit<T>, FieldState<T>>(
       bloc: cubit,
       builder: (_, state) => DropdownButtonFormField<T>(
-        value: state.value,
+        initialValue: state.value,
         decoration: InputDecoration(
           labelText: label,
           errorText: state.errorText,
