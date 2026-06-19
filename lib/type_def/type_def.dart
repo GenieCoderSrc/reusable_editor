@@ -5,3 +5,4 @@ typedef FieldValidator<T> = String? Function(T? value);
 typedef TextFieldValidator = String? Function(String? value);
 
 typedef ImageFieldValidator = String? Function(XFile? file);
+typedef ListImageValidator = String? Function(List<XFile>? files);

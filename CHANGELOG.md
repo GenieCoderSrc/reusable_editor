@@ -2,8 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.3.3
 
+### Jun 18, 2026
 
+### ✨ Added
+
+- Added `VideoFieldCubit` and `VideoFieldState` to support video upload and deletion with progress tracking.
+- Added `AudioFieldCubit` and `AudioFieldState` to support audio upload and deletion with progress tracking.
+- Added `DocFieldCubit` and `DocFieldState` to support document upload and deletion with progress tracking.
 
 ## 1.3.2
 
@@ -15,7 +22,6 @@ All notable changes to this project will be documented in this file.
 - Implemented multi-image validation by mapping `ImageFieldValidator` across lists.
 - Added support for aggregate upload progress and bulk image deletion.
 
-
 ## 1.3.1
 
 ### Mar 13, 2026
@@ -26,7 +32,6 @@ All notable changes to this project will be documented in this file.
 - Introduced `MultiEnumOptionCubit` to manage multi-selection state.
 - Improved form example with checkbox group, radio group, and better Cubit usage.
 - Minor fixes and consistency improvements across reusable form widgets.
-
 
 ## 1.3.0
 

@@ -5,9 +5,13 @@ void registerInputFieldsGetItDI() {
   /// View Models
   sl.registerFactory(() => DateTimeCubit());
   sl.registerFactory(() => TextFieldCubit());
-  sl.registerFactory(() => ImageFieldCubit());
   sl.registerFactory(() => SwitchCubit());
   sl.registerFactory(() => ToggleCubit());
   sl.registerFactory(() => EnumOptionCubit());
+  sl.registerFactory(() => VideoFieldCubit());
+  sl.registerFactory(() => AudioFieldCubit());
+  sl.registerFactory(() => DocFieldCubit());
+  sl.registerFactory(() => ImageFieldCubit());
+  sl.registerFactory(() => ListImageFieldCubit());
   // sl.registerFactory(() => SearchFieldCubit());
 }

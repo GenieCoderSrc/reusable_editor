@@ -5,7 +5,7 @@ A flexible and modular file management and form handling package for Flutter, su
 ## Features
 
 * Abstract interfaces for clean architecture
-* Cubits for managing form states (e.g., image, switch, dropdown, text field, multi-select)
+* Cubits for managing form states (e.g., image, audio, video, document, switch, dropdown, text field, multi-select)
 * Complete set of reusable form field widgets
 * Extensions for asset loading as `File` and `Uint8List`
 * Enum-based dropdown and multi-select checkbox groups with icon and label support
@@ -56,6 +56,9 @@ Full usage guides available at:
 * `DateTimeCubit` - Manages date selection
 * `ImageFieldCubit` - Handles image pick logic and validation
 * `ListImageFieldCubit` - Handles multiple image selection and bulk upload tracking
+* `AudioFieldCubit` - Handles audio pick logic, upload progress, and validation
+* `VideoFieldCubit` - Handles video pick logic, upload progress, and validation
+* `DocFieldCubit` - Handles document pick logic, upload progress, and validation
 * `EnumOptionCubit<T>` - Dropdown selection with generic enum
 * `MultiEnumOptionCubit<T>` - Multi-select enum field management
 * `SwitchCubit` - Toggle logic
@@ -116,6 +119,18 @@ AppRadioGroup<String>(
 // File picker
 final imageCubit = ImageFieldCubit();
 AppFilePicker(cubit: imageCubit, labelText: 'Pick Image');
+
+// Audio picker
+final audioCubit = AudioFieldCubit();
+// Use with your preferred picker and call: audioCubit.selectAudio(pickedFile);
+
+// Video picker
+final videoCubit = VideoFieldCubit();
+// Use with your preferred picker and call: videoCubit.selectVideo(pickedFile);
+
+// Document picker
+final docCubit = DocFieldCubit();
+// Use with your preferred picker and call: docCubit.selectDoc(pickedFile);
 ```
 
 ### Dropdown with Enum

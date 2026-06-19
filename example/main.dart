@@ -48,6 +48,9 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
 
   final ImageFieldCubit _imageCubit = ImageFieldCubit();
   final ListImageFieldCubit _listImageCubit = ListImageFieldCubit();
+  final AudioFieldCubit _audioCubit = AudioFieldCubit();
+  final VideoFieldCubit _videoCubit = VideoFieldCubit();
+  final DocFieldCubit _docCubit = DocFieldCubit();
 
   final ToggleCubit _checkboxCubit = ToggleCubit(
     initialValue: false,
@@ -93,6 +96,9 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
     _sourceCubit.close();
     _imageCubit.close();
     _listImageCubit.close();
+    _audioCubit.close();
+    _videoCubit.close();
+    _docCubit.close();
     _rolesCubit.close();
     _genderCubit.close();
     super.dispose();
@@ -211,75 +217,153 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
                   icon: const Icon(Icons.photo_library),
                   label: const Text('Multi Pick'),
                 ),
+                ElevatedButton.icon(
+                  onPressed: () async {
+                    final XFile? pickedFile = await 'assets/sample.mp3'
+                        .loadAsXFile();
+                    if (pickedFile != null) {
+                      _audioCubit.selectAudio(pickedFile);
+                    }
+                  },
+                  icon: const Icon(Icons.audiotrack),
+                  label: const Text('Audio Pick'),
+                ),
+                ElevatedButton.icon(
+                  onPressed: () async {
+                    final XFile? pickedFile = await 'assets/sample.mp4'
+                        .loadAsXFile();
+                    if (pickedFile != null) {
+                      _videoCubit.selectVideo(pickedFile);
+                    }
+                  },
+                  icon: const Icon(Icons.video_collection),
+                  label: const Text('Video Pick'),
+                ),
+                ElevatedButton.icon(
+                  onPressed: () async {
+                    final XFile? pickedFile = await 'assets/sample.pdf'
+                        .loadAsXFile();
+                    if (pickedFile != null) {
+                      _docCubit.selectDoc(pickedFile);
+                    }
+                  },
+                  icon: const Icon(Icons.description),
+                  label: const Text('Doc Pick'),
+                ),
               ],
             ),
 
             const SizedBox(height: 16),
 
-            Row(
+            Wrap(
+              spacing: 20,
+              runSpacing: 20,
               children: [
-                Expanded(
-                  child: BlocBuilder<ImageFieldCubit, ImageFieldState>(
-                    bloc: _imageCubit,
-                    builder: (context, state) {
-                      final XFile? pickedFile = state.pickedFile;
-                      if (pickedFile != null) {
-                        return Column(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: Image.file(
-                                File(pickedFile.path),
-                                height: 80,
-                                width: 80,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            const Text(
-                              'Single',
-                              style: TextStyle(fontSize: 10),
-                            ),
-                          ],
-                        );
-                      }
-                      return const Text('No single image');
-                    },
-                  ),
+                _buildUploadPreview(
+                  cubit: _imageCubit,
+                  label: 'Image',
+                  builder: (state) {
+                    final XFile? pickedFile = state.pickedFile;
+                    if (pickedFile != null) {
+                      return ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.file(
+                          File(pickedFile.path),
+                          height: 80,
+                          width: 80,
+                          fit: BoxFit.cover,
+                        ),
+                      );
+                    }
+                    return const SizedBox(
+                      width: 80,
+                      height: 80,
+                      child: Center(child: Text('No image')),
+                    );
+                  },
                 ),
-                const SizedBox(width: 20),
-                Expanded(
-                  child: BlocBuilder<ListImageFieldCubit, ListImageFieldState>(
-                    bloc: _listImageCubit,
-                    builder: (context, state) {
-                      final pickedFiles = state.pickedFiles;
-                      if (pickedFiles != null && pickedFiles.isNotEmpty) {
-                        return Column(
-                          children: [
-                            Wrap(
-                              spacing: 4,
-                              children: pickedFiles
-                                  .map(
-                                    (file) => ClipRRect(
-                                      borderRadius: BorderRadius.circular(4),
-                                      child: Image.file(
-                                        File(file.path),
-                                        height: 40,
-                                        width: 40,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  )
-                                  .toList(),
-                            ),
-                            const Text('Multi', style: TextStyle(fontSize: 10)),
-                          ],
-                        );
-                      }
-                      return const Text('No multi images');
-                    },
-                  ),
+                _buildUploadPreview(
+                  cubit: _audioCubit,
+                  label: 'Audio',
+                  builder: (state) {
+                    return Icon(
+                      state.pickedFile != null
+                          ? Icons.music_note
+                          : Icons.mic_off,
+                      size: 80,
+                      color: state.pickedFile != null
+                          ? Colors.blue
+                          : Colors.grey,
+                    );
+                  },
+                ),
+                _buildUploadPreview(
+                  cubit: _videoCubit,
+                  label: 'Video',
+                  builder: (state) {
+                    return Icon(
+                      state.pickedFile != null
+                          ? Icons.movie
+                          : Icons.videocam_off,
+                      size: 80,
+                      color: state.pickedFile != null
+                          ? Colors.red
+                          : Colors.grey,
+                    );
+                  },
+                ),
+                _buildUploadPreview(
+                  cubit: _docCubit,
+                  label: 'Document',
+                  builder: (state) {
+                    return Icon(
+                      state.pickedFile != null
+                          ? Icons.insert_drive_file
+                          : Icons.file_present,
+                      size: 80,
+                      color: state.pickedFile != null
+                          ? Colors.green
+                          : Colors.grey,
+                    );
+                  },
                 ),
               ],
+            ),
+
+            const SizedBox(height: 16),
+
+            BlocBuilder<ListImageFieldCubit, ListImageFieldState>(
+              bloc: _listImageCubit,
+              builder: (context, state) {
+                final pickedFiles = state.pickedFiles;
+                if (pickedFiles.isNotEmpty) {
+                  return Column(
+                    children: [
+                      Wrap(
+                        spacing: 4,
+                        children: pickedFiles
+                            .map(
+                              (file) => ClipRRect(
+                                borderRadius: BorderRadius.circular(4),
+                                child: Image.file(
+                                  File(file.path),
+                                  height: 40,
+                                  width: 40,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            )
+                            .toList(),
+                      ),
+                      const Text(
+                        'Multi Images',
+                        style: TextStyle(fontSize: 10),
+                      ),
+                    ],
+                  );
+                }
+                return const Text('No multi images');
+              },
             ),
 
             const Divider(height: 40),
@@ -374,6 +458,10 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
       _datePickerCubit.validate(),
       _timePickerCubit.validate(),
       _switchCubit.validate(),
+      _imageCubit.validate(),
+      _audioCubit.validate(),
+      _videoCubit.validate(),
+      _docCubit.validate(),
     ].every((error) => error == null);
 
     final selectedRoles = _rolesCubit.selectedTypes
@@ -387,5 +475,23 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
     ScaffoldMessenger.of(
       context,
     ).showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  Widget _buildUploadPreview({
+    required dynamic cubit,
+    required String label,
+    required Widget Function(dynamic state) builder,
+  }) {
+    return Column(
+      children: [
+        BlocBuilder(
+          bloc: cubit,
+          builder: (context, state) {
+            return builder(state);
+          },
+        ),
+        Text(label, style: const TextStyle(fontSize: 10)),
+      ],
+    );
   }
 }
