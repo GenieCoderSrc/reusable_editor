@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 - Added `VideoFieldCubit` and `VideoFieldState` to support video upload and deletion with progress tracking.
 - Added `AudioFieldCubit` and `AudioFieldState` to support audio upload and deletion with progress tracking.
 - Added `DocFieldCubit` and `DocFieldState` to support document upload and deletion with progress tracking.
+- Updated `ListImageFieldCubit` and `ImageFieldCubit` to support multiple image uploads and validation.
 
 ## 1.3.2
 
