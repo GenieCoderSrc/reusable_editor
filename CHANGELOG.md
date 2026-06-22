@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.3.4
+
+### Jun 22, 2026
+
+### ✨ Deleted
+
+- Removed `AppFilePicker` since, `image_picker_adapter` already have same features as `AppImagePicker`.
+- Removed `file_picker` dependency, since we removed the `AppFilePicker` and the dependency is not uses anymore.
+
+
 ## 1.3.3
 
 ### Jun 18, 2026
