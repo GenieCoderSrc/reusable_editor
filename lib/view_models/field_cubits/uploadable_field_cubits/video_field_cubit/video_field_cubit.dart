@@ -28,7 +28,7 @@ class VideoFieldCubit extends UploadableFieldCubit<VideoFieldState> {
     emit(state.copyWith(uploadProgress: normalizeProgress(progress)));
   }
 
-  void finishUpload(String videoUrl) {
+  void finishUpload({required String videoUrl}) {
     emit(
       state.copyWith(
         videoUrl: videoUrl,
@@ -40,7 +40,7 @@ class VideoFieldCubit extends UploadableFieldCubit<VideoFieldState> {
     );
   }
 
-  void failUpload(String error) {
+  void failUpload({String? error}) {
     emit(state.copyWith(error: error, isUploading: false, uploadProgress: 0));
   }
 
@@ -60,7 +60,7 @@ class VideoFieldCubit extends UploadableFieldCubit<VideoFieldState> {
     );
   }
 
-  void failDelete(String error) {
+  void failDelete({String? error}) {
     emit(state.copyWith(error: error, isDeleting: false));
   }
 

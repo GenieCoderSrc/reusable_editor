@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.3.5
+
+### Jun 22, 2026
+
+### ✨ Updated
+
+- Updated `UploadableFieldCubits` method arguments as optional parameter.
+
+
 ## 1.3.4
 
 ### Jun 22, 2026

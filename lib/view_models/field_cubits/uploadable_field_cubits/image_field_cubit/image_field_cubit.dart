@@ -28,10 +28,10 @@ class ImageFieldCubit extends UploadableFieldCubit<ImageFieldState> {
     emit(state.copyWith(uploadProgress: normalizeProgress(progress)));
   }
 
-  void finishUpload(String imageUrl) {
+  void finishUpload({required String imgUrl}) {
     emit(
       state.copyWith(
-        imageUrl: imageUrl,
+        imageUrl: imgUrl,
         error: null,
         isUploading: false,
         uploadProgress: 1,
@@ -40,7 +40,7 @@ class ImageFieldCubit extends UploadableFieldCubit<ImageFieldState> {
     );
   }
 
-  void failUpload(String error) {
+  void failUpload({String? error}) {
     emit(state.copyWith(error: error, isUploading: false, uploadProgress: 0));
   }
 
@@ -60,7 +60,7 @@ class ImageFieldCubit extends UploadableFieldCubit<ImageFieldState> {
     );
   }
 
-  void failDelete(String error) {
+  void failDelete({String? error}) {
     emit(state.copyWith(error: error, isDeleting: false));
   }
 

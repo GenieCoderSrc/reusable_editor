@@ -30,10 +30,10 @@ class ListImageFieldCubit extends UploadableFieldCubit<ListImageFieldState> {
     emit(state.copyWith(uploadProgress: normalizeProgress(progress)));
   }
 
-  void finishUpload(String imageUrl) {
+  void finishUpload({required String imgUrl}) {
     emit(
       state.copyWith(
-        imageUrls: [...state.imageUrls, imageUrl],
+        imageUrls: [...state.imageUrls, imgUrl],
         isUploading: false,
         uploadProgress: 1,
         error: null,
@@ -45,10 +45,10 @@ class ListImageFieldCubit extends UploadableFieldCubit<ListImageFieldState> {
     emit(state.copyWith(isDeleting: true));
   }
 
-  void finishDelete(String imageUrl) {
+  void finishDelete({String? imgUrl}) {
     emit(
       state.copyWith(
-        imageUrls: state.imageUrls.where((e) => e != imageUrl).toList(),
+        imageUrls: state.imageUrls.where((e) => e != imgUrl).toList(),
         isDeleting: false,
       ),
     );

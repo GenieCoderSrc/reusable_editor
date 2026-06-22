@@ -28,7 +28,7 @@ class DocFieldCubit extends UploadableFieldCubit<DocFieldState> {
     emit(state.copyWith(uploadProgress: normalizeProgress(progress)));
   }
 
-  void finishUpload(String docUrl) {
+  void finishUpload({required String docUrl}) {
     emit(
       state.copyWith(
         docUrl: docUrl,
@@ -40,7 +40,7 @@ class DocFieldCubit extends UploadableFieldCubit<DocFieldState> {
     );
   }
 
-  void failUpload(String error) {
+  void failUpload({String? error}) {
     emit(state.copyWith(error: error, isUploading: false, uploadProgress: 0));
   }
 
@@ -60,7 +60,7 @@ class DocFieldCubit extends UploadableFieldCubit<DocFieldState> {
     );
   }
 
-  void failDelete(String error) {
+  void failDelete({String? error}) {
     emit(state.copyWith(error: error, isDeleting: false));
   }
 

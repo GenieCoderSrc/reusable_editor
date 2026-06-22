@@ -28,7 +28,7 @@ class AudioFieldCubit extends UploadableFieldCubit<AudioFieldState> {
     emit(state.copyWith(uploadProgress: normalizeProgress(progress)));
   }
 
-  void finishUpload(String audioUrl) {
+  void finishUpload({required String audioUrl}) {
     emit(
       state.copyWith(
         audioUrl: audioUrl,
@@ -40,7 +40,7 @@ class AudioFieldCubit extends UploadableFieldCubit<AudioFieldState> {
     );
   }
 
-  void failUpload(String error) {
+  void failUpload({String? error}) {
     emit(state.copyWith(error: error, isUploading: false, uploadProgress: 0));
   }
 
@@ -60,7 +60,7 @@ class AudioFieldCubit extends UploadableFieldCubit<AudioFieldState> {
     );
   }
 
-  void failDelete(String error) {
+  void failDelete({String? error}) {
     emit(state.copyWith(error: error, isDeleting: false));
   }
 
