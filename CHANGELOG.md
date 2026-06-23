@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.3.6
+
+### Jun 23, 2026
+
+### ♻️ Refactored
+
+- Renamed `file` to `pickedFile` in `ImageFieldCubit`.
+- Renamed `imgUrl` to `imageUrl` in `ImageFieldCubit`.
+- Renamed `files` to `pickedFiles` in `ListImageFieldCubit`.
+- Renamed `imgUrls` to `imageUrls` in `ListImageFieldCubit`.
+
 ## 1.3.5
 
 ### Jun 22, 2026
@@ -10,16 +21,16 @@ All notable changes to this project will be documented in this file.
 
 - Updated `UploadableFieldCubits` method arguments as optional parameter.
 
-
 ## 1.3.4
 
 ### Jun 22, 2026
 
 ### ✨ Deleted
 
-- Removed `AppFilePicker` since, `image_picker_adapter` already have same features as `AppImagePicker`.
-- Removed `file_picker` dependency, since we removed the `AppFilePicker` and the dependency is not uses anymore.
-
+- Removed `AppFilePicker` since, `image_picker_adapter` already have same features as
+  `AppImagePicker`.
+- Removed `file_picker` dependency, since we removed the `AppFilePicker` and the dependency is not
+  uses anymore.
 
 ## 1.3.3
 
@@ -27,10 +38,14 @@ All notable changes to this project will be documented in this file.
 
 ### ✨ Added
 
-- Added `VideoFieldCubit` and `VideoFieldState` to support video upload and deletion with progress tracking.
-- Added `AudioFieldCubit` and `AudioFieldState` to support audio upload and deletion with progress tracking.
-- Added `DocFieldCubit` and `DocFieldState` to support document upload and deletion with progress tracking.
-- Updated `ListImageFieldCubit` and `ImageFieldCubit` to support multiple image uploads and validation.
+- Added `VideoFieldCubit` and `VideoFieldState` to support video upload and deletion with progress
+  tracking.
+- Added `AudioFieldCubit` and `AudioFieldState` to support audio upload and deletion with progress
+  tracking.
+- Added `DocFieldCubit` and `DocFieldState` to support document upload and deletion with progress
+  tracking.
+- Updated `ListImageFieldCubit` and `ImageFieldCubit` to support multiple image uploads and
+  validation.
 
 ## 1.3.2
 
@@ -38,7 +53,8 @@ All notable changes to this project will be documented in this file.
 
 ### ✨ Added
 
-- Added `ListImageFieldCubit` and `ListImageFieldState` to support multiple image uploads and validation.
+- Added `ListImageFieldCubit` and `ListImageFieldState` to support multiple image uploads and
+  validation.
 - Implemented multi-image validation by mapping `ImageFieldValidator` across lists.
 - Added support for aggregate upload progress and bulk image deletion.
 - Updated `DropdownButtonFormField` deprecated `value` property to `initialValue`.
@@ -211,7 +227,8 @@ All notable changes to this project will be documented in this file.
 ### ♻️ Updated
 
 * Improved `ImageFieldCubit` to support upload and delete state management.
-* Added `uploadProgress`, `isUploading`, and `isDeleting` to `ImageFieldState` for improved image operation tracking and
+* Added `uploadProgress`, `isUploading`, and `isDeleting` to `ImageFieldState` for improved image
+  operation tracking and
   user feedback in forms.
 
 ## 1.1.4
@@ -222,24 +239,34 @@ All notable changes to this project will be documented in this file.
 
 - Usages `ImageFieldState` in the `ImageFieldCubit`.
 
-* `base_bloc.dart`: Introduced a foundational abstract class for all BLoCs. This class enforces the use of a common
-  state that extends `BaseState`, encouraging consistency and reusability across all business logic components.
+* `base_bloc.dart`: Introduced a foundational abstract class for all BLoCs. This class enforces the
+  use of a common
+  state that extends `BaseState`, encouraging consistency and reusability across all business logic
+  components.
 
-* `base_state.dart`: Defined an abstract base state that all Cubit or Bloc states should extend. It encapsulates a
-  `FormSubmissionStatus` to track form states (e.g., loading, success, failure), aligning with the Single Responsibility
+* `base_state.dart`: Defined an abstract base state that all Cubit or Bloc states should extend. It
+  encapsulates a
+  `FormSubmissionStatus` to track form states (e.g., loading, success, failure), aligning with the
+  Single Responsibility
   Principle.
 
-* `form_submission_status.dart`: Added sealed classes to represent the different statuses of form submission: initial,
-  submitting, success, and failed. These classes ensure clear and maintainable handling of form-related logic, and
+* `form_submission_status.dart`: Added sealed classes to represent the different statuses of form
+  submission: initial,
+  submitting, success, and failed. These classes ensure clear and maintainable handling of
+  form-related logic, and
   provide extensibility for future states.
 
-* `loading_cubit.dart`: Implemented a dedicated `Cubit` to manage general-purpose loading states across the app. This
+* `loading_cubit.dart`: Implemented a dedicated `Cubit` to manage general-purpose loading states
+  across the app. This
   promotes separation of concerns by delegating loading logic to its own class.
 
-* `loading_state.dart`: Introduced a strongly-typed state system for `LoadingCubit`, including `LoadingInitial`,
-  `LoadingInProgress`, and `LoadingError`. This supports more expressive and testable UI loading feedback.
+* `loading_state.dart`: Introduced a strongly-typed state system for `LoadingCubit`, including
+  `LoadingInitial`,
+  `LoadingInProgress`, and `LoadingError`. This supports more expressive and testable UI loading
+  feedback.
 
-These additions were created following SOLID principles and ensure a clean architecture approach for scalable and
+These additions were created following SOLID principles and ensure a clean architecture approach for
+scalable and
 maintainable Flutter applications.
 
 ## 1.1.3
@@ -272,7 +299,8 @@ maintainable Flutter applications.
 
 ♻️ Refactored
 
-- Added `formFieldValidator` getter to `FieldCubit<T>` to provide a reusable Flutter form validator callback without
+- Added `formFieldValidator` getter to `FieldCubit<T>` to provide a reusable Flutter form validator
+  callback without
   duplicating validation logic.
 
 ## 1.0.9
@@ -296,7 +324,8 @@ maintainable Flutter applications.
     * Modern `ToggleCubit` instead of `SwitchCubit`.
     * Unified form field cubit usage.
     * `validate()` pattern on all `FieldCubit<T>` instances.
-    * Usage of `EnumOptionDropDownMenuFormField`, `AppCheckbox`, `AppTextField`, `AppDatePicker`, etc.
+    * Usage of `EnumOptionDropDownMenuFormField`, `AppCheckbox`, `AppTextField`, `AppDatePicker`,
+      etc.
 
 ## 1.0.8
 
@@ -344,7 +373,8 @@ maintainable Flutter applications.
 
 * **Removed `ImagePickerCubit`** registration and BlocProvider setup from `reusable_editor`.
 * **Decoupled image picking functionality**:
-    * `reusable_editor` no longer handles or depends on image picking, cropping, or compressing logic.
+    * `reusable_editor` no longer handles or depends on image picking, cropping, or compressing
+      logic.
     * All related logic has been moved to the independent package `reusable_image_widget`.
 
 ### 🔄 Migration Note
@@ -355,7 +385,8 @@ If you were using `ImagePickerCubit` or image-related widgets in `reusable_edito
 - Register its dependencies using `registerReusableImageWidgetDependencies()`.
 - Include `ImagePickerCubit` in your widget tree using `reusableImageWidgetBlocProviders`.
 
-✅ This makes `reusable_editor` cleaner, more modular, and focused strictly on form field editors and reusable input
+✅ This makes `reusable_editor` cleaner, more modular, and focused strictly on form field editors and
+reusable input
 Cubits.
 
 ## 1.0.4

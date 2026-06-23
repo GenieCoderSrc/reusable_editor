@@ -3,18 +3,18 @@ import 'dart:io';
 import 'package:cross_file/cross_file.dart';
 import 'package:i_validator/i_validator.dart';
 import 'package:reusable_editor/type_def/type_def.dart';
-import 'package:reusable_editor/view_models/field_cubits/uploadable_field_cubits/base/uploadable_field_cubit.dart';
+import 'package:reusable_editor/view_models/uploadable_field_cubits/base/uploadable_field_cubit.dart';
 
-part 'image_field_state.dart';
+part 'doc_field_state.dart';
 
-class ImageFieldCubit extends UploadableFieldCubit<ImageFieldState> {
+class DocFieldCubit extends UploadableFieldCubit<DocFieldState> {
   final ImageFieldValidator validator;
 
-  ImageFieldCubit({ImageFieldValidator? validator})
-    : validator = validator ?? ((file) => file?.validateImageFile()),
-      super(const ImageFieldState());
+  DocFieldCubit({ImageFieldValidator? validator})
+    : validator = validator ?? ((file) => file?.validateDocumentFile()),
+      super(const DocFieldState());
 
-  void selectImage(XFile? file) {
+  void selectDoc(XFile? file) {
     emit(
       state.copyWith(pickedFile: file, error: validator(file), isDirty: true),
     );
@@ -28,10 +28,10 @@ class ImageFieldCubit extends UploadableFieldCubit<ImageFieldState> {
     emit(state.copyWith(uploadProgress: normalizeProgress(progress)));
   }
 
-  void finishUpload({required String imgUrl}) {
+  void finishUpload({required String docUrl}) {
     emit(
       state.copyWith(
-        imageUrl: imgUrl,
+        docUrl: docUrl,
         error: null,
         isUploading: false,
         uploadProgress: 1,
@@ -52,7 +52,7 @@ class ImageFieldCubit extends UploadableFieldCubit<ImageFieldState> {
     emit(
       state.copyWith(
         pickedFile: null,
-        imageUrl: null,
+        docUrl: null,
         error: null,
         isDeleting: false,
         isDirty: true,
@@ -77,6 +77,6 @@ class ImageFieldCubit extends UploadableFieldCubit<ImageFieldState> {
   }
 
   void clear() {
-    emit(const ImageFieldState());
+    emit(const DocFieldState());
   }
 }
