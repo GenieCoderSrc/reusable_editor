@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:cross_file/cross_file.dart';
 import 'package:i_validator/i_validator.dart';
 import 'package:reusable_editor/type_def/type_def.dart';
-import 'package:reusable_editor/view_models/field_cubits/uploadable_field_cubits/base/uploadable_field_cubit.dart';
+import 'package:reusable_editor/view_models/uploadable_field_cubits/base/uploadable_field_cubit.dart';
 
 part 'audio_field_state.dart';
 

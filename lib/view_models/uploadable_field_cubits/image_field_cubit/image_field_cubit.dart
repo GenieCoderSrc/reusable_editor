@@ -3,20 +3,25 @@ import 'dart:io';
 import 'package:cross_file/cross_file.dart';
 import 'package:i_validator/i_validator.dart';
 import 'package:reusable_editor/type_def/type_def.dart';
-import 'package:reusable_editor/view_models/field_cubits/uploadable_field_cubits/base/uploadable_field_cubit.dart';
+import 'package:reusable_editor/view_models/uploadable_field_cubits/base/uploadable_field_cubit.dart';
 
-part 'doc_field_state.dart';
+part 'image_field_state.dart';
 
-class DocFieldCubit extends UploadableFieldCubit<DocFieldState> {
+class ImageFieldCubit extends UploadableFieldCubit<ImageFieldState> {
   final ImageFieldValidator validator;
 
-  DocFieldCubit({ImageFieldValidator? validator})
-    : validator = validator ?? ((file) => file?.validateDocumentFile()),
-      super(const DocFieldState());
+  ImageFieldCubit({ImageFieldValidator? validator})
+    : validator =
+          validator ?? ((pickedFile) => pickedFile?.validateImageFile()),
+      super(const ImageFieldState());
 
-  void selectDoc(XFile? file) {
+  void selectImage(XFile? pickedFile) {
     emit(
-      state.copyWith(pickedFile: file, error: validator(file), isDirty: true),
+      state.copyWith(
+        pickedFile: pickedFile,
+        error: validator(pickedFile),
+        isDirty: true,
+      ),
     );
   }
 
@@ -28,10 +33,10 @@ class DocFieldCubit extends UploadableFieldCubit<DocFieldState> {
     emit(state.copyWith(uploadProgress: normalizeProgress(progress)));
   }
 
-  void finishUpload({required String docUrl}) {
+  void finishUpload({required String imageUrl}) {
     emit(
       state.copyWith(
-        docUrl: docUrl,
+        imageUrl: imageUrl,
         error: null,
         isUploading: false,
         uploadProgress: 1,
@@ -52,7 +57,7 @@ class DocFieldCubit extends UploadableFieldCubit<DocFieldState> {
     emit(
       state.copyWith(
         pickedFile: null,
-        docUrl: null,
+        imageUrl: null,
         error: null,
         isDeleting: false,
         isDirty: true,
@@ -77,6 +82,6 @@ class DocFieldCubit extends UploadableFieldCubit<DocFieldState> {
   }
 
   void clear() {
-    emit(const DocFieldState());
+    emit(const ImageFieldState());
   }
 }

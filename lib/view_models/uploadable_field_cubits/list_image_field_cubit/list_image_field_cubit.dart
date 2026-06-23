@@ -1,7 +1,7 @@
 import 'package:cross_file/cross_file.dart';
 import 'package:i_validator/i_validator.dart';
 import 'package:reusable_editor/type_def/type_def.dart';
-import 'package:reusable_editor/view_models/field_cubits/uploadable_field_cubits/base/uploadable_field_cubit.dart';
+import 'package:reusable_editor/view_models/uploadable_field_cubits/base/uploadable_field_cubit.dart';
 
 part 'list_image_field_state.dart';
 
@@ -9,14 +9,15 @@ class ListImageFieldCubit extends UploadableFieldCubit<ListImageFieldState> {
   final ListImageValidator validator;
 
   ListImageFieldCubit({ListImageValidator? validator})
-    : validator = validator ?? ((files) => files?.validateImageFiles()),
+    : validator =
+          validator ?? ((pickedFiles) => pickedFiles?.validateImageFiles()),
       super(const ListImageFieldState());
 
-  void selectImages(List<XFile> files) {
+  void selectImages(List<XFile>? pickedFiles) {
     emit(
       state.copyWith(
-        pickedFiles: files,
-        error: validator(files),
+        pickedFiles: pickedFiles,
+        error: validator(pickedFiles),
         isDirty: true,
       ),
     );
@@ -30,10 +31,10 @@ class ListImageFieldCubit extends UploadableFieldCubit<ListImageFieldState> {
     emit(state.copyWith(uploadProgress: normalizeProgress(progress)));
   }
 
-  void finishUpload({required String imgUrl}) {
+  void finishUpload({required String imageUrls}) {
     emit(
       state.copyWith(
-        imageUrls: [...state.imageUrls, imgUrl],
+        imageUrls: [...state.imageUrls, imageUrls],
         isUploading: false,
         uploadProgress: 1,
         error: null,
@@ -45,10 +46,10 @@ class ListImageFieldCubit extends UploadableFieldCubit<ListImageFieldState> {
     emit(state.copyWith(isDeleting: true));
   }
 
-  void finishDelete({String? imgUrl}) {
+  void finishDelete({String? imageUrl}) {
     emit(
       state.copyWith(
-        imageUrls: state.imageUrls.where((e) => e != imgUrl).toList(),
+        imageUrls: state.imageUrls.where((e) => e != imageUrl).toList(),
         isDeleting: false,
       ),
     );
