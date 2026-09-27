@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.3.7
+
+### Sep 26, 2026
+
+### ✨ Updated
+
+- Updated `equatable` to 3.0.0
+- Updated `intl` to 0.20.3
+- Updated `cross_file` to 0.4.0
+
 ## 1.3.6
 
 ### Jun 23, 2026
