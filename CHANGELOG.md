@@ -4,7 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## 1.3.7
 
-### Sep 26, 2026
+### Sep 27, 2026
+
+### 🐛 Fixed
+
+- Fixed `XFile` path access in `main.dart` and various `UploadableFieldState` implementations (Audio, Doc, Image, Video) to support newer `cross_file` package changes.
 
 ### ✨ Updated
 
