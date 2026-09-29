@@ -18,7 +18,6 @@ dependencies:
   i_validator: ^1.2.0
   get_it_di_global_variable: ^0.0.8
 
-
 #  3rd party packages
   provider: ^6.1.5+1
   path_provider: ^2.1.6
