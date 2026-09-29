@@ -27,7 +27,7 @@ extension AssetToXFileExtension on String {
       // Write bytes to file (flush ensures it's written fully)
       await file.writeAsBytes(bytes, flush: true);
 
-      return XFile(file.path);
+      return XFile.fileSystem(path:file.path);
     } catch (e, stackTrace) {
       debugPrint('❌ AssetToXFileExtension | loadAsXFile | Error: $e');
       debugPrintStack(stackTrace: stackTrace);

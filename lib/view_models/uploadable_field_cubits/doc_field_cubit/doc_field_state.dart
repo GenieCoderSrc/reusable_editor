@@ -14,9 +14,17 @@ class DocFieldState extends UploadableFieldState {
     super.isDirty,
   });
 
-  bool get hasLocalDoc => pickedFile?.path.isNotEmpty == true;
+  bool get hasLocalDoc => pickedFile == null 
+      ? false 
+      : ((pickedFile is FileSystemXFile) 
+          ? (pickedFile as FileSystemXFile).path.isNotEmpty 
+          : Uri.parse(pickedFile!.uri).path.isNotEmpty);
   bool get hasUploadedDoc => docUrl?.isNotEmpty == true;
-  File? get docFile => pickedFile == null ? null : File(pickedFile!.path);
+  File? get docFile => pickedFile == null 
+      ? null 
+      : File((pickedFile is FileSystemXFile) 
+          ? (pickedFile as FileSystemXFile).path 
+          : Uri.parse(pickedFile!.uri).path);
 
   DocFieldState copyWith({
     Object? pickedFile = _sentinel,
