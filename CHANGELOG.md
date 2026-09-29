@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.3.7
+
+### Sep 29, 2026
+
+### ✨ Updated
+
+- Updated `intl to ^0.20.3`
+- Updated `equatable to ^3.0.0`
+
 ## 1.3.6
 
 ### Jun 23, 2026
