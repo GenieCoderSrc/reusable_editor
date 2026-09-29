@@ -14,11 +14,19 @@ class VideoFieldState extends UploadableFieldState {
     super.isDirty,
   });
 
-  bool get hasLocalVideo => pickedFile?.path.isNotEmpty == true;
+  bool get hasLocalVideo => pickedFile == null 
+      ? false 
+      : ((pickedFile is FileSystemXFile) 
+          ? (pickedFile as FileSystemXFile).path.isNotEmpty 
+          : Uri.parse(pickedFile!.uri).path.isNotEmpty);
 
   bool get hasUploadedVideo => videoUrl?.isNotEmpty == true;
 
-  File? get videoFile => pickedFile == null ? null : File(pickedFile!.path);
+  File? get videoFile => pickedFile == null 
+      ? null 
+      : File((pickedFile is FileSystemXFile) 
+          ? (pickedFile as FileSystemXFile).path 
+          : Uri.parse(pickedFile!.uri).path);
 
   VideoFieldState copyWith({
     Object? pickedFile = _sentinel,
