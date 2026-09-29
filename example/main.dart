@@ -268,11 +268,7 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
                       return ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: Image.file(
-                          File(
-                            (pickedFile is FileSystemXFile)
-                                ? (pickedFile).path
-                                : Uri.parse(pickedFile.uri).path,
-                          ),
+                          File(pickedFile.path),
                           height: 80,
                           width: 80,
                           fit: BoxFit.cover,
@@ -350,11 +346,7 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
                               (file) => ClipRRect(
                                 borderRadius: BorderRadius.circular(4),
                                 child: Image.file(
-                                  File(
-                                    (file is FileSystemXFile)
-                                        ? (file as FileSystemXFile).path
-                                        : Uri.parse(file.uri).path,
-                                  ),
+                                  File(file.path),
                                   height: 40,
                                   width: 40,
                                   fit: BoxFit.cover,

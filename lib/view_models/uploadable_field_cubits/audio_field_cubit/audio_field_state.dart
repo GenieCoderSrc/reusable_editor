@@ -14,19 +14,11 @@ class AudioFieldState extends UploadableFieldState {
     super.isDirty,
   });
 
-  bool get hasLocalAudio => pickedFile == null 
-      ? false 
-      : ((pickedFile is FileSystemXFile) 
-          ? (pickedFile as FileSystemXFile).path.isNotEmpty 
-          : Uri.parse(pickedFile!.uri).path.isNotEmpty);
+  bool get hasLocalAudio => pickedFile?.path.isNotEmpty == true;
 
   bool get hasUploadedAudio => audioUrl?.isNotEmpty == true;
 
-  File? get audioFile => pickedFile == null 
-      ? null 
-      : File((pickedFile is FileSystemXFile) 
-          ? (pickedFile as FileSystemXFile).path 
-          : Uri.parse(pickedFile!.uri).path);
+  File? get audioFile => pickedFile == null ? null : File(pickedFile!.path);
 
   AudioFieldState copyWith({
     Object? pickedFile = _sentinel,

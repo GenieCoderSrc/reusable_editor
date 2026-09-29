@@ -14,19 +14,11 @@ class ImageFieldState extends UploadableFieldState {
     super.isDirty,
   });
 
-  bool get hasLocalImage => pickedFile == null 
-      ? false 
-      : ((pickedFile is FileSystemXFile) 
-          ? (pickedFile as FileSystemXFile).path.isNotEmpty 
-          : Uri.parse(pickedFile!.uri).path.isNotEmpty);
+  bool get hasLocalImage => pickedFile?.path.isNotEmpty == true;
 
   bool get hasUploadedImage => imageUrl?.isNotEmpty == true;
 
-  File? get imageFile => pickedFile == null 
-      ? null 
-      : File((pickedFile is FileSystemXFile) 
-          ? (pickedFile as FileSystemXFile).path 
-          : Uri.parse(pickedFile!.uri).path);
+  File? get imageFile => pickedFile == null ? null : File(pickedFile!.path);
 
   ImageFieldState copyWith({
     Object? pickedFile = _sentinel,
