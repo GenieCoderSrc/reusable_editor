@@ -5,7 +5,7 @@ class SwitchCubit extends FieldCubit<bool> {
   final bool _initialValue;
 
   SwitchCubit({bool super.initialValue = true, super.validator})
-    : _initialValue = initialValue;
+      : _initialValue = initialValue;
 
   /// Toggle the value or set explicitly, then validate.
   void toggle({bool? value}) {

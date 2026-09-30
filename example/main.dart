@@ -154,22 +154,18 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 8),
-
             EnumOptionDropDownMenuFormField<FileDataSourceType>(
               selectedValue: _sourceCubit.state.selectedOption,
               onChanged: _sourceCubit.selectOption,
               hint: 'Choose data source',
               dropdownItems: dropdownItems,
             ),
-
             const SizedBox(height: 24),
-
             Text(
               'Multi-Selection (Checkboxes)',
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 8),
-
             Card(
               child: Padding(
                 padding: const EdgeInsets.all(12),
@@ -180,22 +176,19 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
                 ),
               ),
             ),
-
             const SizedBox(height: 24),
-
             Text(
               'Image Picker',
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 8),
-
             Wrap(
               spacing: 10,
               children: [
                 ElevatedButton.icon(
                   onPressed: () async {
-                    final XFile? pickedFile = await 'assets/sample.png'
-                        .loadAsXFile();
+                    final XFile? pickedFile =
+                        await 'assets/sample.png'.loadAsXFile();
                     if (pickedFile != null) {
                       _imageCubit.selectImage(pickedFile);
                     }
@@ -219,8 +212,8 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
                 ),
                 ElevatedButton.icon(
                   onPressed: () async {
-                    final XFile? pickedFile = await 'assets/sample.mp3'
-                        .loadAsXFile();
+                    final XFile? pickedFile =
+                        await 'assets/sample.mp3'.loadAsXFile();
                     if (pickedFile != null) {
                       _audioCubit.selectAudio(pickedFile);
                     }
@@ -230,8 +223,8 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
                 ),
                 ElevatedButton.icon(
                   onPressed: () async {
-                    final XFile? pickedFile = await 'assets/sample.mp4'
-                        .loadAsXFile();
+                    final XFile? pickedFile =
+                        await 'assets/sample.mp4'.loadAsXFile();
                     if (pickedFile != null) {
                       _videoCubit.selectVideo(pickedFile);
                     }
@@ -241,8 +234,8 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
                 ),
                 ElevatedButton.icon(
                   onPressed: () async {
-                    final XFile? pickedFile = await 'assets/sample.pdf'
-                        .loadAsXFile();
+                    final XFile? pickedFile =
+                        await 'assets/sample.pdf'.loadAsXFile();
                     if (pickedFile != null) {
                       _docCubit.selectDoc(pickedFile);
                     }
@@ -252,9 +245,7 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
                 ),
               ],
             ),
-
             const SizedBox(height: 16),
-
             Wrap(
               spacing: 20,
               runSpacing: 20,
@@ -291,9 +282,8 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
                           ? Icons.music_note
                           : Icons.mic_off,
                       size: 80,
-                      color: state.pickedFile != null
-                          ? Colors.blue
-                          : Colors.grey,
+                      color:
+                          state.pickedFile != null ? Colors.blue : Colors.grey,
                     );
                   },
                 ),
@@ -306,9 +296,8 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
                           ? Icons.movie
                           : Icons.videocam_off,
                       size: 80,
-                      color: state.pickedFile != null
-                          ? Colors.red
-                          : Colors.grey,
+                      color:
+                          state.pickedFile != null ? Colors.red : Colors.grey,
                     );
                   },
                 ),
@@ -321,17 +310,14 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
                           ? Icons.insert_drive_file
                           : Icons.file_present,
                       size: 80,
-                      color: state.pickedFile != null
-                          ? Colors.green
-                          : Colors.grey,
+                      color:
+                          state.pickedFile != null ? Colors.green : Colors.grey,
                     );
                   },
                 ),
               ],
             ),
-
             const SizedBox(height: 16),
-
             BlocBuilder<ListImageFieldCubit, ListImageFieldState>(
               bloc: _listImageCubit,
               builder: (context, state) {
@@ -365,16 +351,12 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
                 return const Text('No multi images');
               },
             ),
-
             const Divider(height: 40),
-
             Text(
               'Standard Form Fields',
               style: Theme.of(context).textTheme.headlineSmall,
             ),
-
             const SizedBox(height: 16),
-
             AppRadioGroup<String>(
               cubit: _genderCubit,
               label: 'Select Gender',
@@ -382,41 +364,31 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
               labels: const ['Male', 'Female', 'Other'],
               activeColor: Colors.deepPurple,
             ),
-
             const SizedBox(height: 16),
-
             AppCheckbox(
               cubit: _checkboxCubit,
               label: 'Accept Terms and Conditions',
             ),
-
             const SizedBox(height: 16),
-
             AppTextField(
               bloc: _textFieldCubit,
               label: 'Name',
               hintText: 'Enter your name',
             ),
-
             const SizedBox(height: 16),
-
             AppDatePicker(
               cubit: _datePickerCubit,
               labelText: 'Select Date',
               placeholderText: 'Tap to pick a date',
               formatter: DateFormat('yyyy-MM-dd'),
             ),
-
             const SizedBox(height: 16),
-
             AppTimePicker(
               cubit: _timePickerCubit,
               labelText: 'Select Time',
               hintText: 'Tap to pick a time',
             ),
-
             const SizedBox(height: 16),
-
             AppSlider(
               cubit: _sliderCubit,
               min: 0.0,
@@ -425,13 +397,9 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
               labelText: 'Intensity Level',
               displayValue: (val) => '${(val * 100).toInt()}%',
             ),
-
             const SizedBox(height: 16),
-
             AppSwitch(cubit: _switchCubit, label: 'Enable Notifications'),
-
             const SizedBox(height: 32),
-
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
@@ -442,7 +410,6 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
                 child: const Text('Validate & Submit'),
               ),
             ),
-
             const SizedBox(height: 40),
           ],
         ),
@@ -464,9 +431,8 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
       _docCubit.validate(),
     ].every((error) => error == null);
 
-    final selectedRoles = _rolesCubit.selectedTypes
-        .map((e) => e.name)
-        .join(', ');
+    final selectedRoles =
+        _rolesCubit.selectedTypes.map((e) => e.name).join(', ');
 
     final message = isValid
         ? 'Valid! Gender: ${_genderCubit.state.value}, Roles: ${selectedRoles.isEmpty ? 'None' : selectedRoles}'

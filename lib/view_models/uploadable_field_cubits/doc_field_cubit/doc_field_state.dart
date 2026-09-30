@@ -44,12 +44,12 @@ class DocFieldState extends UploadableFieldState {
 
   @override
   List<Object?> get props => [
-    pickedFile,
-    docUrl,
-    error,
-    isUploading,
-    isDeleting,
-    uploadProgress,
-    isDirty,
-  ];
+        pickedFile,
+        docUrl,
+        error,
+        isUploading,
+        isDeleting,
+        uploadProgress,
+        isDirty,
+      ];
 }

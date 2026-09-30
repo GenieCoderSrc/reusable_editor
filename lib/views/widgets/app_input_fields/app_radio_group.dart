@@ -70,9 +70,9 @@ class AppRadioGroup<T> extends StatelessWidget {
     this.subtitleBuilder,
     this.secondaryBuilder,
   }) : assert(
-         values.length == labels.length,
-         'Values and Labels must have same length',
-       );
+          values.length == labels.length,
+          'Values and Labels must have same length',
+        );
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +83,6 @@ class AppRadioGroup<T> extends StatelessWidget {
         children: [
           Text(label, style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(height: 8),
-
           RadioGroup<T>(
             groupValue: state.value,
             onChanged: (T? newValue) {
@@ -130,8 +129,7 @@ class AppRadioGroup<T> extends StatelessWidget {
                   // If you decide to add activeColor or tileColor,
                   // check if the specific Flutter version requires WidgetStateProperty for those too.
                   // Usually, activeColor remains a plain Color, but fillColor is a Property.
-                  fillColor:
-                      fillColor ??
+                  fillColor: fillColor ??
                       (activeColor != null
                           ? WidgetStateProperty.all(activeColor)
                           : null),
@@ -141,7 +139,6 @@ class AppRadioGroup<T> extends StatelessWidget {
               }),
             ),
           ),
-
           if (state.errorText != null)
             Padding(
               padding: const EdgeInsets.only(left: 12, top: 4),

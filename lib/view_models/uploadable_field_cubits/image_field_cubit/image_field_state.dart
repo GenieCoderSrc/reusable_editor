@@ -33,9 +33,8 @@ class ImageFieldState extends UploadableFieldState {
       pickedFile: identical(pickedFile, _sentinel)
           ? this.pickedFile
           : pickedFile as XFile?,
-      imageUrl: identical(imageUrl, _sentinel)
-          ? this.imageUrl
-          : imageUrl as String?,
+      imageUrl:
+          identical(imageUrl, _sentinel) ? this.imageUrl : imageUrl as String?,
       error: identical(error, _sentinel) ? this.error : error as String?,
       isUploading: isUploading ?? this.isUploading,
       isDeleting: isDeleting ?? this.isDeleting,
@@ -48,12 +47,12 @@ class ImageFieldState extends UploadableFieldState {
 
   @override
   List<Object?> get props => [
-    pickedFile,
-    imageUrl,
-    error,
-    isUploading,
-    isDeleting,
-    uploadProgress,
-    isDirty,
-  ];
+        pickedFile,
+        imageUrl,
+        error,
+        isUploading,
+        isDeleting,
+        uploadProgress,
+        isDirty,
+      ];
 }

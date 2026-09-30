@@ -19,10 +19,10 @@ abstract class UploadableFieldState extends Equatable {
 
   @override
   List<Object?> get props => [
-    error,
-    isUploading,
-    isDeleting,
-    uploadProgress,
-    isDirty,
-  ];
+        error,
+        isUploading,
+        isDeleting,
+        uploadProgress,
+        isDirty,
+      ];
 }

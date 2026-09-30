@@ -11,8 +11,8 @@ class AudioFieldCubit extends UploadableFieldCubit<AudioFieldState> {
   final ImageFieldValidator validator;
 
   AudioFieldCubit({ImageFieldValidator? validator})
-    : validator = validator ?? ((file) => file?.validateAudioFile()),
-      super(const AudioFieldState());
+      : validator = validator ?? ((file) => file?.validateAudioFile()),
+        super(const AudioFieldState());
 
   void selectAudio(XFile? file) {
     emit(

@@ -11,8 +11,8 @@ class VideoFieldCubit extends UploadableFieldCubit<VideoFieldState> {
   final ImageFieldValidator validator;
 
   VideoFieldCubit({ImageFieldValidator? validator})
-    : validator = validator ?? ((file) => file?.validateVideoFile()),
-      super(const VideoFieldState());
+      : validator = validator ?? ((file) => file?.validateVideoFile()),
+        super(const VideoFieldState());
 
   void selectVideo(XFile? file) {
     emit(

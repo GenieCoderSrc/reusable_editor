@@ -46,12 +46,12 @@ class ListImageFieldState extends UploadableFieldState {
 
   @override
   List<Object?> get props => [
-    pickedFiles,
-    imageUrls,
-    error,
-    isUploading,
-    isDeleting,
-    uploadProgress,
-    isDirty,
-  ];
+        pickedFiles,
+        imageUrls,
+        error,
+        isUploading,
+        isDeleting,
+        uploadProgress,
+        isDirty,
+      ];
 }

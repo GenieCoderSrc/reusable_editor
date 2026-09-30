@@ -33,9 +33,8 @@ class VideoFieldState extends UploadableFieldState {
       pickedFile: identical(pickedFile, _sentinel)
           ? this.pickedFile
           : pickedFile as XFile?,
-      videoUrl: identical(videoUrl, _sentinel)
-          ? this.videoUrl
-          : videoUrl as String?,
+      videoUrl:
+          identical(videoUrl, _sentinel) ? this.videoUrl : videoUrl as String?,
       error: identical(error, _sentinel) ? this.error : error as String?,
       isUploading: isUploading ?? this.isUploading,
       isDeleting: isDeleting ?? this.isDeleting,
@@ -48,12 +47,12 @@ class VideoFieldState extends UploadableFieldState {
 
   @override
   List<Object?> get props => [
-    pickedFile,
-    videoUrl,
-    error,
-    isUploading,
-    isDeleting,
-    uploadProgress,
-    isDirty,
-  ];
+        pickedFile,
+        videoUrl,
+        error,
+        isUploading,
+        isDeleting,
+        uploadProgress,
+        isDirty,
+      ];
 }

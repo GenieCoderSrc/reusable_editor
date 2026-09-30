@@ -30,11 +30,11 @@ class FieldState<T> extends Equatable {
   }
 
   FieldState<T> init() => FieldState<T>(
-    value: null,
-    validator: validator,
-    errorText: null,
-    isDirty: false,
-  );
+        value: null,
+        validator: validator,
+        errorText: null,
+        isDirty: false,
+      );
 
   @override
   List<Object?> get props => [value, errorText, validator, isDirty];

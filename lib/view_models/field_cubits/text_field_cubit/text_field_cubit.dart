@@ -11,14 +11,14 @@ class TextFieldCubit extends Cubit<TextFieldState> {
   final String? _initialValue;
 
   TextFieldCubit({String? initialValue, TextFieldValidator? validator})
-    : _initialValue = initialValue,
-      controller = TextEditingController(text: initialValue),
-      super(
-        TextFieldState.initial(
-          initialValue: initialValue,
-          validator: validator,
-        ),
-      ) {
+      : _initialValue = initialValue,
+        controller = TextEditingController(text: initialValue),
+        super(
+          TextFieldState.initial(
+            initialValue: initialValue,
+            validator: validator,
+          ),
+        ) {
     controller.addListener(_handleTextChanged);
   }
 
@@ -56,8 +56,7 @@ class TextFieldCubit extends Cubit<TextFieldState> {
     return error;
   }
 
-  FormFieldValidator<String> get formFieldValidator =>
-      (value) => validate();
+  FormFieldValidator<String> get formFieldValidator => (value) => validate();
 
   void reset({bool validate = false}) {
     controller.text = _initialValue ?? '';

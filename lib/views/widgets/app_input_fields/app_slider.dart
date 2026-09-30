@@ -16,7 +16,7 @@ class AppSlider extends StatelessWidget {
   final int? divisions;
   final String labelText; // Renamed from label to labelText for consistency
   final String Function(double value)
-  displayValue; // New parameter to format the current value for display
+      displayValue; // New parameter to format the current value for display
 
   const AppSlider({
     super.key,

@@ -11,8 +11,8 @@ class DocFieldCubit extends UploadableFieldCubit<DocFieldState> {
   final ImageFieldValidator validator;
 
   DocFieldCubit({ImageFieldValidator? validator})
-    : validator = validator ?? ((file) => file?.validateDocumentFile()),
-      super(const DocFieldState());
+      : validator = validator ?? ((file) => file?.validateDocumentFile()),
+        super(const DocFieldState());
 
   void selectDoc(XFile? file) {
     emit(

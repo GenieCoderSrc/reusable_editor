@@ -19,8 +19,7 @@ class EnumMultiOptionCheckboxGroup<T extends Enum> extends StatelessWidget {
     BuildContext context,
     EnumOptionEntity<T> option,
     bool selected,
-  )?
-  itemBuilder;
+  )? itemBuilder;
 
   const EnumMultiOptionCheckboxGroup({
     super.key,
@@ -56,12 +55,10 @@ class EnumMultiOptionCheckboxGroup<T extends Enum> extends StatelessWidget {
                   value: selected,
                   onChanged: (_) => cubit.toggleOption(option.type),
                 ),
-
                 if (option.icon != null) ...[
                   Icon(option.icon, size: 20, color: option.iconColor),
                   const SizedBox(width: 6),
                 ],
-
                 Text(option.label ?? option.type.name),
               ],
             ),
@@ -97,9 +94,7 @@ class EnumMultiOptionCheckboxGroup<T extends Enum> extends StatelessWidget {
               Text(label!, style: Theme.of(context).textTheme.labelLarge),
               const SizedBox(height: 6),
             ],
-
             content,
-
             if (errorText != null) ...[
               const SizedBox(height: 6),
               Text(

@@ -11,9 +11,9 @@ class ImageFieldCubit extends UploadableFieldCubit<ImageFieldState> {
   final ImageFieldValidator validator;
 
   ImageFieldCubit({ImageFieldValidator? validator})
-    : validator =
-          validator ?? ((pickedFile) => pickedFile?.validateImageFile()),
-      super(const ImageFieldState());
+      : validator =
+            validator ?? ((pickedFile) => pickedFile?.validateImageFile()),
+        super(const ImageFieldState());
 
   void selectImage(XFile? pickedFile) {
     emit(

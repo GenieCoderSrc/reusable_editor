@@ -9,9 +9,9 @@ class ListImageFieldCubit extends UploadableFieldCubit<ListImageFieldState> {
   final ListImageValidator validator;
 
   ListImageFieldCubit({ListImageValidator? validator})
-    : validator =
-          validator ?? ((pickedFiles) => pickedFiles?.validateImageFiles()),
-      super(const ListImageFieldState());
+      : validator =
+            validator ?? ((pickedFiles) => pickedFiles?.validateImageFiles()),
+        super(const ListImageFieldState());
 
   void selectImages(List<XFile>? pickedFiles) {
     emit(

@@ -33,9 +33,8 @@ class AudioFieldState extends UploadableFieldState {
       pickedFile: identical(pickedFile, _sentinel)
           ? this.pickedFile
           : pickedFile as XFile?,
-      audioUrl: identical(audioUrl, _sentinel)
-          ? this.audioUrl
-          : audioUrl as String?,
+      audioUrl:
+          identical(audioUrl, _sentinel) ? this.audioUrl : audioUrl as String?,
       error: identical(error, _sentinel) ? this.error : error as String?,
       isUploading: isUploading ?? this.isUploading,
       isDeleting: isDeleting ?? this.isDeleting,
@@ -48,12 +47,12 @@ class AudioFieldState extends UploadableFieldState {
 
   @override
   List<Object?> get props => [
-    pickedFile,
-    audioUrl,
-    error,
-    isUploading,
-    isDeleting,
-    uploadProgress,
-    isDirty,
-  ];
+        pickedFile,
+        audioUrl,
+        error,
+        isUploading,
+        isDeleting,
+        uploadProgress,
+        isDirty,
+      ];
 }

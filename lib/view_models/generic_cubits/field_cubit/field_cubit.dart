@@ -9,20 +9,20 @@ class FieldCubit<T> extends Cubit<FieldState<T>> {
   final FieldState<T> _initialState;
 
   FieldCubit({T? initialValue, FieldValidator<T>? validator})
-    : _initialState = FieldState<T>(
-        value: initialValue,
-        validator: validator,
-        errorText: null,
-        isDirty: false,
-      ),
-      super(
-        FieldState<T>(
+      : _initialState = FieldState<T>(
           value: initialValue,
           validator: validator,
           errorText: null,
           isDirty: false,
         ),
-      );
+        super(
+          FieldState<T>(
+            value: initialValue,
+            validator: validator,
+            errorText: null,
+            isDirty: false,
+          ),
+        );
 
   void onChanged(T? value) {
     final error = state.validator?.call(value);

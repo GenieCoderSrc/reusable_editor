@@ -55,8 +55,7 @@ class AppTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<TextFieldCubit, TextFieldState>(
       bloc: bloc,
-      builder:
-          builder ??
+      builder: builder ??
           (context, state) {
             return TextFormField(
               autofocus: autofocus,
