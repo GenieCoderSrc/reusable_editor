@@ -250,10 +250,10 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
               spacing: 20,
               runSpacing: 20,
               children: [
-                _buildUploadPreview(
+                _buildUploadPreview<ImageFieldCubit, ImageFieldState>(
                   cubit: _imageCubit,
                   label: 'Image',
-                  builder: (state) {
+                  builder: (ImageFieldState state) {
                     final XFile? pickedFile = state.pickedFile;
                     if (pickedFile != null) {
                       return ClipRRect(
@@ -273,10 +273,10 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
                     );
                   },
                 ),
-                _buildUploadPreview(
+                _buildUploadPreview<AudioFieldCubit, AudioFieldState>(
                   cubit: _audioCubit,
                   label: 'Audio',
-                  builder: (state) {
+                  builder: (AudioFieldState state) {
                     return Icon(
                       state.pickedFile != null
                           ? Icons.music_note
@@ -287,10 +287,10 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
                     );
                   },
                 ),
-                _buildUploadPreview(
+                _buildUploadPreview<VideoFieldCubit, VideoFieldState>(
                   cubit: _videoCubit,
                   label: 'Video',
-                  builder: (state) {
+                  builder: (VideoFieldState state) {
                     return Icon(
                       state.pickedFile != null
                           ? Icons.movie
@@ -301,10 +301,10 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
                     );
                   },
                 ),
-                _buildUploadPreview(
+                _buildUploadPreview<DocFieldCubit, DocFieldState>(
                   cubit: _docCubit,
                   label: 'Document',
-                  builder: (state) {
+                  builder: (DocFieldState state) {
                     return Icon(
                       state.pickedFile != null
                           ? Icons.insert_drive_file
@@ -443,14 +443,14 @@ class _FormEditorDemoState extends State<FormEditorDemo> {
     ).showSnackBar(SnackBar(content: Text(message)));
   }
 
-  Widget _buildUploadPreview({
-    required dynamic cubit,
+  Widget _buildUploadPreview<C extends StateStreamable<S>, S>({
+    required C cubit,
     required String label,
-    required Widget Function(dynamic state) builder,
+    required Widget Function(S state) builder,
   }) {
     return Column(
       children: [
-        BlocBuilder(
+        BlocBuilder<C, S>(
           bloc: cubit,
           builder: (context, state) {
             return builder(state);
